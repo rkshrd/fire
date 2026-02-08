@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/* ===== CUSTOM THEME ===== */
+:root {
+  --color-bg-primary: #0b0b0c;
+  --color-bg-secondary: #111113;
+  --color-bg-tertiary: #1a1a1f;
+  --color-bg-card: #16161a;
+  --color-bg-hover: #1e1e24;
+  
+  --color-accent: #ff6200;
+  --color-accent-hover: #ff7b2e;
+  --color-accent-dim: #b95617;
+  --color-accent-glow: #ff620040;
+  
+  --color-text-primary: #f3e2cf;
+  --color-text-secondary: #8e8f94;
+  --color-text-muted: #5a5b60;
+  --color-text-code: #e2c08d;
+  
+  --color-border: #2a2a30;
+  --color-border-hover: #3a3a42;
+  
+  --color-green: #28d27a;
+  --color-cyan: #2ea3ff;
+  --color-pink: #ff7eb9;
+  --color-yellow: #feff9c;
+  --color-purple: #9b6cff;
+  --color-red: #ff5f56;
+  --color-yellow-dot: #ffbd2e;
+  --color-green-dot: #27c93f;
+
+  --color-syntax-keyword: #c586c0;
+  --color-syntax-type: #4ec9b0;
+  --color-syntax-string: #ce9178;
+  --color-syntax-var: #9cdcfe;
+  --color-syntax-func: #dcdcaa;
+  --color-syntax-num: #b5cea8;
+
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ===== BASE STYLES ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ===== LIGHT THEME ===== */
+[data-theme="light"] {
+  --color-bg-primary: #f5f5f5;
+  --color-bg-secondary: #fff;
+  --color-bg-tertiary: #fafafa;
+  --color-bg-card: #fff;
+  --color-bg-hover: #f0f0f0;
+  --color-text-primary: #1a1a2e;
+  --color-text-secondary: #4a4a5a;
+  --color-text-muted: #7a7a8a;
+  --color-border: #d0d0d8;
+  --color-border-hover: #b0b0b8;
+  --color-syntax-keyword: #8b2fa8;
+  --color-syntax-type: #267f6e;
+  --color-syntax-string: #a44a1f;
+  --color-syntax-var: #0451a5;
+  --color-syntax-func: #795e26;
+  --color-syntax-num: #098658;
+}
+
+/* ===== CURSOR (desktop only) ===== */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-dim);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* ===== SELECTION ===== */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--color-accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--color-accent-glow), 0 0 40px var(--color-accent-glow);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== UTILITIES ===== */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: rgba(11, 11, 12, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.dot-grid {
+  background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Download icon button used in project cards */
+.download-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  background: var(--color-bg-card);
+  color: var(--color-accent);
+  transition: all 0.15s ease;
+}
+
+.download-icon:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.download-icon svg { display: block; }

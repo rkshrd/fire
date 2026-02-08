@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thaïs PARISOT - Profile</title>
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- ====== NAVBAR ====== -->
+    <header class="navbar">
+    <!-- Menu gauche -->
+    <div class="left">
+      <button id="menuBtn" class="hamburger" aria-label="Menu principal">>_</button>
+      <nav id="menu" class="dropdown">
+        <a href="carreer.html">🔸Carreer</a>
+        <a href="cursus.html">🔸Cursus</a>
+        <a href="profile.html">🔸Profile</a>
+        <a href="projects.html">🔸Projects (E5)</a>
+      </nav>
+    </div>
+
+    <!-- Centre -->
+    <div class="center">
+      <div class="title-with-logos">
+        <a href="index.html">
+          <img src="pictures/logo5.png" alt="Logo principal" class="logo-slot">
+        </a>
+      </div>
+    </div>
+
+    <!-- Droite -->
+    <div class="right">
+      <div class="datetime">
+        <div id="dateStr">—</div>
+        <div id="timeStr">—</div>
+      </div>
+      <button id="themeToggle" aria-label="ColorTheme" class="theme-btn">🌙</button>
+    </div>
+  </header>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <!-- Photo et Actions -->
+            <div class="profile-header">
+                <div class="profile-photo-container">
+                    <div class="profile-photo">
+                        <img src="pictures/me7.jpg" alt="Thaïs PARISOT">
+                    </div>
+                   <div class="action-buttons">
+                        <button class="action-btn download-btn" id="downloadBtn" type="button" title="Télécharger CV">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="action-btn redirect-btn" id="redirectBtn" type="button" title="Ouvrir le CV">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+                <!-- Description -->
+                <div class="profile-description">
+                    <h2>Parcours & Aspirations</h2>
+                    <p>
+                        Initialement en provenance d'un cursus littéraire et sociologique, anthropologique et philosophoque : 
+                        <br>
+                        J'ai réorienté mon parcours vers le domaine de l'informatique par pure curiostité et pur challenge personnel.
+                        <br>
+                        <br>
+                        Aujourd'hui, étudiante passionnée par la cybersécurité, les réseaux et l'administration système, 
+                        je développe mes compétences techniques à travers des projets concrets et des expériences 
+                        professionnelles enrichissantes.
+                    </p>
+                    <p>
+                        Mon objectif est de contribuer à la sécurisation des infrastructures numériques dans les environnements OIV, tout en 
+                        continuant à apprendre et à évoluer dans un environnement technologique en constante mutation. 
+                        <br>
+                        Je suis particulièrement intéressée par l'authentification, la cryptographie, les menaces cybernétiques, la schématisation des réseaux, 
+                        l'analyse de vulnérabilités et la mise en place de solutions de sécurité robustes.
+                    </p>
+                    <p>
+                        À travers mon parcours académique et professionnel, je cherche à allier théorie et pratique 
+                        pour devenir une experte reconnue dans le domaine de la cybersécurité.
+                    </p>
+                </div>
+            </div>
+
+        <!-- ====== COMPÉTENCES ====== -->
+      <div class="skills-section" id="skills">
+        <h2 class="section-title">Compétences</h2>
+
+        <div class="skill-block">
+          <h3><i class="fas fa-code"></i> Langages</h3>
+          <div class="skill-items">
+            <div class="skill-item"><i class="fab fa-python"></i><span>Python</span></div>
+            <div class="skill-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+            <div class="skill-item"><i class="fab fa-html5"></i><span>HTML / CSS</span></div>
+            <div class="skill-item"><i class="fas fa-terminal"></i><span>Bash</span></div>
+            <div class="skill-item"><i class="fas fa-database"></i><span>SQL</span></div>
+            <div class="skill-item"><i class="fa-brands fa-windows"></i><span>PowerShell</span></div>
+            <div class="skill-item"><i class="fa-brands fa-php"></i><span>PHP</span></div>
+          </div>
+        </div>
+
+        <div class="skill-block">
+          <h3><i class="fas fa-tools"></i> Logiciels & Outils </h3>
+          <div class="skill-items">
+            <div class="skill-item"><i class="fab fa-linux"></i><span>Linux</span></div>
+            <div class="skill-item"><i class="fas fa-network-wired"></i><span>Wireshark</span></div>
+            <div class="skill-item"><i class="fas fa-shield-halved"></i><span>Metasploit</span></div>
+            <div class="skill-item"><i class="fa-brands fa-windows"></i><span>Windows</span></div>
+            <div class="skill-item"><i class="fab fa-docker"></i><span>Docker</span></div>
+            <div class="skill-item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+            <div class="skill-item"><i class="fas fa-server"></i><span>VMware</span></div>
+          </div>
+        </div>
+
+        <div class="skill-block">
+          <h3><i class="fas fa-certificate"></i> Certifications</h3>
+          <div class="skill-items">
+            <div class="skill-item"><i class="fas fa-shield"></i><span>CompTIA Security+</span></div>
+            <div class="skill-item"><i class="fas fa-network-wired"></i><span>Cisco CCNA 1</span></div>
+            <div class="skill-item"><i class="fas fa-user-secret"></i><span>EBios Risk</span></div>
+            <div class="skill-item"><i class="fas fa-shield"></i><span>FM: Sécurité des Réseaux Informartiques</span></div>
+            <div class="skill-item"><i class="fas fa-user-secret"></i><span>Cisco : Introduction à la cybersécurité</span></div>
+            <div class="skill-item"><i class="fas fa-network-wired"></i><span>Cisco : Basiques du matériel informatique</span></div>
+            <div class="skill-item"><i class="fas fa-shield"></i><span>CNIL : RGPD</span></div>
+            <div class="skill-item"><i class="fas fa-shield"></i><span>SecNum : Introduction à la cybersécurité</span></div>
+          </div>
+        </div>
+
+        <div class="skill-block">
+          <h3><i class="fas fa-language"></i> Langues </h3>
+          <div class="skill-items">
+            <div class="skill-item"><i class="fas fa-flag-usa"></i><span>Anglais — C1</span></div>
+            <div class="skill-item"><i class="fas fa-flag"></i><span>Espagnol — B2</span></div>
+            <div class="skill-item"><i class="fas fa-torii-gate"></i><span>Japonais — A2</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== TIMELINE ====== -->
+      <div class="timeline-section" id="timeline">
+        <h2 class="section-title">Expériences & Formation</h2>
+
+        <div class="timeline">
+          <div class="timeline-item left">
+            <div class="timeline-content entreprise">
+              <span class="timeline-date">09.2025</span>
+              <h3>Technicienne Informatique <br>(Équipe Architecture) <br>— Alternance</h3>
+              <h4>SUEZ R&amp;V</h4>
+              <p>Valorisation des Produits IT Services et équipes; automatisation; référencements; analyse, structuration et synthétisation de données</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-content ecole">
+              <span class="timeline-date">09.2024 → 2026</span>
+              <h3>BTS SIO — SISR</h3>
+              <h4>ENSUP CAMPUS SQY (ENSITECH)</h4>
+              <p>Spécialisation systèmes/réseaux et cybersécurité.</p>
+            </div>
+          </div>
+          <!-- Année 2024 -->
+          <div class="timeline-item left">
+            <div class="timeline-content entreprise">
+              <span class="timeline-date">09.2024 → 08.2025</span>
+              <h3>Technicienne Support Informatique <br>— Alternance</h3>
+              <h4>Clinique Privée de l'Europe, Le Port-Marly</h4>
+              <p>Gestion/maintenance es infrastructures réseau, support N1&2.</p>
+            </div>
+          </div>
+        
+          <div class="timeline-item left">
+            <div class="timeline-content entreprise">
+              <span class="timeline-date">02.2024 → 05.2024</span>
+              <h3>Technicienne Support Informatique <br>— Stage</h3>
+              <h4>Clinique Privée de l'Europe, Le Port-Marly</h4>
+              <p>Maintenance des infrastructures réseau, support  N1 & 2. (7 semaines).</p>
+            </div>
+          </div>
+          <!-- Année 2023 -->
+            <div class="timeline-item right">
+            <div class="timeline-content ecole">
+              <span class="timeline-date">09.2023 → 06.2023</span>
+              <h3>BTS SIO SISR 1</h3>
+              <h4>H3 Campus, Poissy</h4>
+              <p>Première année de BTS SIO, spécialisation SISR (Solutions d’Infrastructure, Systèmes et Réseaux).</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-content ecole">
+              <span class="timeline-date">2022 → 2023</span>
+              <h3>Licence Sociologie</h3>
+              <h4>Université Nanterre</h4>
+              <p>Option anthropologie &amp; ethnologie.</p>
+            </div>
+          </div>
+
+          <!-- Année 2022 -->
+          <div class="timeline-item right">
+            <div class="timeline-content ecole">
+              <span class="timeline-date">2021 → 2022</span>
+              <h3>Licence Humanités</h3>
+              <h4>Institut Catholique de Paris</h4>
+              <p>Sociologie, Anthropologie, Théologie, Philosophie, Histoire, Grec ancien.</p>
+            </div>
+          </div>
+
+          <!-- Année 2020-->
+          <div class="timeline-item right">
+            <div class="timeline-content ecole">
+              <span class="timeline-date">2017 → 2020</span>
+              <h3>Baccalauréat Général — Littérature</h3>
+              <h4>Candidate libre</h4>
+              <p>Obtention : Sept. 2020 — Mention AB.
+              <br> Options : Droits & grands enjeux du monde contempozrain, Littérature Anglaise
+              <br>
+              <br> Spécialité : sous COVID -19 🫶🏻</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+   <!-- ====== HOBBIES ====== -->
+      <section class="skills-section" id="hobbies">
+        <h2 class="section-title">Hobbies</h2>
+
+        <div class="skill-block">
+          <h3><i class="fas fa-heart"></i></h3>
+          <div class="skill-items">
+            <div class="skill-item"><i class="fas fa-mountain"></i><span>Escalade</span></div>
+            <div class="skill-item"><i class="fas fa-book"></i><span>Lecture</span></div>
+            <div class="skill-item"><i class="fas fa-gamepad"></i><span>Jeux vidéo</span></div>
+            <div class="skill-item"><i class="fas fa-dumbbell"></i><span>Musculation</span></div>
+            <div class="skill-item"><i class="fas fa-chess"></i></i><span>Ėchecs</span></div>
+            <div class="skill-item"><i class="fas fa-star"></i><span>Astronomie</span></div>
+        </div>
+      </section>
+
+    <script src="js/profile.js"></script>
+    <script src="js/header.js"></script>
+    
+</body>
+</html>

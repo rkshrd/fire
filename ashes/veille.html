@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veille Technologique</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/veille.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <!-- Menu gauche -->
+    <div class="left">
+      <button id="menuBtn" class="hamburger" aria-label="Menu principal">>_</button>
+      <nav id="menu" class="dropdown">
+        <a href="career.html">🔸Career</a>
+        <a href="cursus.html">🔸Cursus</a>
+        <a href="profile.html">🔸Profile</a>
+        <a href="projects.html">🔸Projects (E5)</a>
+      </nav>
+    </div>
+
+    <!-- Centre -->
+    <div class="center">
+      <div class="title-with-logos">
+        <a href="index.html">
+          <img src="pictures/logo2.png" alt="Logo principal" class="logo-slot">
+        </a>
+      </div>
+    </div>
+
+    <!-- Droite -->
+    <div class="right">
+      <div class="datetime">
+        <div id="dateStr">—</div>
+        <div id="timeStr">—</div>
+      </div>
+      <button id="themeToggle" aria-label="ColorTheme" class="theme-btn">🌙</button>
+    </div>
+  </header>
+  <nav class="veille-navbar">
+    <div>
+      <ul id="nav-links" class="nav-links" role="menubar" aria-label="Navigation veille">
+        <!-- Liens générés dynamiquement -->
+      </ul>
+    </div>
+  </nav>
+
+  <section id="root" class="veille" aria-live="polite">
+    <!-- Templates -->
+    <template id="section-template">
+      <div class="section-">
+        <section class="hero">
+          <h1 class="title"></h1>
+          <p class="subtitle"></p>
+        </section>
+
+        <section class="content-section">
+          <div class="definition-block">
+            <h2 class="block-title">Pour expliquer :</h2>
+            <p class="block-content definition"></p>
+          </div>
+
+          <div class="functioning-block">
+            <h2 class="block-title">Comment ça fonctionne :</h2>
+            <p class="block-content fonctionnement"></p>
+          </div>
+        </section>
+
+        <section class="cork-board-section">
+          <h2 class="section-title">Méthodes d'Authentification Multi-Facteurs</h2>
+          <div class="cork-board">
+            <div class="post-it-container"></div>
+          </div>
+        </section>
+
+        <section class="articles-section">
+          <h2 class="section-title">Articles &amp; Actualités</h2>
+
+          <!-- tag filters (added) -->
+          <div class="articles-tags" aria-label="Filtrer les articles par tag" role="toolbar">
+            <!-- Buttons generated dynamically -->
+          </div>
+
+          <div class="articles-grid"></div>
+        </section>
+      </div>
+    </template>
+
+    <template id="postit-template">
+      <div class="post-it">
+        <h3 class="post-it-title"></h3>
+        <div class="post-it-content"></div>
+      </div>
+    </template>
+
+    <template id="article-template">
+      <article class="article-card">
+        <img class="article-image" alt="">
+        <div class="article-content">
+          <button type="button" class="article-tag"></button>
+          <h3 class="article-title"></h3>
+          <p class="article-excerpt"></p>
+          <div class="article-meta">
+            <span class="article-source"></span>
+            <a class="read-more">Lire l'article</a>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <!-- Fallback / Loading placeholder shown until JSON is rendered -->
+    <div id="loading">toz</div>
+  </section>
+
+  <!-- scripts -->
+  <script src="js/header.js"></script>
+  <script src="js/veille-script.js"></script>
+</body>
+</html>

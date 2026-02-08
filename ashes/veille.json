@@ -1,0 +1,597 @@
+{
+  "veilles": [
+    {
+      "title": "Authentification Multi-Facteurs",
+      "sub-title": "MFA",
+      "definition": "L'Authentification Multi-Facteurs (MFA) est une méthode de sécurité qui nécessite au moins deux formes distinctes de vérification d'identité avant d'accorder l'accès à un système ou une application. Cette approche renforce considérablement la sécurité en combinant plusieurs catégories de facteurs : quelque chose que vous connaissez ou facteur de connaissance (mot de passe, code PIN, réponse d'une question secrète), quelque chose que vous possédez ou facteur de possession (téléphone, token, TOPT), et quelque chose que vous êtes ou facteur d'identification (biométrie). En exigeant plusieurs preuves d'identité, la MFA réduit drastiquement les risques liés au vol de credentials et aux accès non autorisés, devenant ainsi un standard incontournable en cybersécurité moderne.",
+      "fonctionnement": "Le processus d'authentification multi-facteurs se déroule en plusieurs étapes séquentielles. Premièrement, l'utilisateur fournit son identifiant et son mot de passe (facteur de connaissance). Une fois cette première vérification réussie, le système demande un second facteur : cela peut être un code temporaire envoyé par SMS, généré par une application d'authentification (TOTP), ou une validation biométrique. Le serveur d'authentification vérifie ensuite la validité de ce second facteur en temps réel. Seulement après validation des multiples facteurs, l'accès est accordé. Ce mécanisme utilise souvent des protocoles standardisés comme OATH (TOTP/HOTP), FIDO2, ou des solutions propriétaires intégrées dans des architectures Zero Trust (ZTNA) et Single Sign-On (SSO).",
+      "prerequis": [
+        {
+          "title": "SMS / OTP",
+          "fonctionnement": "1. Saisie du login/mot de passe; 2. Serveur génère un code à usage unique (6 chiffres); 3. Envoi du code via SMS; 4. Utilisateur entre le code; 5. Vérification et accès accordé",
+          "protocole": "Basé sur OATH HOTP/TOTP",
+          "environnement": "Compatible SSO, applications web/mobile",
+          "logo-path": "",
+          "link": ""
+        },
+        {
+          "title": "Authenticator App (TOTP)",
+          "fonctionnement": "1. Scan du QR code lors du setup; 2. Application génère des codes toutes les 30s; 3. Synchronisation temporelle avec serveur; 4. Saisie du code à 6 chiffres; 5. Validation algorithmique (HMAC-SHA1)",
+          "protocole": "TOTP (RFC 6238)",
+          "environnement": "Google Authenticator, Microsoft Authenticator, Authy, intégration SSO",
+          "logo-path": "",
+          "link": ""
+        },
+        {
+          "title": "Push Notification",
+          "fonctionnement": "1. Tentative de connexion détectée; 2. Push notification envoyée à l'app mobile; 3. Affichage des détails de connexion; 4. Utilisateur approuve/rejette; 5. Réponse transmise au serveur",
+          "protocole": "FCM (Firebase) / APNs",
+          "environnement": "Duo Security, Microsoft Authenticator, architectures ZTNA",
+          "logo-path": "",
+          "link": "https://brainstation.io/cybersecurity/two-factor-auth"
+        },
+        {
+          "title": "Biométrie",
+          "fonctionnement": "1. Capture de la donnée biométrique (empreinte, visage); 2. Extraction des caractéristiques uniques; 3. Comparaison avec template stocké (hash); 4. Score de correspondance calculé; 5. Accès accordé si seuil atteint",
+          "protocole": "FIDO2, WebAuthn",
+          "environnement": "Windows Hello, Touch ID, Face ID, ZTNA",
+          "logo-path": "",
+          "link": ""
+        },
+        {
+          "title": "Clés de Sécurité (FIDO2)",
+          "fonctionnement": "1. Enregistrement de la clé physique; 2. Génération de paire de clés publique/privée; 3. Insertion de la clé USB/NFC; 4. Challenge cryptographique envoyé; 5. Signature avec clé privée, vérification publique",
+          "protocole": "FIDO2/WebAuthn (U2F)",
+          "environnement": "YubiKey, Google Titan, SSO enterprise",
+          "logo-path": "",
+          "link": ""
+        },
+        {
+          "title": "Email Verification",
+          "fonctionnement": "1. Détection de tentative de connexion; 2. Génération de lien unique ou code; 3. Envoi par email sécurisé; 4. Clic sur le lien / saisie du code; 5. Validation de la session",
+          "protocole": "SMTP/TLS, tokens JWT",
+          "environnement": "Systèmes web, backup pour SSO",
+          "logo-path": "",
+          "link": ""
+        },
+        {
+          "title": "Certificats Client",
+          "fonctionnement": "1. Installation du certificat X.509 sur l'appareil; 2. Établissement de connexion TLS; 3. Serveur demande le certificat client; 4. Vérification de la chaîne de confiance; 5. Authentification mutuelle réussie",
+          "protocole": "PKI, mTLS (mutual TLS)",
+          "environnement": "VPN enterprise, ZTNA, accès B2B",
+          "logo-path": "",
+          "link": ""
+        },
+        {
+          "title": "Smart Cards",
+          "fonctionnement": "1. Insertion de la carte à puce; 2. Saisie du code PIN; 3. Lecture des credentials cryptés; 4. Déchiffrement avec la clé privée; 5. Authentification auprès du contrôleur",
+          "protocole": "ISO 7816, PIV, CAC",
+          "environnement": "Gouvernement, banques, accès physique + logique",
+          "logo-path": "",
+          "link": ""
+        },
+        {
+          "title": "Authentification Adaptative",
+          "fonctionnement": "1. Analyse du contexte (IP, device, comportement); 2. Calcul du score de risque en temps réel; 3. Décision automatique sur le niveau MFA; 4. Facteurs supplémentaires si risque élevé; 5. Accès accordé selon politique",
+          "protocole": "Risk-based authentication",
+          "environnement": "ZTNA, Cloud SSO (Okta, Azure AD)",
+          "logo-path": "",
+          "link": ""
+        },
+        {
+          "title": "Authentification vocale",
+          "fonctionnement": "1. Enregistrement de l'échantillon vocal; 2. Extraction des caractéristiques vocales uniques; 3. Comparaison avec le modèle stocké; 4. Calcul du score de similarité; 5. Accès accordé si le score dépasse le seuil",
+          "protocole": "Technologies de reconnaissance vocale",
+          "environnement": "Centres d'appels, services bancaires téléphoniques",
+          "logo-path": "",
+          "link": ""
+        }
+      ],
+      "articles": [
+        {
+          "date": "",
+          "title": "Authentification à 2 Facteurs (2AF)",
+          "image": "visu_article/otp2.png",
+          "link": "https://www.microsoft.com/fr-fr/security/business/security-101/what-is-two-factor-authentication-2fa",
+          "tags": ["Documentation"],
+          "description": "Fiche explicative sur l'authentification à deux facteurs (2AF), ses avantages et son fonctionnement pour renforcer la sécurité des comptes utilisateurs.",
+          "source": "Microsoft Security"
+        },
+        {
+          "date": "25 Août 2025",
+          "title": "Meilleures Applications 2FA - Comparatif 2025",
+          "image": "visu_article/EasyWP-Google-Authenticator-2-why-use-Google-Authenticator.png",
+          "link": "https://www.clubic.com/guide-achat-538328-authentification-2fa-les-meilleures-applications-en-2024.html",
+          "tags": ["Solutions"],
+          "description": "Comparatif des meilleures applications d'authentification à deux facteurs (2FA) en 2025, incluant Google Authenticator, Authy, Microsoft Authenticator et autres solutions populaires.",
+          "source": "Clubic"
+        },
+        {
+          "date": "30 Octobre 2025",
+          "title": "CISA & NSA Tips for Microsft Exchange Server",
+          "image": "",
+          "link": "https://www.bleepingcomputer.com/news/security/cisa-and-nsa-share-tips-on-securing-microsoft-exchange-servers/amp/",
+          "tags": ["Infrastructure"],
+          "description": "Conseils de la CISA et de la NSA pour sécuriser les serveurs Microsoft Exchange, incluant l'implémentation de l'authentification multi-facteurs (MFA) pour protéger contre les accès non autorisés.",
+          "source": " BleepingComputer"
+        },
+        {
+          "date": "31 Octobre 2025",
+          "title": "Hacktivist Group Targeting Infrastructure",
+          "image": "",
+          "link": "https://www.cybersecuritydive.com/news/canadian-warn-hacktivists-exposed-ics-devices/804244/",
+          "tags": ["Vulnérabilité", "Infrastructure", "Entreprise"],
+          "description": "Un groupe de hacktivistes cible les infrastructures critiques en exploitant des vulnérabilités, soulignant l'importance de l'authentification multi-facteurs (MFA) pour renforcer la sécurité des systèmes industriels.",
+          "source": "Cybersecurity Dive"
+        },
+        {
+          "date": "",
+          "title": "MFA Résistante au Phishing: Ce Qu'il Faut Savoir",
+          "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='220'%3E%3Crect fill='%23ff7043' width='400' height='220'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='20' font-family='Arial'%3ECloudflare%3C/text%3E%3C/svg%3E",
+          "link": "",
+          "tags": ["Sécurité"],
+          "description": "Pourquoi toutes les méthodes MFA ne se valent pas face au phishing et comment implémenter une authentification véritablement résistante aux attaques.",
+          "source": "Cloudflare Learning"
+        },
+        {
+          "date": "4 Novembre 2025",
+          "title": "Flock Safety piraté par un simple mot de passe",
+          "image": "visu_article/mfa_enterprise.png",
+          "link": "https://www.bfmtv.com/tech/cybersecurite/le-plus-grand-reseau-de-cameras-privees-des-etats-unis-a-la-merci-des-pirates-et-utilise-sans-controle-par-les-autorites-pour-surveiller-la-population_AV-202511040552.html",
+          "tags": ["Failles", "Entreprise", "Sécurité"],
+          "description": "Une faille de sécurité majeure chez Flock Safety, le plus grand réseau de caméras privées aux États-Unis, a été exploitée par des pirates utilisant un simple mot de passe, mettant en lumière l'importance cruciale de l'authentification multi-facteurs (MFA) pour protéger les systèmes sensibles.",
+          "source": "BFMTV"
+        },
+        {
+          "date": "14 Mars 2024",
+          "title": "Authentifier les utilisateurs",
+          "image": "visu_article/",
+          "link": "https://www.cnil.fr/fr/securite-authentifier-les-utilisateurs",
+          "tags": ["Standard", "Gouvernement"],
+          "description": "Guide de la CNIL sur les meilleures pratiques pour authentifier les utilisateurs de manière sécurisée, incluant l'implémentation de l'authentification multi-facteurs (MFA) pour renforcer la protection des données personnelles.",
+          "source": "CNIL"
+        },
+        {
+          "date": "31 Mars 2025",
+          "title": "LeBonCoin : Biométrie VS TOTP",
+          "image": "visu_article/mfa_enterprise.png",
+          "link": "https://www.silicon.fr/Thematique/cybersecurite-1371/Breves/biometrie-totp-choix-leboncoin-mfa-469570.htm",
+          "tags": ["Entreprise", "Sécurité"],
+          "description": "LeBonCoin opte pour la biométrie plutôt que le TOTP pour son authentification multi-facteurs (MFA), soulignant les avantages de la biométrie en termes de sécurité et d'expérience utilisateur.",
+          "source": "Silicon.fr"
+        },
+        {
+          "date": "30 Octobre 2025",
+          "title": "Critical Claroty Authentication Bypass Flaw Opened OT to Attack",
+          "image": "visu_article/",
+          "link": "https://www.darkreading.com/ics-ot-security/claroty-patches-authentication-bypass-flaw",
+          "tags": ["Failles", "Sécurité"],
+          "description": "Une faille critique dans le système Claroty permettait de contourner l'authentification, exposant les environnements OT à des attaques potentielles. La mise en œuvre de l'authentification multi-facteurs (MFA) est recommandée pour renforcer la sécurité.",
+          "source": "Dark Reading"
+        },
+        {
+          "date": "30 Octobre 2025",
+          "title": "Keyless to Be Acquired by Ping Identity",
+          "image": "visu_article/mfa_cloud.png",
+          "link": "https://bebeez.eu/2025/10/30/keyless-to-be-acquired-by-ping-identity-to-drive-global-adoption-of-privacy-preserving-biometric-authentication/",
+          "tags": ["Solutions", "Sécurité", "Innovation", "Biométrie"],
+          "description": "Keyless, spécialiste de l'authentification biométrique sans mot de passe, va être acquis par Ping Identity pour promouvoir l'adoption mondiale de solutions d'authentification respectueuses de la vie privée dans les environnements cloud.",
+          "source": "Bebeez"
+        },
+        {
+          "date": "31 Octobre 2025",
+          "title": "SEC to launch Blockchain-Based Authentication Platform",
+          "image": "visu_article/",
+          "link": "https://thevoicenewsweekly.com/%F0%9D%90%92%F0%9D%90%84%F0%9D%90%82-%F0%9D%90%AD%F0%9D%90%A8-%F0%9D%90%A5%F0%9D%90%9A%F0%9D%90%AE%F0%9D%90%A7%F0%9D%90%9C%F0%9D%90%A1-%F0%9D%90%81%F0%9D%90%A5%F0%9D%90%A8%F0%9D%90%9C%F0%9D%90%A4/",
+          "tags": ["Innovation", "Sécurité", "Blockchain"],
+          "description": "La Securities and Exchange Commission (SEC) des Philippines lance une plateforme d'authentification basée sur la blockchain pour renforcer la sécurité et la transparence des processus d'enregistrement des entreprises.",
+          "source": "The Voice News Weekly"
+        },
+        {
+          "date": "28 Mars 2024",
+          "title": "Authentification Multifacteur & RGPD",
+          "image": "visu_article/",
+          "link": "https://www.cnil.fr/fr/cloturee-authentification-multifacteur-consultation-publique-de-la-cnil-sur-un-projet-de",
+          "tags": ["Standard", "Gouvernement"],
+          "description": "Consultation publique de la CNIL sur un projet de recommandation relatif à l'authentification multifacteur (MFA) dans le cadre du RGPD, visant à renforcer la sécurité des données personnelles.",
+          "source": "CNIL"
+        },
+        {
+          "date": "",
+          "title": "Yubikey U2F for MFA",
+          "image": "visu_article/",
+          "link": "https://www.yubico.com/mfa-authentication/?lang=fr&gad_source=1&gclid=CjwKCAjw-qi_BhBxEiwAkxvbkOaZydTMKyPbn8BHNcCfj0WIPf7fYcx2WmU_PnTQYIRH6dV2B-nCdBoCMt8QAvD_BwE",
+          "tags": ["Solutions", "Sécurité", "Entreprise"],
+          "description": "Présentation des clés de sécurité Yubikey U2F pour l'authentification multi-facteurs (MFA), offrant une protection robuste contre les accès non autorisés aux comptes et systèmes d'entreprise.",
+          "source": "Yubico"
+        },
+        {
+          "date": "",
+          "title": "Passwordless Authentication",
+          "image": "visu_article/",
+          "link": "https://www.cyberark.com/fr/what-is/passwordless-authentication/",
+          "tags": ["Solutions", "Sécurité", "Entreprise", "Documentation"],
+          "description": "Explication de l'authentification sans mot de passe (passwordless), une méthode de sécurité qui utilise des facteurs biométriques ou des clés de sécurité pour vérifier l'identité des utilisateurs sans nécessiter de mot de passe traditionnel.",
+          "source": "Cyber Ark"
+        },
+        {
+          "date": "",
+          "title": "",
+          "image": "visu_article/",
+          "link": "",
+          "tags": ["Statistiques"],
+          "description": "",
+          "source": "Documentation"
+        },
+        {
+          "date": "26 Novembre 2024",
+          "title": "Authentification Multi-Facteurs by Default",
+          "image": "visu_article/",
+          "link": "https://learn.microsoft.com/fr-fr/entra/identity/authentication/concept-system-preferred-multifactor-authentication",
+          "tags": ["Documentation", "Systèmes"],
+          "description": "Présentation du concept d'authentification multi-facteurs (MFA) par défaut dans les systèmes Microsoft, visant à renforcer la sécurité des comptes utilisateurs en exigeant plusieurs formes de vérification d'identité.",
+          "source": "Microsoft Learn"
+        },
+        {
+          "date": "13 Février 2025",
+          "title": "Astaroth Phising Kit Bypasses 2AF",
+          "image": "visu_article/",
+          "link": "https://hackread.com/astaroth-phishing-kit-bypasses-2fa-hijack-gmail-microsoft/?utm_source=tldrinfosec",
+          "tags": ["Failles", "Vulnérabilité", "2AF"],
+          "description": " Le kit de phishing Astaroth a été mis à jour pour contourner l'authentification à deux facteurs (2AF), permettant aux attaquants de compromettre les comptes Gmail et Microsoft malgré la présence de mesures de sécurité supplémentaires.",
+          "source": "Hackread"
+        },
+        {
+          "date": "11 Juillet 2022",
+          "title": "Pypi Project Deploy 2AF with Keys",
+          "image": "visu_article/",
+          "link": "https://www.zdnet.fr/actualites/python-pypl-deploie-le-systeme-2fa-et-distribue-4-000-cles-de-securite-39944602.htm",
+          "tags": ["Innovation", "Sécurité", "2AF", "Entreprise"],
+          "description": "Le projet PyPI de Python a déployé un système d'authentification à deux facteurs (2AF) et distribué 4 000 clés de sécurité aux utilisateurs pour renforcer la sécurité des comptes sur la plateforme de gestion de paquets.",
+          "source": "ZDNet"
+        },
+        {
+          "date": "30 Octobre 2025",
+          "title": "",
+          "image": "visu_article/",
+          "link": "https://tech.einnews.com/pr_news/862524534/quantum-safe-multi-factor-authentication-market-anticipated-to-grow-at-20-8-cagr-through-2029-industry-report",
+          "tags": ["Recherches", "Statistiques", "Entreprise"],
+          "description": " Rapport sur le marché de l'authentification multi-facteurs quantique-sûre, anticipant une croissance à un taux de 20,8 % CAGR jusqu'en 2029, soulignant l'importance croissante de la sécurité dans les environnements d'entreprise.",
+          "source": "Ein News"
+        },
+        {
+          "date": "2 Mai 2024",
+          "title": "Microsoft étend l'authentification passkey",
+          "image": "visu_article/",
+          "link": "https://www.usine-digitale.fr/article/microsoft-etend-l-authentification-par-passkey-aux-particuliers-en-plus-des-entreprises.N2212628",
+          "tags": ["Innovation", "Sécurité"],
+          "description": "Microsoft étend l'authentification par passkey, une méthode sans mot de passe, aux utilisateurs particuliers en plus des entreprises, renforçant ainsi la sécurité et la facilité d'accès aux comptes Microsoft.",
+          "source": "L'Usine Digitale"
+        },
+        {
+          "date": "14 Février 2023",
+          "title": "MFA",
+          "image": "visu_article/",
+          "link": "https://www.vaadata.com/blog/fr/authentification-multifacteur-mfa-principes-types-dattaques-exploitations-et-bonnes-pratiques-securite/",
+          "tags": ["Documentation", "MFA", "Solutions", "Sécurité"],
+          "description": "Tout savoir sur l'authentification multifacteur (MFA) : principes, types d'attaques, exploitations et bonnes pratiques de sécurité pour protéger les comptes utilisateurs.",
+          "source": "Vaadata"
+        },
+        {
+          "date": "31 Octobre 2025",
+          "title": "Unit-42 & High Touch Attacks",
+          "image": "visu_article/",
+          "link": "https://secpro.substack.com/p/unit-42-on-high-touch-attacks?source=queue",
+          "tags": ["Vulnérabilité", "Sécurité", "Entreprise"],
+          "description": "Unit 42 analyse les attaques à haute interaction (high-touch attacks) qui ciblent les entreprises, mettant en lumière les vulnérabilités exploitées et les mesures de sécurité, telles que l'authentification multi-facteurs (MFA), pour se protéger contre ces menaces sophistiquées.",
+          "source": "SecPro"
+        },
+        {
+          "date": "1er Septembre 2025",
+          "title": "CVE-2025-52856: & CVE-2025-52861",
+          "image": "visu_article/QNAP.png",
+          "link": "https://cybersecuritynews.com/qnap-authentication-vulnerability/",
+          "tags": ["Failles", "Vulnérabilité", "Sécurité", "Entreprise"],
+          "description": "Deux vulnérabilités critiques, CVE-2025-52856 et CVE-2025-52861, ont été découvertes dans les dispositifs QNAP, permettant de contourner les mécanismes d'authentification et d'accéder illégalement aux données sensibles. La mise en œuvre de l'authentification multi-facteurs (MFA) est recommandée pour renforcer la sécurité des systèmes affectés.",
+          "source": "Cyber Security News"
+        },
+        {
+          "date": "1er Septembre 2025",
+          "title": "",
+          "image": "visu_article/",
+          "link": "https://www.bluewin.ch/en/news/millions-of-email-accounts-hacked-how-you-can-protect-yourself-now-2849982.html",
+          "tags": ["Failles", "Sécurité", "Google"],
+          "description": "Une faille de sécurité majeure a compromis des millions de comptes email, exposant les utilisateurs à des risques accrus de piratage et de vol d'identité. L'implémentation de l'authentification multi-facteurs (MFA) est fortement recommandée pour protéger les comptes contre les accès non autorisés.",
+          "source": "Blue News"
+        },
+        {
+          "date": "13 Juin 2025",
+          "title": "Anthentication Issues in Microsoft 365",
+          "image": "visu_article/M365disrupt.png",
+          "link": "https://cybersecuritynews.com/microsoft-365-authentication-issues/",
+          "tags": ["Failles", "Sécurité", "Microsoft 365"],
+          "description": "",
+          "source": "Cyber Security News"
+        },
+        {
+          "date": "2 Septembre 2025",
+          "title": "",
+          "image": "visu_article/",
+          "link": "",
+          "tags": ["Statistiques"],
+          "description": "",
+          "source": "Exemple"
+        },
+        {
+          "date": "2 Septembre 2025",
+          "title": "",
+          "image": "visu_article/",
+          "link": "",
+          "tags": ["Exemple"],
+          "description": "",
+          "source": "Exemple"
+        },
+        {
+          "date": "31 Janvier 2026",
+          "title": "Mandiant Finds ShinyHunters-Style Vishing Attacks Stealing MFA to Breach SaaS Platforms",
+          "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2lnJbnFaov0GE_74eq7mb52_5L4JzxpsP2dS-QqlaAJ8aSuWL-QRFQhkHSS_oso_YVwAUrLjhG_V2oVRGfxZuZjrf4dfYkkGI-e-OXJUq3exOdhCJC8I00T3cmSuQGdK52eeajtBJryw95T-fl27BXaYYewKTAhgZPKj_ZWcaQDJhbSkj59dV4l0SZe8G/s1600/vishing.jpg",
+          "link": "https://thehackernews.com/2026/01/mandiant-finds-shinyhunters-using.html",
+          "tags": ["Failles", "Solutions", "Cloud"],
+          "description": "Google-owned Mandiant on Friday said it identified an \"expansion in threat activity\" that uses tradecraft consistent with extortion-themed attacks orchestrated by a financially motivated hacking group known as ShinyHunters. The attacks leverage advanced voice phishing (aka vishing) and bogus credential harvesting sites mimicking targeted companies to gain unauthorized access to victim",
+          "source": "The Hacker News"
+        },
+        {
+          "date": "26 Janvier 2026",
+          "title": "Okta Flags Customized, Reactive Vishing Attacks Which Bypass MFA",
+          "image": "",
+          "link": "https://www.infosecurity-magazine.com/news/okta-flags-vishing-attacks-which/",
+          "tags": ["Failles"],
+          "description": "Threat actors posing as IT support teams use phishing kits to generate fake login sites in real-time to trick victims into handing over credentials",
+          "source": "Infosecurity Magazine"
+        },
+        {
+          "date": "7 Janvier 2026",
+          "title": "MFA Failure Enables Infostealer Breach At 50 Enterprises",
+          "image": "",
+          "link": "https://www.infosecurity-magazine.com/news/mfa-failure-infostealer-breach-50/",
+          "tags": ["Entreprise", "Failles"],
+          "description": "Threat actor “Zestix” was able to breach around 50 firms using infostealers because they lacked multi-factor authentication",
+          "source": "Infosecurity Magazine"
+        },
+        {
+          "date": "29 Août 2022",
+          "title": "Tentacles of ‘0ktapus’ Threat Group Victimize 130 Firms",
+          "image": "",
+          "link": "https://threatpost.com/0ktapus-victimize-130-firms/180487/",
+          "tags": ["Hacks", "Privacy", "full", "large", "medium"],
+          "description": "Over 130 companies tangled in sprawling phishing campaign that spoofed a multi-factor authentication system.",
+          "source": "Threatpost"
+        }
+      ]
+    },
+    {
+      "title": "Zero Trust Network Access",
+      "sub-title": "ZTNA",
+      "definition": "Le Zero Trust Network Access (ZTNA) est un modèle de sécurité qui supprime la confiance implicite traditionnellement accordée aux utilisateurs et aux appareils situés “dans” le réseau.\n Le principe : ne jamais faire confiance par défaut, toujours vérifier.\r\n ZTNA repose sur une approche granulaire de l'accès aux ressources, où chaque demande d'accès est évaluée en fonction de multiples critères tels que l'identité de l'utilisateur, le contexte de la demande (heure, emplacement, appareil utilisé) et le niveau de risque associé. En intégrant des technologies telles que l'authentification multi-facteurs (MFA), la micro-segmentation et la surveillance continue, ZTNA vise à minimiser les surfaces d'attaque et à protéger les données sensibles contre les menaces internes et externes.",
+      "fonctionnement": "ZTNA utilise des politiques d’accès granulaires au niveau de l’application définies sur le refus par défaut pour tous les utilisateurs et appareils. Un utilisateur se connecte et s’authentifie par rapport à un contrôleur Zero Trust, qui met en œuvre la politique de sécurité appropriée et vérifie les attributs de l’appareil. Une fois que l’utilisateur et l’appareil satisfont aux exigences spécifiées, l’accès est accordé à des applications et ressources réseau spécifiques en fonction de l’identité de l’utilisateur. Le statut de l’utilisateur et de l’appareil est continuellement vérifié pour maintenir l’accès.",
+      "prerequis": [
+        {
+          "title": "Prerequis 1",
+          "fonctionnement": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "protocole": "protocole 1",
+          "environnement": "environnement 1",
+          "logo-path": "",
+          "link": ""
+        },
+        {
+          "title": "Prerequis 2",
+          "fonctionnement": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "protocole": "protocole 2",
+          "environnement": "environnement 2",
+          "logo-path": "",
+          "link": ""
+        }
+      ],
+      "articles": [
+        {
+          "date": "",
+          "title": "Title: article 1",
+          "image": "css/article_standin_image.jpg",
+          "link": "",
+          "tags": ["Gouvernement"],
+          "description": "Description: article 1",
+          "source": "Test.test"
+        },
+        {
+          "date": "",
+          "title": "Title: article 2",
+          "image": "css/article_standin_image.jpg",
+          "link": "",
+          "tags": ["Gouvernement"],
+          "description": "Description: article 2",
+          "source": "Test.test"
+        },
+        {
+          "date": "6 Février 2026",
+          "title": "EDR, Email, and SASE Miss This Entire Class of Browser Attacks",
+          "image": "",
+          "link": "https://www.bleepingcomputer.com/news/security/edr-email-and-sase-miss-this-entire-class-of-browser-attacks/",
+          "tags": ["Security", "Sécurité", "Failles", "Solutions"],
+          "description": "Many modern attacks happen entirely inside the browser, leaving little evidence for traditional security tools. Keep Aware shows why EDR, email, and SASE miss browser-only attacks and how visibility changes prevention. [...]",
+          "source": "BleepingComputer"
+        },
+        {
+          "date": "2 Février 2026",
+          "title": "NSA Publishes New Zero Trust Implementation Guidelines",
+          "image": "",
+          "link": "https://www.infosecurity-magazine.com/news/nsa-zero-trust-implementation/",
+          "tags": ["Entreprise", "Innovation", "Documentation"],
+          "description": "NSA released new guidelines to help organizations achieve target-level Zero Trust maturity",
+          "source": "Infosecurity Magazine"
+        },
+        {
+          "date": "21 Janvier 2026",
+          "title": "Risk of AI Model Collapse to Drive Zero Trust Data Governance, Gartner Says",
+          "image": "",
+          "link": "https://www.infosecurity-magazine.com/news/ai-model-collapse-zero-trust-data/",
+          "tags": ["Entreprise"],
+          "description": "Gartner predicts 50% of organizations will adopt zero trust data governance by 2028",
+          "source": "Infosecurity Magazine"
+        },
+        {
+          "date": "27 Janvier 2026",
+          "title": "AI &amp; the Death of Accuracy: What It Means for Zero-Trust",
+          "image": "https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/blt16a225f2be68303f/6972837427d0e5cd3caca439/wood_block_tower_cagan_niron_Alamy.jpg?width=1280&auto=webp&quality=80&disable=upscale",
+          "link": "https://www.darkreading.com/application-security/ai-death-accuracy-zero-trust",
+          "tags": ["Sécurité"],
+          "description": "AI \"model collapse,\" where LLMs over time train on more and more AI-generated data and become degraded as a result, can introduce inaccuracies, promulgate malicious activity, and impact PII protections.",
+          "source": "Dark Reading"
+        },
+        {
+          "date": "3 Février 2026",
+          "title": "Empowering the RAF Association with Next-Generation Cyber Resilience",
+          "image": "https://www.paloaltonetworks.com/blog/wp-content/uploads/2026/02/GettyImages-989518294-edit.jpg",
+          "link": "https://www.paloaltonetworks.com/blog/2026/02/raf-association-next-generation-cyber-resilience/",
+          "tags": [
+            "AI Security",
+            "Announcement",
+            "Government",
+            "Public Sector",
+            "Zero Trust Security",
+            "Sécurité"
+          ],
+          "description": "The RAF Association (RAFA) boosts digital resilience and scales operations by partnering with Palo Alto Networks for zero trust and AI-driven security. The post Empowering the RAF Association with Next-Generation Cyber Resilience appeared first on Palo Alto Networks Blog.",
+          "source": "Palo Alto Networks"
+        },
+        {
+          "date": "5 Janvier 2026",
+          "title": "Palo Alto Networks Announces Support for NVIDIA Enterprise AI Factory",
+          "image": "https://www.paloaltonetworks.com/blog/wp-content/uploads/2025/12/panw-nvidia-blog-social-banners_Op4-1080x1080-1.png",
+          "link": "https://www.paloaltonetworks.com/blog/2026/01/support-nvidia-enterprise-ai-factory/",
+          "tags": [
+            "AI Governance",
+            "Announcement",
+            "Firewall",
+            "Partners",
+            "Products and Services",
+            "Sécurité"
+          ],
+          "description": "Secure your AI Factory with Palo Alto Networks Prisma AIRS and NVIDIA BlueField. Get zero trust security without sacrificing AI performance. The post Palo Alto Networks Announces Support for NVIDIA Enterprise AI Factory appeared first on Palo Alto Networks Blog.",
+          "source": "Palo Alto Networks"
+        }
+      ]
+    },
+    {
+      "title": "Security Information and Event Management",
+      "sub-title": "SIEM",
+      "definition": "Un SIEM, signifiant Security Information and Event Management, est une solution de cybersécurité qui centralise la collecte, l'analyse et la corrélation des données de sécurité provenant de diverses sources au sein d'une organisation. Il permet de détecter, d'analyser.",
+      "fonctionnement": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "prerequis": [
+        {
+          "title": "Prerequis 1",
+          "fonctionnement": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "protocole": "protocole 1",
+          "environnement": "environnement 1",
+          "logo-path": "",
+          "link": ""
+        },
+        {
+          "title": "Prerequis 2",
+          "fonctionnement": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "protocole": "protocole 2",
+          "environnement": "environnement 2",
+          "logo-path": "",
+          "link": ""
+        }
+      ],
+      "articles": [
+        {
+          "date": "6 Février 2026",
+          "title": "How Samsung Knox Helps Stop Your Network Security Breach",
+          "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYbHuhB2klNlaHkYykLYRjMjQVPrFD5GjaSmTiLJPzDkOGBVufabhBs2akKWk8RV3LBOvEqj2ANFmVcfqfixnoHAlShEtg6FZvSviNFYX1xmLxdRZwK3M87ElFVhJbArR7ZELSje8MoaPW2FnbHHIWFTpjSOxlPaP5KWEXzIJ8YkkMlzdUE01DTeDPKUw/s1600/samsung.jpg",
+          "link": "https://thehackernews.com/2026/02/how-samsung-knox-helps-stop-your-network-security-breach.html",
+          "tags": ["Sécurité", "Entreprise", "Infrastructure", "Failles"],
+          "description": "As you know, enterprise network security has undergone significant evolution over the past decade. Firewalls have become more intelligent, threat detection methods have advanced, and access controls are now more detailed. However (and it&rsquo;s a big &ldquo;however&rdquo;), the increasing use of mobile devices in business operations necessitates network security measures that are specifically",
+          "source": "The Hacker News"
+        },
+        {
+          "date": "4 Février 2026",
+          "title": "The First 90 Seconds: How Early Decisions Shape Incident Response Investigations",
+          "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUnx0YyMmcxNjnpByxI1Ox1uYPj-VK1XhaTm_BWuyumyZGTDH9njGAT0tc95n736kaWAVeRD9ptaw5XJZoNSuIeVBgU8bBXXMlu-zlyZxXq8AjftysB21xcTcM5U-mtX6-jdtRAYuAhkLTb2k2inxlvvI4vXevI8knxLpst2BeGfY6LI0bHj7U87-VwxQ/s1600/malware-attack.jpg",
+          "link": "https://thehackernews.com/2026/02/the-first-90-seconds-how-early.html",
+          "tags": ["Solutions"],
+          "description": "Many incident response failures do not come from a lack of tools, intelligence, or technical skills. They come from what happens immediately after detection, when pressure is high, and information is incomplete. I have seen IR teams recover from sophisticated intrusions with limited telemetry. I have also seen teams lose control of investigations they should have been able to handle. The",
+          "source": "The Hacker News"
+        },
+        {
+          "date": "3 Février 2026",
+          "title": "[Webinar] The Smarter SOC Blueprint: Learn What to Build, Buy, and Automate",
+          "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj94yPJzbFbdUMoIM3dTA8goVdCA24p4PPkHSWX3VTTV5kl4XNJD_hz4_NrZb0XjG_tHMdyLMSWJIawj8PTJcqal7TpfSJ0_3jeGzZFn7dTa0_ecTHkRtPzSKBP1VlUaeuv_ErmIMZF08OiQxQPZ73I-A5AmbcUyLGtt2dsYI7RWEBUMie7rqn_EjnC_5aQ/s1600/soc-webinar.jpg",
+          "link": "https://thehackernews.com/2026/02/webinar-smarter-soc-blueprint-learn.html",
+          "tags": ["Sécurité", "Solutions"],
+          "description": "Most security teams today are buried under tools. Too many dashboards. Too much noise. Not enough real progress. Every vendor promises “complete coverage” or “AI-powered automation,” but inside most SOCs, teams are still overwhelmed, stretched thin, and unsure which tools are truly pulling their weight. The result? Bloated stacks, missed signals, and mounting pressure to do more with less. This",
+          "source": "The Hacker News"
+        },
+        {
+          "date": "29 Janvier 2026",
+          "title": "Researchers Find 175,000 Publicly Exposed Ollama AI Servers Across 130 Countries",
+          "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpmx-gYMpMW-nf6wXdiwU6bhhuySnvXQo3BifYIaLE8Vi7Verinm69xkQ4B2AWSXdkdU6yA0WjLVtNGvxx_QzRyxEDKxbpqil2P3NZzOQrFf_MihjJeRVJ64VrWW9IAW9eaxmay2BeiTCHKIestdHmy3KpDagP53nnYQkV4z2TsKoCa_m-gk7BCTue_CKE/s1600/Ollama.jpg",
+          "link": "https://thehackernews.com/2026/01/researchers-find-175000-publicly.html",
+          "tags": ["Infrastructure", "Innovation", "Cloud"],
+          "description": "A new joint investigation by SentinelOne SentinelLABS, and Censys has revealed that the open-source artificial intelligence (AI) deployment has created a vast \"unmanaged, publicly accessible layer of AI compute infrastructure\" that spans 175,000 unique Ollama hosts across 130 countries. These systems, which span both cloud and residential networks across the world, operate outside the",
+          "source": "The Hacker News"
+        },
+        {
+          "date": "23 Décembre 2025",
+          "title": "Hundreds of Arrests as Operation Sentinel Recovers $3m",
+          "image": "",
+          "link": "https://www.infosecurity-magazine.com/news/hundreds-arrests-operation/",
+          "tags": ["SIEM"],
+          "description": "Operational Sentinel helps to crack down on cybercrime across 19 African countries in a month-long campaign",
+          "source": "Infosecurity Magazine"
+        },
+        {
+          "date": "6 Février 2026",
+          "title": "Airrived Emerges From Stealth With $6.1 Million in Funding",
+          "image": "",
+          "link": "https://www.securityweek.com/airrived-emerges-from-stealth-with-6-1-million-in-funding/",
+          "tags": [
+            "Artificial Intelligence",
+            "Cybersecurity Funding",
+            "AI",
+            "Airrived",
+            "funding",
+            "Vulnérabilité"
+          ],
+          "description": "The startup aims to unify SOC, GRC, IAM, vulnerability management, IT, and business operations through its Agentic OS platform. The post Airrived Emerges From Stealth With $6.1 Million in Funding appeared first on SecurityWeek.",
+          "source": "SecurityWeek"
+        },
+        {
+          "date": "30 Janvier 2026",
+          "title": "Torq Moves SOCs Beyond SOAR With AI-Powered Hyper Automation",
+          "image": "https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/blt95ade4301e0baed1/697e3b674c92fabc22015c8e/AI-ML-Ops-BluePlanetStudio-adobe.jpg?width=1280&auto=webp&quality=80&disable=upscale",
+          "link": "https://www.darkreading.com/remote-workforce/torq-moves-socs-soar-ai-powered-hyper-automation",
+          "tags": ["SIEM"],
+          "description": "Investors poured $140 million into Torq's Series D Round, raising the startup's valuation to $1.2 billion, to bring AI-based \"hyper automation\" to SOCs.",
+          "source": "Dark Reading"
+        },
+        {
+          "date": "22 Janvier 2026",
+          "title": "What the Alien Franchise Taught Me About Cybersecurity",
+          "image": "https://www.paloaltonetworks.com/blog/wp-content/uploads/2026/01/AdobeStock_576388241-scaled.jpeg",
+          "link": "https://www.paloaltonetworks.com/blog/2026/01/alien-franchise-taught-cybersecurity/",
+          "tags": [
+            "AI Security",
+            "Points of View",
+            "AI-powered SIEM",
+            "SOC modernization",
+            "Sécurité",
+            "Infrastructure"
+          ],
+          "description": "Ripley's tactics from Alien are your blueprint for SOC transformation to defeat modern threats with AI-driven security, automation and SIEM modernization. The post What the Alien Franchise Taught Me About Cybersecurity appeared first on Palo Alto Networks Blog.",
+          "source": "Palo Alto Networks"
+        }
+      ]
+    }
+  ]
+}
