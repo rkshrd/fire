@@ -1,0 +1,179 @@
+{
+    "topics": {
+        "MFA": {
+            "keywords": [
+                "MFA", "multi-factor authentication", "authentification multi-facteurs",
+                "2FA", "two-factor", "deux facteurs", "A2F",
+                "TOTP", "OTP", "one-time password",
+                "FIDO2", "WebAuthn", "passkey", "passwordless",
+                "biometric", "biométrie", "biometrics",
+                "authenticator", "YubiKey", "security key", "clé de sécurité",
+                "phishing-resistant", "push notification authentication",
+                "SMS verification", "code de vérification",
+                "identity verification", "vérification d'identité"
+            ],
+            "veille_index": 0
+        },
+        "ZTNA": {
+            "keywords": [
+                "zero trust", "ZTNA", "zero-trust",
+                "never trust always verify", "ne jamais faire confiance",
+                "micro-segmentation", "microsegmentation",
+                "least privilege", "moindre privilège",
+                "network access control", "contrôle d'accès réseau",
+                "identity-aware proxy", "software-defined perimeter",
+                "SDP", "SASE", "secure access service edge",
+                "conditional access", "accès conditionnel",
+                "zero trust architecture", "ZTA"
+            ],
+            "veille_index": 1
+        },
+        "SIEM": {
+            "keywords": [
+                "SIEM", "security information event management",
+                "security information and event management",
+                "log management", "gestion des logs",
+                "security analytics", "analyse de sécurité",
+                "threat detection", "détection des menaces",
+                "incident response", "réponse aux incidents",
+                "SOC", "security operations center",
+                "SOAR", "security orchestration",
+                "Splunk", "QRadar", "Sentinel", "LogRhythm", "Elastic SIEM",
+                "Wazuh", "correlation engine", "moteur de corrélation",
+                "event correlation", "corrélation d'événements",
+                "security monitoring", "surveillance de sécurité"
+            ],
+            "veille_index": 2
+        }
+    },
+    "rss_feeds": {
+        "cybersecurity_general": [
+            {
+                "name": "BleepingComputer",
+                "url": "https://www.bleepingcomputer.com/feed/",
+                "lang": "en"
+            },
+            {
+                "name": "The Hacker News",
+                "url": "https://feeds.feedburner.com/TheHackersNews",
+                "lang": "en"
+            },
+            {
+                "name": "Dark Reading",
+                "url": "https://www.darkreading.com/rss.xml",
+                "lang": "en"
+            },
+            {
+                "name": "Krebs on Security",
+                "url": "https://krebsonsecurity.com/feed/",
+                "lang": "en"
+            },
+            {
+                "name": "SecurityWeek",
+                "url": "https://www.securityweek.com/feed/",
+                "lang": "en"
+            },
+            {
+                "name": "Threatpost",
+                "url": "https://threatpost.com/feed/",
+                "lang": "en"
+            },
+            {
+                "name": "Cyber Security News",
+                "url": "https://cybersecuritynews.com/feed/",
+                "lang": "en"
+            },
+            {
+                "name": "Help Net Security",
+                "url": "https://www.helpnetsecurity.com/feed/",
+                "lang": "en"
+            },
+            {
+                "name": "SC Magazine",
+                "url": "https://www.scmagazine.com/feed",
+                "lang": "en"
+            },
+            {
+                "name": "Infosecurity Magazine",
+                "url": "https://www.infosecurity-magazine.com/rss/news/",
+                "lang": "en"
+            }
+        ],
+        "cybersecurity_fr": [
+            {
+                "name": "LeMagIT Sécurité",
+                "url": "https://www.lemagit.fr/rss/ContentSyndication.xml",
+                "lang": "fr"
+            },
+            {
+                "name": "ZDNet FR",
+                "url": "https://www.zdnet.fr/feeds/rss/actualites/",
+                "lang": "fr"
+            },
+            {
+                "name": "L'Usine Digitale",
+                "url": "https://www.usine-digitale.fr/rss",
+                "lang": "fr"
+            },
+            {
+                "name": "Silicon.fr",
+                "url": "https://www.silicon.fr/feed",
+                "lang": "fr"
+            },
+            {
+                "name": "IT Social",
+                "url": "https://itsocial.fr/feed/",
+                "lang": "fr"
+            },
+            {
+                "name": "Clubic Sécurité",
+                "url": "https://www.clubic.com/feed/univers-39-securite.rss",
+                "lang": "fr"
+            }
+        ],
+        "tech_general": [
+            {
+                "name": "dev.to",
+                "url": "https://dev.to/feed",
+                "lang": "en"
+            },
+            {
+                "name": "Ars Technica Security",
+                "url": "https://feeds.arstechnica.com/arstechnica/security",
+                "lang": "en"
+            },
+            {
+                "name": "Wired Security",
+                "url": "https://www.wired.com/feed/category/security/latest/rss",
+                "lang": "en"
+            }
+        ],
+        "vendor_blogs": [
+            {
+                "name": "Microsoft Security Blog",
+                "url": "https://www.microsoft.com/en-us/security/blog/feed/",
+                "lang": "en"
+            },
+            {
+                "name": "Cloudflare Blog",
+                "url": "https://blog.cloudflare.com/rss/",
+                "lang": "en"
+            },
+            {
+                "name": "Palo Alto Networks",
+                "url": "https://www.paloaltonetworks.com/blog/feed/",
+                "lang": "en"
+            },
+            {
+                "name": "CrowdStrike Blog",
+                "url": "https://www.crowdstrike.com/blog/feed/",
+                "lang": "en"
+            },
+            {
+                "name": "Zscaler Blog",
+                "url": "https://www.zscaler.com/blogs/feed",
+                "lang": "en"
+            }
+        ]
+    }
+}
