@@ -19,7 +19,7 @@ export default function HomePage() {
     const [showCode, setShowCode] = useState(false);
 
     return (
-        <div className="relative dot-grid h-[calc(100vh-3.5rem-4rem)] flex flex-col items-center justify-center gap-12 px-4 overflow-hidden">
+        <div className="relative dot-grid h-[calc(100vh-4.5rem-4rem)] flex flex-col items-center justify-center gap-12 px-4 overflow-hidden">
             {/* Hero section */}
             <section className="text-center px-4 max-w-3xl mx-auto relative z-10">
                 <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-4">

@@ -7,7 +7,9 @@ export default function CustomCursor() {
     const trailRef = useRef<HTMLDivElement>(null);
     const [isHovering, setIsHovering] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
-    const [isTouchDevice, setIsTouchDevice] = useState(() => typeof window !== 'undefined' ? window.matchMedia("(pointer: coarse)").matches : false);
+    const [isTouchDevice] = useState(() =>
+        typeof window !== "undefined" ? window.matchMedia("(pointer: coarse)").matches : false
+    );
 
     useLayoutEffect(() => {
         if (isTouchDevice) return;
@@ -68,7 +70,7 @@ export default function CustomCursor() {
             document.removeEventListener("mouseleave", onMouseLeave);
             document.removeEventListener("mouseover", onMouseOver);
         };
-    }, []);
+    }, [isTouchDevice]);
 
     if (isTouchDevice) return null;
 

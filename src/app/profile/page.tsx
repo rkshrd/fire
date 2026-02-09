@@ -10,7 +10,6 @@ import CodeBlock, {
     Var,
     Punct,
     Type,
-    Num,
 } from "@/components/terminal/CodeBlock";
 import {
     Code,
@@ -27,7 +26,7 @@ import {
     Dumbbell,
     Crown,
     Telescope,
-    Languages
+    Languages,
 } from "lucide-react";
 
 const skills = {

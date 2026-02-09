@@ -32,4 +32,4 @@ Les fichiers importants sont:
 - `rss_sources.json` : configuration des flux et mots-clés
 - `veille.sh` : lanceur bash pour installation et planification
 - `versions/` : copies datées de `veille.json`
-- `veille_history.json` : historique des URL traitées
+- `veille_history.json` : historique des URL traitées
