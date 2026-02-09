@@ -1,0 +1,164 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Projet N°1 : Apache2 & SSL",
+      "tag": "school",
+      "description": "Configuration et sécurisation d'un serveur web Apache2 avec certificats SSL/TLS pour garantir des connexions HTTPS sécurisées.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-01.zip"
+    },
+    {
+      "id": 2,
+      "title": "Projet N°2 : Site Web Balance ton Port",
+      "tag": "school",
+      "description": "Développement d'une application web interactive permettant de visualiser et gérer les informations portuaires en temps réel.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-02.zip"
+    },
+    {
+      "id": 3,
+      "title": "Projet N°3 : DHCP",
+      "tag": "school",
+      "description": "Mise en place et configuration d'un serveur DHCP pour l'attribution automatique d'adresses IP sur le réseau local.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-03.zip"
+    },
+    {
+      "id": 4,
+      "title": "Projet N°4 : Keylogger",
+      "tag": "myself",
+      "description": "Développement d'un outil de surveillance des frappes clavier à des fins éducatives et de cybersécurité.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-04.zip"
+    },
+    {
+      "id": 5,
+      "title": "Projet N°5 : Referential Pool Prints & GLPI",
+      "tag": "corporate",
+      "description": "Création d'un référentiel d'imprimantes et intégration avec GLPI pour une gestion optimale du parc d'impression.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-05.zip"
+    },
+    {
+      "id": 6,
+      "title": "Projet N°6 : OCS & GLPI",
+      "tag": "corporate",
+      "description": "Déploiement et configuration d'OCS Inventory couplé à GLPI pour l'inventaire automatisé du parc informatique.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-06.zip"
+    },
+    {
+      "id": 7,
+      "title": "Projet N°7 : Fire Network",
+      "tag": "school",
+      "description": "Conception et simulation d'une architecture réseau sécurisée avec pare-feu et règles de filtrage avancées.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-07.zip"
+    },
+    {
+      "id": 8,
+      "title": "Projet N°8 : Migration W11",
+      "tag": "corporate",
+      "description": "Planification et exécution de la migration vers Windows 11 avec renouvellement complet des équipements utilisateurs.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-08.zip"
+    },
+    {
+      "id": 9,
+      "title": "Projet N°9 : Deploy Fleet Printers",
+      "tag": "corporate",
+      "description": "Déploiement d'une flotte d'imprimantes réseau avec création de guides d'utilisation et de maintenance.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-09.zip"
+    },
+    {
+      "id": 10,
+      "title": "Projet N°10 : Deploy New Switches",
+      "tag": "corporate",
+      "description": "Installation et configuration de nouveaux switches réseau avec VLAN et sécurisation des ports.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-10.zip"
+    },
+    {
+      "id": 11,
+      "title": "Projet N°11 : Process User Profile & Onboarding",
+      "tag": "corporate",
+      "description": "Automatisation du processus de création de profils utilisateurs et d'onboarding pour les nouveaux employés.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-11.zip"
+    },
+    {
+      "id": 12,
+      "title": "Projet N°12 : Add Sonde & Thermostat PCE",
+      "tag": "corporate",
+      "description": "Installation de sondes de température et thermostats connectés pour la supervision des salles serveurs.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-12.zip"
+    },
+    {
+      "id": 13,
+      "title": "Projet N°13 : Stadium Company",
+      "tag": "school",
+      "description": "Projet de gestion d'infrastructure IT pour un stade : réseau, caméras, affichage et billetterie électronique.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-13.zip"
+    },
+    {
+      "id": 14,
+      "title": "Projet N°14 : Radius, Auth, VPN & MFA",
+      "tag": "myself",
+      "description": "Mise en place d'une infrastructure d'authentification Radius avec VPN et authentification multi-facteurs.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-14.zip"
+    },
+    {
+      "id": 15,
+      "title": "Projet N°15 : Add Access Control Devices",
+      "tag": "corporate",
+      "description": "Intégration de dispositifs de contrôle d'accès physique connectés au système de gestion des identités.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-15.zip"
+    },
+    {
+      "id": 16,
+      "title": "Projet N°16 : Network Monitoring",
+      "tag": "myself",
+      "description": "Développement d'une solution de monitoring réseau en temps réel avec alertes automatisées.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-16.zip"
+    },
+    {
+      "id": 17,
+      "title": "Projet N°17 : Referential IT Services Catalog",
+      "tag": "corporate",
+      "description": "Création d'un catalogue de services IT complet pour standardiser et documenter tous les services offerts.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-17.zip"
+    },
+    {
+      "id": 18,
+      "title": "Projet N°18 : Backup & Disaster Recovery",
+      "tag": "corporate",
+      "description": "Mise en place d'une stratégie de sauvegarde complète avec plan de reprise après sinistre (PRA/PCA).",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-18.zip"
+    },
+    {
+      "id": 19,
+      "title": "Projet N°19 : Active Directory Migration",
+      "tag": "myself",
+      "description": "Planification et exécution d'une migration Active Directory vers une nouvelle forêt avec restructuration.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-19.zip"
+    },
+    {
+      "id": 20,
+      "title": "Projet N°20 : Virtualization Infrastructure",
+      "tag": "school",
+      "description": "Conception d'une infrastructure de virtualisation avec VMware/Hyper-V pour optimiser les ressources serveurs.",
+      "source": "projects/page.tsx",
+      "download": "data/projects/project-20.zip"
+    }
+  ]
+}
