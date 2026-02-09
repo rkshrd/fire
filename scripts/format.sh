@@ -8,7 +8,7 @@ NC='\033[0m'
 
 echo -e "${BLUE}→${NC} Running Prettier..."
 echo ""
-npx prettier --write "src/**/*.{ts,tsx}" "scripts/**/*.ts" "public/**/*.svg" "*.{js,mjs,json}"
+npx prettier --write "src/**/*.{ts,tsx}" "*.{js,mjs,json}"
 echo ""
 echo -e "${GREEN}✓${NC} Prettier completed"
 
