@@ -8,7 +8,7 @@ NC='\033[0m'
 
 echo -e "${BLUE}→${NC} Running Prettier..."
 echo ""
-npx prettier --write "src/**/*.{ts,tsx}" "scripts/**/*.ts" "public/**/*.svg" "*.{js,mjs,json}"
+npx prettier --write "src/**/*.{ts,tsx}" "*.{js,mjs,json}"
 echo ""
 echo -e "${GREEN}✓${NC} Prettier completed"
 
@@ -29,7 +29,7 @@ while read -r file; do
         newline_changes+="${GREEN}✓${NC} Cleaned: $file\n"
     fi
 done < <(find . -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" -o -name "*.mjs" -o -name "*.mts" -o -name "*.md" \) \
-    ! -path "./node_modules/*" ! -path "./.next/*" ! -path "./out/*")
+    ! -path "./node_modules/*" ! -path "./.next/*" ! -path "./out/*" ! -path "./ashes/*")
 
 if [ -n "$newline_changes" ]; then
     echo ""

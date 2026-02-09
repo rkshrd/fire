@@ -37,7 +37,7 @@ export default function VeillePage() {
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-center mb-12"
+                className="text-center mb-4"
             >
                 <h1 className="text-3xl sm:text-5xl font-bold mb-2 text-[var(--color-text-primary)]">
                     Veille Technologique
@@ -48,7 +48,7 @@ export default function VeillePage() {
             </motion.div>
 
             {/* Topic nav */}
-            <div className="sticky top-14 z-30 glass rounded-lg p-2 mb-8 flex gap-2 justify-center flex-wrap">
+            <div className="sticky top-0 z-60 py-4 px-2 flex gap-2 justify-center flex-wrap">
                 {veilleData.veilles.map((v, i) => (
                     <button
                         key={i}

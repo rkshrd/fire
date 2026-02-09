@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import Navbar from "@/components/ui/Navbar";
@@ -8,8 +8,8 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 
-const inter = Inter({ subsets: ['latin'] })
-const jetbrains = JetBrains_Mono({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
+const jetbrains = JetBrains_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Thaïs PARISOT — Portfolio",
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <ScrollProgress />
                     <ScrollToTop />
                     <Navbar />
-                    <main className="pt-14 pb-16 min-h-screen">{children}</main>
+                    <main className="pt-18 pb-16 min-h-screen">{children}</main>
                     <Footer />
                 </ThemeProvider>
             </body>

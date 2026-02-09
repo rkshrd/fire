@@ -90,7 +90,10 @@ export default function CursusPage() {
                             {/* SLAM */}
                             <div className="border border-[var(--color-border)] rounded-lg p-4 bg-[var(--color-bg-primary)]">
                                 <div className="flex items-center gap-2 mb-3">
-                                    <ArrowRightLeft size={20} className="text-[var(--color-cyan)]" />
+                                    <ArrowRightLeft
+                                        size={20}
+                                        className="text-[var(--color-cyan)]"
+                                    />
                                     <div>
                                         <h3 className="text-sm font-bold text-[var(--color-text-primary)]">
                                             SLAM

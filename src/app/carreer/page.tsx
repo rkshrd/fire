@@ -3,14 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import TerminalWindow from "@/components/terminal/TerminalWindow";
-import {
-    CodeLine,
-    Keyword,
-    Type,
-    Str,
-    Var,
-    Punct,
-} from "@/components/terminal/CodeBlock";
+import { CodeLine, Keyword, Type, Str, Var, Punct } from "@/components/terminal/CodeBlock";
 
 interface Mission {
     title: string;
