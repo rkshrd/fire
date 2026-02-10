@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TypingEffect from "@/components/ui/TypingEffect";
-import DraggableCandle from "@/components/draggable/DraggableCandle";
+import DraggableCandle from "@/components/ui/DraggableCandle";
 import CodeBlock, {
     CodeLine,
     Keyword,
@@ -17,6 +17,14 @@ export default function HomePage() {
     const [showSubtitle, setShowSubtitle] = useState(false);
     const [showQuote, setShowQuote] = useState(false);
     const [showCode, setShowCode] = useState(false);
+    const [showCandle, setShowCandle] = useState(false);
+
+    useEffect(() => {
+        if (showCode) {
+            const timer = setTimeout(() => setShowCandle(true), 600);
+            return () => clearTimeout(timer);
+        }
+    }, [showCode]);
 
     return (
         <div className="relative dot-grid h-[calc(100vh-4.5rem-4rem)] flex flex-col items-center justify-center gap-12 px-4 overflow-hidden">
@@ -93,7 +101,7 @@ export default function HomePage() {
                 </div>
             )}
 
-            <DraggableCandle />
+            {showCandle && <DraggableCandle />}
 
             <style jsx>{`
                 @keyframes fadeInUp {
