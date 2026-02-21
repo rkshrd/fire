@@ -1,18 +1,31 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function DraggableCandle() {
     const router = useRouter();
     const candleRef = useRef<HTMLDivElement>(null);
-    const [position, setPosition] = useState(() => ({
-        x: typeof window !== "undefined" ? window.innerWidth / 2 - 32 : 0,
-        y: typeof window !== "undefined" ? window.innerHeight - 200 : 0,
-    }));
+    const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
+    const [hasBeenDragged, setHasBeenDragged] = useState(false);
     const dragOffset = useRef({ x: 0, y: 0 });
+
+    useLayoutEffect(() => {
+        const updatePosition = () => {
+            if (!hasBeenDragged) {
+                setPosition({
+                    x: window.innerWidth / 2 - 48,
+                    y: window.innerHeight - 200,
+                });
+            }
+        };
+
+        updatePosition();
+        window.addEventListener("resize", updatePosition);
+        return () => window.removeEventListener("resize", updatePosition);
+    }, [hasBeenDragged]);
 
     useEffect(() => {
         if (!isDragging) return;
@@ -49,12 +62,14 @@ export default function DraggableCandle() {
     const handleMouseDown = (e: React.MouseEvent) => {
         dragOffset.current = { x: e.clientX - position.x, y: e.clientY - position.y };
         setIsDragging(true);
+        setHasBeenDragged(true);
     };
 
     const handleTouchStart = (e: React.TouchEvent) => {
         const touch = e.touches[0];
         dragOffset.current = { x: touch.clientX - position.x, y: touch.clientY - position.y };
         setIsDragging(true);
+        setHasBeenDragged(true);
     };
 
     const handleDoubleClick = () => {
