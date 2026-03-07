@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Download, ExternalLink } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -16,27 +17,44 @@ export default function Footer() {
                     >
                         home
                     </Link>
-                    <Link
-                        href="/profile"
+                    <a
+                        href="https://www.linkedin.com/in/thaïs-parisot-777ir3ign1s/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="hover:text-[var(--color-accent)] transition-colors"
                         data-hoverable
                     >
-                        profile
-                    </Link>
-                    <Link
-                        href="/projects"
+                        linkedin
+                    </a>
+                    <a
+                        href="https://discord.com/users/264148329527508992"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="hover:text-[var(--color-accent)] transition-colors"
                         data-hoverable
                     >
-                        projects
-                    </Link>
-                    <Link
-                        href="/veille"
-                        className="hover:text-[var(--color-accent)] transition-colors"
+                        discord
+                    </a>
+                    cv
+                    <a
+                        href="/CV.pdf"
+                        download="CV-Thaïs-Parisot.pdf"
+                        className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"
                         data-hoverable
+                        title="Télécharger mon CV"
                     >
-                        veille
-                    </Link>
+                        <Download size={14} />
+                    </a>
+                    <a
+                        href="/CV.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"
+                        data-hoverable
+                        title="Voir mon CV"
+                    >
+                        <ExternalLink size={14} />
+                    </a>
                 </div>
             </div>
         </footer>
