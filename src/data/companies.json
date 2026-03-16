@@ -1,0 +1,68 @@
+{
+    "companies": [
+        {
+            "name": "SUEZ R&V",
+            "role": "Technicien Informatique — Équipe Architecture ATS",
+            "period": "Sept 2025 — Aujourd'hui",
+            "location": "Île-de-France, La Défense, Altiplano",
+            "team": "Équipe Architecture GIS/ATS - Tranverses",
+            "description": "Intégrée à l'équipe Architecture du Département Technique, j'interviens sur le référencement de produits et de services, le déploiement et le maintien des de flux d'automatisation sur notre infrastructure. Je participe à des projets de structuration et de solution d'envergure nationale impliquant des architectures hybrides et de multi.",
+            "missions": [
+                {
+                    "title": "Referential TAD",
+                    "description": "Restructuration et mise à jour d'un référentiel technique complet : schémas réseau, procédures d'exploitation et documentations techniques"
+                },
+                {
+                    "title": "Synch SRV",
+                    "description": "Flux stockés en cloud, avec déclencheur automatisé ou de récurence afin de synchroniser une liste database sur SharePoint et stocker les informations essentielles à l'entièreté des services IT au sein d'un même document en xlsx."
+                },
+                {
+                    "title": "Référentiel & Documentation",
+                    "description": "Création et maintien de la documentation technique."
+                },
+                {
+                    "title": "Support N2/N3",
+                    "description": "Prise en charge des incidents réseau escaladés, analyse des logs, diagnostic et résolution de problèmes complexes sur l'infrastructure."
+                },
+                {
+                    "title": "Projets Transverses",
+                    "description": "Participation à des projets transverses : migration d'équipements, standardisation des configurations et amélioration continue des processus."
+                }
+            ]
+        },
+        {
+            "name": "Vivalto Santé / CHPE",
+            "role": "Technicienne Support IT",
+            "period": "Sept 2023 — Sept 2024",
+            "location": "Île-de-France",
+            "team": "Service Informatique",
+            "description": "Au sein du service informatique du Centre Hospitalier Paul Eismein, j'ai assuré le support utilisateur, la gestion du parc informatique et piloté le projet de migration Windows 11 avec renouvellement du matériel.",
+            "missions": [
+                {
+                    "title": "Migration Windows 11",
+                    "description": "Pilotage de la migration vers Windows 11 : inventaire du parc, planification par service, masterisation, déploiement et accompagnement des utilisateurs."
+                },
+                {
+                    "title": "Gestion du Parc IT",
+                    "description": "Administration du parc informatique via GLPI et OCS Inventory : suivi des actifs, gestion des licences et cycle de vie du matériel."
+                },
+                {
+                    "title": "Support Utilisateur",
+                    "description": "Support de proximité N1/N2 pour les professionnels de santé : dépannage, installation, configuration et formation aux outils métier."
+                },
+                {
+                    "title": "Onboarding & Offboarding",
+                    "description": "Gestion des arrivées et départs : création de comptes AD, messagerie, attribution de matériel et récupération à la sortie."
+                },
+                {
+                    "title": "Infrastructure Imprimantes",
+                    "description": "Déploiement et maintenance de la flotte d'imprimantes réseau, création de référentiels et guides d'utilisation."
+                },
+                {
+                    "title": "Contrôle d'Accès",
+                    "description": "Installation et configuration de dispositifs de contrôle d'accès physique pour sécuriser les zones sensibles de l'établissement."
+                }
+            ]
+        }
+    ]
+}

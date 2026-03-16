@@ -1,0 +1,68 @@
+{
+    "timeline": [
+        {
+            "date": "09.2025",
+            "type": "work",
+            "title": "Technicienne Informatique\n(Équipe Architecture) — Alternance",
+            "org": "SUEZ R&V",
+            "desc": "Valorisation des Produits IT ; automatisation ; référencements ; analyse et structuration de données"
+        },
+        {
+            "date": "09.2024 → 2026",
+            "type": "school",
+            "title": "BTS SIO — SISR",
+            "org": "ENSUP CAMPUS SQY (ENSITECH)",
+            "desc": "Spécialisation systèmes/réseaux et cybersécurité"
+        },
+        {
+            "date": "09.2024 → 08.2025",
+            "type": "work",
+            "title": "Technicienne Support Informatique — Alternance",
+            "org": "Clinique Privée de l'Europe, Le Port-Marly",
+            "desc": "Gestion/maintenance des infrastructures réseau, support N1&2"
+        },
+        {
+            "date": "02.2024 → 05.2024",
+            "type": "work",
+            "title": "Technicienne Support Informatique — Stage",
+            "org": "Clinique Privée de l'Europe, Le Port-Marly",
+            "desc": "Maintenance des infrastructures réseau, support N1&2 (7 semaines)"
+        },
+        {
+            "date": "09.2023 → 06.2024",
+            "type": "school",
+            "title": "BTS SIO SISR 1",
+            "org": "H3 Campus, Poissy",
+            "desc": "Première année de BTS SIO, spécialisation SISR"
+        },
+        {
+            "date": "2022 → 2023",
+            "type": "school",
+            "title": "Licence Sociologie",
+            "org": "Université Nanterre",
+            "desc": "Option anthropologie & ethnologie"
+        },
+        {
+            "date": "2021 → 2022",
+            "type": "school",
+            "title": "Licence Humanités",
+            "org": "Institut Catholique de Paris",
+            "desc": "Sociologie, Anthropologie, Théologie, Philosophie, Histoire, Grec ancien"
+        },
+        {
+            "date": "2017 → 2020",
+            "type": "school",
+            "title": "Baccalauréat Général — Littérature",
+            "org": "Candidate libre",
+            "desc": "Obtention sept. 2020 — Mention AB. Spé: Droits & grands enjeux du monde contemporain, Littérature Anglaise"
+        }
+    ],
+    "hobbies": [
+        { "name": "Escalade", "icon": "Mountain" },
+        { "name": "Lecture", "icon": "BookOpen" },
+        { "name": "Jeux vidéo", "icon": "Gamepad2" },
+        { "name": "Musculation", "icon": "Dumbbell" },
+        { "name": "Échecs", "icon": "Crown" },
+        { "name": "Astronomie", "icon": "Telescope" }
+    ]
+}

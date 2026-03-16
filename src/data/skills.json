@@ -1,0 +1,87 @@
+{
+    "langages": [
+        { "name": "Python", "icon": "Code" },
+        { "name": "JavaScript", "icon": "Code" },
+        { "name": "HTML/CSS", "icon": "Globe" },
+        { "name": "Bash", "icon": "Terminal" },
+        { "name": "SQL", "icon": "Database" },
+        { "name": "PowerShell", "icon": "Terminal" },
+        { "name": "PHP", "icon": "Code" }
+    ],
+    "outils": [
+        { "name": "Linux", "icon": "Monitor" },
+        { "name": "Wireshark", "icon": "Monitor" },
+        { "name": "Metasploit", "icon": "Monitor" },
+        { "name": "Windows", "icon": "Monitor" },
+        { "name": "Docker", "icon": "Container" },
+        { "name": "Git", "icon": "GitBranch" },
+        { "name": "VMware", "icon": "Server" }
+    ],
+    "certifications": [
+        {
+            "name": "Network Technician Career Path",
+            "url": "/certifications/network-technician-career-path-cisco.pdf",
+            "src": "/certifications/network-technician-career-path.png"
+        },
+        {
+            "name": "Computer Hardware Basics",
+            "url": "/certifications/computer-hardware-basics-cisco.pdf",
+            "src": "/certifications/computer-hardware-basics.png"
+        },
+        {
+            "name": "Networking Basics",
+            "url": "/certifications/networking-basics-cisco.pdf",
+            "src": "/certifications/networking-basics.png"
+        },
+        {
+            "name": "Introduction to Cybersecurity",
+            "url": "/certifications/introduction-to-cybersecurity-cisco.pdf",
+            "src": "/certifications/introduction-to-cybersecurity.png"
+        },
+        {
+            "name": "Introduction to IoT",
+            "url": "/certifications/introduction-to-iot-cisco.pdf",
+            "src": "/certifications/introduction-to-iot.png"
+        },
+        {
+            "name": "Introduction to Modern AI",
+            "url": "/certifications/introduction-to-modern-ai-cisco.pdf",
+            "src": "/certifications/introduction-to-modern-ai.png"
+        },
+        {
+            "name": "Industrial Networking Essentials",
+            "url": "/certifications/industrial-networking-cisco.pdf",
+            "src": "/certifications/industrial-networking-essentials.png"
+        },
+        {
+            "name": "Digital Safety & Security Awareness",
+            "url": "/certifications/digital-safety-cisco.pdf",
+            "src": "/certifications/digital-safety-and-security-awareness.png"
+        },
+        {
+            "name": "Google IT Support Professional",
+            "url": "/certifications/google-it-support.pdf",
+            "src": "/certifications/google-it-support-professional-certificate-v-3.png"
+        },
+        {
+            "name": "I2CS Cybersecurity",
+            "url": "/certifications/i2cs-cisco.pdf",
+            "src": "/certifications/introduction-to-cybersecurity.png"
+        },
+        {
+            "name": "SecNum Cybersécurité",
+            "url": "/certifications/secnum-cybersecurite.pdf",
+            "src": ""
+        },
+        {
+            "name": "EBios Risk Manager",
+            "url": "/certifications/risk-ebios-2025.pdf",
+            "src": ""
+        }
+    ],
+    "langues": [
+        { "name": "Anglais", "level": "C1", "icon": "Languages" },
+        { "name": "Espagnol", "level": "B2", "icon": "Languages" },
+        { "name": "Japonais", "level": "A2", "icon": "Languages" }
+    ]
+}
