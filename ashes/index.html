@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thaïs PARISOT — Portfolio</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Feuille de style -->
+  <link rel="stylesheet" href="css/finalfire.css" />
+  <link rel="stylesheet" href="css/header.css" />
+</head>
+
+<body>
+  <!-- ====== NAVBAR ====== -->
+  <header class="navbar">
+    <!-- Menu gauche -->
+    <div class="left">
+      <button id="menuBtn" class="hamburger" aria-label="Menu principal">>_</button>
+      <nav id="menu" class="dropdown">
+        <a href="carreer.html">🔸Carreer</a>
+        <a href="cursus.html">🔸Cursus</a>
+        <a href="profile.html">🔸Profile</a>
+        <a href="projects.html">🔸Projects (E5)</a>
+      </nav>
+    </div>
+
+    <!-- Centre -->
+    <div class="center">
+      <div class="title-with-logos">
+        <a href="index.html">
+          <img src="pictures/logo2.png" alt="Logo principal" class="logo-slot">
+        </a>
+      </div>
+    </div>
+
+    <!-- Droite -->
+    <div class="right">
+      <div class="datetime">
+        <div id="dateStr">—</div>
+        <div id="timeStr">—</div>
+      </div>
+      <button id="themeToggle" aria-label="ColorTheme" class="theme-btn">🌙</button>
+    </div>
+  </header>
+
+  <!-- ====== CONTENU PRINCIPAL ====== -->
+  <main>
+    <section class="hero">
+      <div class="title">Thaïs PARISOT</div>
+      <div class="subtitle">Network, System & Cybersecurity's Student</div>
+      <div class="quote"><em>“Spark of Computing”</em></div>
+    </section>
+
+    <!-- Bougie pixel draggable -->
+    <img src="pictures/candle1.png" id="candle" alt="Candle Pixel" title="Veille Technologique : MFA, ZTNA & SIEM" />
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/header.js"></script>
+
+</body>
+</html>

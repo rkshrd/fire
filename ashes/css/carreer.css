@@ -1,0 +1,320 @@
+:root {
+    --bg: #0b0b0c;
+    --panel: #111213;
+    --text: #f3e2cf;
+    --title-h1: #ffba92;
+    --title-h2: #dfa380;
+    --sub-title: #8e8f94;
+    --muted: #8e8f941a;
+    --hovered: #8e8f9433;
+    --accent: #ff6200;
+    --card: #ff620033;
+    --card-weak: #ff62001a;
+    --shadow: #ff620026;
+}
+
+/* ====== Thème clair ====== */
+.light-theme {
+    --bg: #f3f3f3;
+    --panel: #ffffff;
+    --text: #0c0c0c;
+    --accent: #db5400;
+    --title-h1: #392920;
+    --title-h2: #694d3c;
+    --sub-title: #505053;
+    --muted: #8e8f941a;
+    --hovered: #d3d6e133;
+    --accent: #ff6200;
+    --card: #ff620033;
+    --card-weak: #ff62001a;
+    --shadow: #ff620026;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Main Container */
+main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background-color: var(--bg);
+    border-right: 2px solid var(--accent);
+    padding: 30px 0;
+    overflow-y: auto;
+}
+
+.company-item {
+    padding: 0;
+    margin: 0;
+}
+
+.company-button {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.company-button:hover {
+    background-color: var(--card-weak);
+    border-left-color: var(--accent);
+}
+
+.company-button.active {
+    background-color: var(--card);
+    border-left-color: var(--title-h1);
+}
+
+.company-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    font-weight: bold;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.logo-suez {
+    background-color: #d4ff98;
+}
+
+.logo-vivalto {
+    background-color: #1818ff;
+}
+
+.missions-button {
+    width: 100%;
+    padding: 10px 20px 10px 56px;
+    border-radius: 50px;
+    background-color: var(--muted);
+    border: none;
+    color: var(--accent);
+    text-align: left;
+    cursor: pointer;
+    font-size: 30px, bold;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    display: none;
+}
+
+.missions-button.active {
+    display: block;
+}
+
+.missions-button:hover {
+    background-color: var(--hovered);
+    border-left-color: var(--title-h1);
+}
+
+.missions-button.selected {
+    background-color: var(--card);
+    border-left-color: var(--title-h1);
+    color: var(--title-h1);
+}
+
+/* Content Area */
+.content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.content-hidden {
+    display: none;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Company Presentation */
+.company-presentation h1 {
+    font-size: 45px;
+    margin-bottom: 30px;
+    color: var(--title-h1);
+}
+
+.presentation-section {
+    margin-bottom: 20px;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+}
+
+.section-primary {
+    background-color: var(--card);
+}
+
+.section-secondary {
+    background-color: var(--card);
+}
+
+.section-tertiary {
+    background-color: var(--card-weak);
+}
+
+.presentation-section h2 {
+    font-size: 25px;
+    margin-bottom: 12px;
+    color: var(--title-h2);
+    
+}
+
+.presentation-section p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    
+}
+
+/* Missions Grid */
+.missions-container {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 12fr));
+    flex-direction: wrap;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+
+.mission-card {
+    flex: 1 1 300px;
+    min-width: 300px;
+    background-color: var(--card-weak);
+    border: 2px solid var(--card);
+    border-radius: 8px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.mission-card:hover {
+    border-color: var(--title-h2);
+    box-shadow: 0 8px 24px var(--shadow);
+    transform: translateY(-4px);
+}
+
+.mission-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--title-h2);
+}
+
+.mission-card .mission-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: var(--sub-title);
+}
+
+.mission-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.mission-card p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--title-h1)
+};
+
+.empty-state {
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.empty-state p {
+    font-size: 16px;
+}
+
+.company-header {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background: linear-gradient(180deg, var(--accent), var(--bg) );
+}
+
+.company-header img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* crop to fit, avoids overflow */
+    object-position: center;
+}

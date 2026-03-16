@@ -1,0 +1,369 @@
+:root {
+  --bg: #050608;
+  --bg-alt: #080b10;
+  --panel: #0c1117;
+  --panel-soft: #111822;
+  --accent: #ff9735;
+  --accent-soft: #bf741e;
+  --accent-strong: #ff7b00;
+  --text-main: #e5f6ff;
+  --text-muted: #7b8a9a;
+  --border: #2a3b4c;
+  --danger: #ff4f4f;
+  --warning: #ffd166;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: radial-gradient(circle at top, #122334 0, #050608 55%, #020308 100%);
+  color: var(--text-main);
+}
+
+/* Layout */
+
+.page {
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* Header */
+
+.page-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-family: "Fira Code", monospace;
+  font-size: clamp(2.3rem, 3vw, 2.8rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  text-shadow: 0 0 8px rgba(255, 102, 0, 0.75);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-cursor {
+  display: inline-block;
+  margin-left: 4px;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+.subtitle {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Terminal window */
+
+.terminal {
+  background: linear-gradient(135deg, var(--panel), #05070b);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 26px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  position: relative;
+}
+
+.terminal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(53, 255, 155, 0.12);
+  pointer-events: none;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: radial-gradient(circle at top left, #172534 0, #05060a 65%);
+  padding: 10px 16px;
+  border-bottom: 1px solid #1b2836;
+  font-family: "Fira Code", monospace;
+  font-size: 0.8rem;
+}
+
+.term-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.dot-close {
+  background: #ff5f57;
+}
+
+.dot-min {
+  background: #febc2e;
+}
+
+.dot-max {
+  background: #28c840;
+}
+
+.term-title {
+  flex: 1;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.term-tag {
+  font-size: 0.7rem;
+  color: var(--accent);
+}
+
+.terminal-body {
+  padding: 18px 20px 20px;
+  background: radial-gradient(circle at top left, #111827 0, #050608 50%);
+}
+
+/* Text blocks */
+
+.muted-label {
+  font-family: "Fira Code", monospace;
+  font-size: 1.5rem;
+  color: var(--accent-soft);
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.paragraph {
+  margin: 0 0 14px;
+  line-height: 1.6;
+  color: #cfd9e6;
+  font-size: 0.95rem;
+}
+
+.section-title {
+  margin-top: 18px;
+  margin-bottom: 10px;
+  font-family: "Fira Code", monospace;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-strong);
+}
+
+/* Cards grid */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.card {
+  background: var(--panel-soft);
+  border-radius: var(--radius-md);
+  border: 1px solid #613f2f;
+  padding: 14px 16px 16px;
+  box-shadow: 0 14px 20px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 184, 53, 0.06), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.card-icon {
+  font-size: 1.3rem;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.card-subtitle {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.card-list {
+  margin: 10px 0 8px;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  color: #d1deee;
+}
+
+.card-list li + li {
+  margin-top: 4px;
+}
+
+.card-footer {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.accent {
+  color: var(--accent-strong);
+}
+
+/* Lists */
+
+.list-block {
+  margin: 6px 0 12px;
+  padding-left: 1.1rem;
+  color: #d1deee;
+  font-size: 0.92rem;
+}
+
+.list-block li + li {
+  margin-top: 4px;
+}
+
+/* ENSITECH bloc */
+
+.terminal-body--split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.ensitech-text {
+  flex: 2 1 260px;
+}
+
+.ensitech-logo-wrap {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ensitech-logo {
+  max-width: 230px;
+  max-height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.6));
+  background: #ffffff;
+  padding: 8px 14px;
+  border-radius: 12px;
+}
+
+.logo-fallback {
+  background: transparent;
+  border: 1px dashed var(--border);
+}
+
+.logo-caption {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-strong);
+  font-family: "Fira Code", monospace;
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--accent-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: radial-gradient(circle at top left, rgba(133, 241, 255, 0.18), transparent 65%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.55);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+.btn-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle at top left, rgba(174, 239, 255, 0.3), transparent 68%);
+}
+
+/* Terminal clickable */
+
+.terminal-clickable {
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.terminal-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 26px 46px rgba(0, 0, 0, 0.65);
+  border-color: var(--accent-soft);
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+  body {
+    padding: 24px 12px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animations */
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
