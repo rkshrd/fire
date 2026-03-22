@@ -26,14 +26,17 @@ export default function TypingEffect({
     const [showBlinkCursor, setShowBlinkCursor] = useState(false);
     const onCompleteRef = useRef(onComplete);
     onCompleteRef.current = onComplete;
+    const textRef = useRef(text);
+    const speedRef = useRef(speed);
+    const delayRef = useRef(delay);
 
     useEffect(() => {
         const delayTimer = setTimeout(() => {
             setIsTyping(true);
             let i = 0;
             const interval = setInterval(() => {
-                if (i < text.length) {
-                    setDisplayText(text.slice(0, i + 1));
+                if (i < textRef.current.length) {
+                    setDisplayText(textRef.current.slice(0, i + 1));
                     i++;
                 } else {
                     clearInterval(interval);
@@ -41,12 +44,11 @@ export default function TypingEffect({
                     setShowBlinkCursor(true);
                     onCompleteRef.current?.();
                 }
-            }, speed);
+            }, speedRef.current);
             return () => clearInterval(interval);
-        }, delay);
+        }, delayRef.current);
 
         return () => clearTimeout(delayTimer);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
