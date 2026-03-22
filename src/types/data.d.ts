@@ -26,6 +26,8 @@ declare module "@/data/veille.json" {
         fonctionnement: string;
         prerequis: Prerequis[];
         articles: Article[];
+        sources?: string[];
+        image?: string;
     }
 
     interface VeilleData {
