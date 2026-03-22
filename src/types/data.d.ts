@@ -2,12 +2,12 @@
 // veille.json and projects.json should be located in src/data/
 declare module "@/data/veille.json" {
     interface Article {
-        date: string;
-        title: string;
-        image: string;
-        link: string;
+        date?: string;
+        title?: string;
+        image?: string;
+        link?: string;
         tags: string[];
-        description: string;
+        description?: string;
         source: string;
     }
 
@@ -16,7 +16,7 @@ declare module "@/data/veille.json" {
         fonctionnement: string;
         protocole: string;
         environnement: string;
-        link: string;
+        link?: string;
     }
 
     interface Veille {
