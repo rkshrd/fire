@@ -2,9 +2,11 @@
 
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import TerminalWindow from "@/components/terminal/TerminalWindow";
 import ArticleCard from "@/components/veille/ArticleCard";
 import PostIt from "@/components/veille/PostIt";
+import SourceLinks from "@/components/veille/SourceLinks";
 import veilleData from "@/data/veille.json";
 
 type Veille = (typeof veilleData.veilles)[number];
@@ -12,6 +14,7 @@ type Veille = (typeof veilleData.veilles)[number];
 export default function VeillePage() {
     const [activeTopicIndex, setActiveTopicIndex] = useState(0);
     const [activeTag, setActiveTag] = useState<string | null>(null);
+    const [lightbox, setLightbox] = useState<string | null>(null);
 
     const activeTopic: Veille = veilleData.veilles[activeTopicIndex];
 
@@ -68,28 +71,50 @@ export default function VeillePage() {
                 ))}
             </div>
 
-            {/* Definition terminal */}
+            {/* Definition terminal + illustration */}
             <motion.div
                 key={activeTopicIndex}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="mb-10"
+                className={`mb-10 ${activeTopic.image ? "flex flex-col lg:flex-row gap-6 items-start" : ""}`}
             >
-                <TerminalWindow title={`${activeTopic["sub-title"].toLowerCase()}_definition.md`}>
-                    <h2 className="text-lg font-bold text-[var(--color-accent)] mb-3">
-                        {activeTopic.title}
-                    </h2>
-                    <p className="text-sm text-[var(--color-text-secondary)] mb-4 leading-relaxed">
-                        {activeTopic.definition}
-                    </p>
-                    <h3 className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">
-                        {"> Fonctionnement"}
-                    </h3>
-                    <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
-                        {activeTopic.fonctionnement}
-                    </p>
-                </TerminalWindow>
+                <div className={activeTopic.image ? "flex-1 min-w-0" : ""}>
+                    <TerminalWindow
+                        title={`${activeTopic["sub-title"].toLowerCase()}_definition.md`}
+                    >
+                        <h2 className="text-lg font-bold text-[var(--color-accent)] mb-3">
+                            {activeTopic.title}
+                        </h2>
+                        <p className="text-sm text-[var(--color-text-secondary)] mb-4 leading-relaxed">
+                            {activeTopic.definition}
+                        </p>
+                        <h3 className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">
+                            {"> Fonctionnement"}
+                        </h3>
+                        <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
+                            {activeTopic.fonctionnement}
+                        </p>
+                    </TerminalWindow>
+                </div>
+                {activeTopic.image && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, delay: 0.2 }}
+                        className="lg:w-1/3 shrink-0 flex justify-center lg:self-stretch overflow-hidden"
+                    >
+                        <Image
+                            src={activeTopic.image}
+                            alt={`Illustration ${activeTopic["sub-title"]}`}
+                            width={800}
+                            height={1100}
+                            unoptimized
+                            onClick={() => setLightbox(activeTopic.image!)}
+                            className="rounded-lg border border-[var(--color-border)] h-full w-full object-cover cursor-zoom-in"
+                        />
+                    </motion.div>
+                )}
             </motion.div>
 
             {/* Prerequisites (post-its) */}
@@ -157,10 +182,34 @@ export default function VeillePage() {
                 ))}
             </div>
 
+            {activeTopic.sources && activeTopic.sources.length > 0 && (
+                <SourceLinks sources={activeTopic.sources} />
+            )}
+
             {filteredArticles.length === 0 && (
                 <div className="text-center py-12 text-[var(--color-text-muted)] font-mono text-sm">
                     {"// Aucun article trouvé pour ce filtre"}
                 </div>
+            )}
+
+            {/* Lightbox */}
+            {lightbox && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setLightbox(null)}
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-zoom-out p-8"
+                >
+                    <Image
+                        src={lightbox}
+                        alt="Illustration en grand"
+                        width={800}
+                        height={1100}
+                        unoptimized
+                        className="max-h-[90vh] max-w-[90vw] w-auto h-auto rounded-lg object-contain"
+                    />
+                </motion.div>
             )}
         </div>
     );
