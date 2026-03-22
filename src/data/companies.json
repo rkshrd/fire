@@ -61,6 +61,10 @@
                 {
                     "title": "Contrôle d'Accès",
                     "description": "Installation et configuration de dispositifs de contrôle d'accès physique pour sécuriser les zones sensibles de l'établissement."
+                },
+                {
+                    "title": "Intégration MFA & Passwordless",
+                    "description": "Intégration de l'authentification multi-facteurs (TOTP via Google Authenticator) dans les applications métier, mise en place du passwordless sur les comptes Microsoft et migration vers Microsoft Authenticator."
                 }
             ]
         }
