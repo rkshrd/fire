@@ -51,7 +51,7 @@ export default function VeillePage() {
             </motion.div>
 
             {/* Topic nav */}
-            <div className="sticky top-0 z-60 py-4.5 px-2 flex gap-2 justify-center flex-wrap">
+            <div className="sticky top-0 z-50 py-4.5 px-2 flex gap-2 justify-center flex-wrap">
                 {veilleData.veilles.map((v, i) => (
                     <button
                         key={i}
