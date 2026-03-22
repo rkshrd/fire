@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 
 interface ArticleCardProps {
-    title: string;
-    description: string;
-    date: string;
+    title?: string;
+    description?: string;
+    date?: string;
     source: string;
     tags: string[];
-    link: string;
+    link?: string;
 }
 
 export default function ArticleCard({
