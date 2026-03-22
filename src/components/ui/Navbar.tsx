@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import { Sun, Moon } from "lucide-react";
@@ -19,9 +19,27 @@ export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [dateStr, setDateStr] = useState("—");
     const [timeStr, setTimeStr] = useState("—");
-    const [mounted, setMounted] = useState(false);
+    const mounted = useSyncExternalStore(
+        () => () => {},
+        () => true,
+        () => false
+    );
     const { theme, setTheme } = useTheme();
     const pathname = usePathname();
+
+    // Hide logo on /veille when scrolled past hero
+    const isVeille = pathname.startsWith("/veille");
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+        if (!isVeille) return;
+        const onScroll = () => setScrollY(window.scrollY);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, [isVeille]);
+
+    const hideLogo = isVeille && scrollY > 150;
 
     // Live clock Europe/Paris
     useEffect(() => {
@@ -68,16 +86,11 @@ export default function Navbar() {
     }, []);
 
     // Close menu on route change
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+    const [prevPathname, setPrevPathname] = useState(pathname);
+    if (pathname !== prevPathname) {
+        setPrevPathname(pathname);
         setMenuOpen(false);
-    }, [pathname]);
-
-    // Mark component as mounted to avoid SSR/CSR icon mismatch
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setMounted(true);
-    }, []);
+    }
 
     return (
         <header className="glass fixed top-0 left-0 w-full z-50 h-18 px-6 !border-l-0 !border-r-0">
@@ -132,16 +145,16 @@ export default function Navbar() {
                 >
                     <Image
                         src="/favicon.ico"
-                        /* 
-                Préconiser le /nom_icone.format directement 
-                plutot que public/nom_icone.format pour éviter les 
+                        /*
+                Préconiser le /nom_icone.format directement
+                plutot que public/nom_icone.format pour éviter les
                 problèmes de chemin d'accès et de configuration dans Next.js.
               */
                         alt="FireChipset"
                         width={52}
                         height={52}
                         priority
-                        className="cursor-pointer opacity-90 hover:opacity-100 active:opacity-60 transition-opacity duration-200"
+                        className={`cursor-pointer hover:opacity-100 active:opacity-60 transition-opacity duration-200 ${hideLogo ? "opacity-0 pointer-events-none" : "opacity-90"}`}
                     />
                 </Link>
 
