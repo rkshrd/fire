@@ -175,7 +175,7 @@ export default function ProjectsPage() {
 
                                     {/* Back */}
                                     <div
-                                        className="absolute inset-0 rounded-lg border border-[var(--color-accent)] bg-[var(--color-bg-secondary)] p-4 flex flex-col justify-between"
+                                        className="absolute inset-0 rounded-lg border border-[var(--color-accent)] bg-[var(--color-bg-secondary)] p-4"
                                         style={{
                                             backfaceVisibility: "hidden",
                                             transform: "rotateY(180deg)",
@@ -184,21 +184,17 @@ export default function ProjectsPage() {
                                         <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
                                             {project.description}
                                         </p>
-                                        <div className="flex items-center justify-between mt-3">
-                                            <div className="flex items-center gap-2">
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        handleDownload(project);
-                                                    }}
-                                                    className="download-icon"
-                                                    aria-label={`Download ${project.title}`}
-                                                    data-hoverable
-                                                >
-                                                    <Download size={18} />
-                                                </button>
-                                            </div>
-                                        </div>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleDownload(project);
+                                            }}
+                                            className="download-icon absolute bottom-3 right-3"
+                                            aria-label={`Download ${project.title}`}
+                                            data-hoverable
+                                        >
+                                            <Download size={18} />
+                                        </button>
                                     </div>
                                 </div>
                             </motion.div>
