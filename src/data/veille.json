@@ -959,7 +959,8 @@
                     "description": "Analyse des risques d'affaiblissement des protocoles FIDO lorsque les services autorisent le fallback vers des méthodes moins sécurisées, permettant des attaques de downgrade qui compromettent l'avantage de la MFA phishing-résistante.",
                     "source": "CSO Online"
                 }
-            ]
+            ],
+            "image": "/veille/mfa.gif"
         },
         {
             "title": "Zero Trust Network Access",
@@ -1163,7 +1164,8 @@
                 "https://www.zscaler.com/fr/resources/security-terms-glossary/what-is-zero-trust-network-access",
                 "https://www.zscaler.com/fr/zpedia/sase-vs-ztna",
                 "https://www.zscaler.com/resources/security-terms-glossary/what-is-zero-trust-network-access"
-            ]
+            ],
+            "image": "/veille/ztna.gif"
         },
         {
             "title": "Security Information and Event Management",
@@ -1241,7 +1243,7 @@
                         "Cybersecurity Funding",
                         "AI",
                         "Airrived",
-                        "funding",
+                        "Funding",
                         "Vulnérabilité"
                     ],
                     "description": "The startup aims to unify SOC, GRC, IAM, vulnerability management, IT, and business operations through its Agentic OS platform. The post Airrived Emerges From Stealth With $6.1 Million in Funding appeared first on SecurityWeek.",
