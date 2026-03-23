@@ -118,14 +118,15 @@ export default function VeillePage() {
             </motion.div>
 
             {/* Prerequisites (post-its) */}
-            {activeTopic.prerequis &&
-                activeTopic.prerequis.length > 0 &&
-                activeTopic.prerequis[0].title !== "Prerequis 1" && (
-                    <div className="mb-12">
-                        <h2 className="text-xl font-bold text-[var(--color-text-primary)] mb-6 font-mono">
-                            {"// Prérequis & Méthodes"}
-                        </h2>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {activeTopic.prerequis && activeTopic.prerequis.length > 0 && (
+                <div className="mb-12">
+                    <h2 className="text-xl font-bold text-[var(--color-text-primary)] mb-6 font-mono">
+                        {"// Prérequis & Méthodes"}
+                    </h2>
+                    <div className="flex gap-6">
+                        <div
+                            className={`grid grid-cols-2 sm:grid-cols-3 gap-4 flex-1 ${activeTopic["sub-title"] !== "ZTNA" ? "md:grid-cols-4 lg:grid-cols-5" : ""}`}
+                        >
                             {activeTopic.prerequis.map((p, i) => (
                                 <PostIt
                                     key={i}
@@ -135,8 +136,22 @@ export default function VeillePage() {
                                 />
                             ))}
                         </div>
+                        {activeTopic["sub-title"] === "ZTNA" && (
+                            <div className="hidden lg:flex shrink-0 w-1/4">
+                                <Image
+                                    src="/veille/thrust.jpg"
+                                    alt="How Zero Trust Security Works"
+                                    width={600}
+                                    height={800}
+                                    unoptimized
+                                    onClick={() => setLightbox("/veille/thrust.jpg")}
+                                    className="rounded-lg border border-[var(--color-border)] w-full h-full object-cover cursor-zoom-in"
+                                />
+                            </div>
+                        )}
                     </div>
-                )}
+                </div>
+            )}
 
             {/* Tag filter */}
             <div className="mb-6 flex flex-wrap gap-2">
