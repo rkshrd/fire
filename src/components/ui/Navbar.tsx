@@ -154,7 +154,7 @@ export default function Navbar() {
                         width={52}
                         height={52}
                         priority
-                        className={`cursor-pointer hover:opacity-100 active:opacity-60 transition-opacity duration-200 ${hideLogo ? "opacity-0 pointer-events-none" : "opacity-90"}`}
+                        className={`cursor-pointer transition-all duration-300 drop-shadow-[0_0_6px_var(--color-accent-glow)] hover:drop-shadow-[0_0_10px_var(--color-accent-glow)] hover:scale-105 hover:opacity-100 active:opacity-60 active:scale-95 ${hideLogo ? "opacity-0 pointer-events-none" : "opacity-90"}`}
                     />
                 </Link>
 
