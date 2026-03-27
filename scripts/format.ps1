@@ -1,22 +1,22 @@
 # Script to clean code formatting and run linting
 
-Write-Host "→" -ForegroundColor Blue -NoNewline
+Write-Host "RUN" -ForegroundColor Blue -NoNewline
 Write-Host " Running Prettier..."
 Write-Host ""
 npx prettier --write "src/**/*.{ts,tsx}" "*.{js,mjs,json}"
 Write-Host ""
-Write-Host "✓" -ForegroundColor Green -NoNewline
+Write-Host "OK" -ForegroundColor Green -NoNewline
 Write-Host " Prettier completed"
 
 Write-Host ""
-Write-Host "→" -ForegroundColor Blue -NoNewline
+Write-Host "RUN" -ForegroundColor Blue -NoNewline
 Write-Host " Running linter..."
 npm run lint -- --fix
-Write-Host "✓" -ForegroundColor Green -NoNewline
+Write-Host "OK" -ForegroundColor Green -NoNewline
 Write-Host " Linting completed"
 
 Write-Host ""
-Write-Host "→" -ForegroundColor Blue -NoNewline
+Write-Host "RUN" -ForegroundColor Blue -NoNewline
 Write-Host " Cleaning trailing newlines..."
 
 $hasChanges = $false
@@ -25,7 +25,14 @@ $excludeDirs = @("node_modules", ".next", "out", "ashes")
 
 $files = Get-ChildItem -Recurse -File -Include $extensions | Where-Object {
     $path = $_.FullName
-    -not ($excludeDirs | Where-Object { $path -like "*\$_\*" })
+    $excluded = $false
+    foreach ($dir in $excludeDirs) {
+        if ($path -like "*\$dir\*") {
+            $excluded = $true
+            break
+        }
+    }
+    -not $excluded
 }
 
 foreach ($file in $files) {
@@ -33,7 +40,7 @@ foreach ($file in $files) {
     $cleaned = $content.TrimEnd("`r", "`n")
     if ($content -ne $cleaned) {
         [System.IO.File]::WriteAllText($file.FullName, $cleaned)
-        Write-Host "✓" -ForegroundColor Green -NoNewline
+        Write-Host "OK" -ForegroundColor Green -NoNewline
         Write-Host " Cleaned: $($file.FullName)"
         $hasChanges = $true
     }
@@ -45,5 +52,5 @@ if (-not $hasChanges) {
     Write-Host ""
 }
 
-Write-Host "✓" -ForegroundColor Green -NoNewline
-Write-Host " Code cleaning completed!"
+Write-Host "OK" -ForegroundColor Green -NoNewline
+Write-Host ' Code cleaning completed!'
