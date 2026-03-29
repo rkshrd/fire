@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import TerminalWindow from "@/components/terminal/TerminalWindow";
@@ -21,7 +21,6 @@ export default function VeilleContent({ initialSlug }: { initialSlug?: string })
         : 0;
 
     const pathname = usePathname();
-    const router = useRouter();
     const [activeTopicIndex, setActiveTopicIndex] = useState(initialIndex);
     const [activeTag, setActiveTag] = useState<string | null>(null);
     const [lightbox, setLightbox] = useState<string | null>(null);
@@ -30,16 +29,18 @@ export default function VeilleContent({ initialSlug }: { initialSlug?: string })
 
     useEffect(() => {
         if (pathname === "/veille" || pathname === "/veille/") {
-            router.replace(`/veille/${veilleData.veilles[activeTopicIndex].slug}/`, {
-                scroll: false,
-            });
+            window.history.replaceState(
+                null,
+                "",
+                `/veille/${veilleData.veilles[activeTopicIndex].slug}/`
+            );
         }
-    }, [activeTopicIndex, pathname, router]);
+    }, [activeTopicIndex, pathname]);
 
     const handleTopicChange = (i: number) => {
         setActiveTopicIndex(i);
         setActiveTag(null);
-        router.replace(`/veille/${veilleData.veilles[i].slug}/`, { scroll: false });
+        window.history.replaceState(null, "", `/veille/${veilleData.veilles[i].slug}/`);
     };
 
     // Get all unique tags for current topic
@@ -75,7 +76,7 @@ export default function VeilleContent({ initialSlug }: { initialSlug?: string })
             </motion.div>
 
             {/* Topic nav */}
-            <div className="sticky top-0 z-50 py-4.5 px-2 flex gap-2 justify-center flex-wrap">
+            <div className="sticky top-0 z-45 py-4.5 px-2 flex gap-2 justify-center flex-wrap w-fit mx-auto">
                 {veilleData.veilles.map((v, i) => (
                     <button
                         key={i}
