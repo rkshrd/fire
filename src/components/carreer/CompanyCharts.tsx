@@ -1,17 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef, useSyncExternalStore } from "react";
-import {
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    ResponsiveContainer,
-    AreaChart,
-    Area,
-    PieChart,
-    Pie,
-} from "recharts";
+import { useState, useEffect, useRef } from "react";
+import { XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area, PieChart, Pie } from "recharts";
 import { motion } from "framer-motion";
 import TerminalWindow from "@/components/terminal/TerminalWindow";
 import type {
@@ -24,13 +14,22 @@ import type {
     CompanyCharts,
 } from "@/types/companies";
 
-const emptySubscribe = () => () => {};
-function useIsMounted() {
-    return useSyncExternalStore(
-        emptySubscribe,
-        () => true,
-        () => false
-    );
+function useContainerSize<T extends HTMLElement = HTMLDivElement>() {
+    const ref = useRef<T>(null);
+    const [size, setSize] = useState({ width: 0, height: 0 });
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const obs = new ResizeObserver(([entry]) => {
+            const { width, height } = entry.contentRect;
+            setSize({ width: Math.floor(width), height: Math.floor(height) });
+        });
+        obs.observe(el);
+        return () => obs.disconnect();
+    }, []);
+
+    return { ref, ...size };
 }
 
 // ─── Revenue Bar Chart (SVG inline) ───────────────────────────
@@ -276,63 +275,61 @@ function RadarChart({ data }: { data: RadarDataPoint[] }) {
 
 // ─── Growth Area Chart (recharts) ─────────────────────────────
 function GrowthAreaChart({ data, label = "Valeur" }: { data: GrowthDataPoint[]; label?: string }) {
-    const mounted = useIsMounted();
+    const { ref, width, height } = useContainerSize<HTMLDivElement>();
 
     return (
         <TerminalWindow title="growth.sh">
             <p className="text-xs text-[var(--color-text-muted)] mb-4 font-mono">
                 {`$ plot growth --metric="${label}"`}
             </p>
-            <div className="h-56">
-                {mounted && (
-                    <ResponsiveContainer width="100%" height="100%" minWidth={0}>
-                        <AreaChart data={data}>
-                            <defs>
-                                <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stopColor="#28d27a" stopOpacity={0.3} />
-                                    <stop offset="100%" stopColor="#28d27a" stopOpacity={0} />
-                                </linearGradient>
-                            </defs>
-                            <CartesianGrid
-                                strokeDasharray="3 3"
-                                stroke="var(--color-border)"
-                                vertical={false}
-                            />
-                            <XAxis
-                                dataKey="year"
-                                tick={{ fill: "var(--color-text-muted)", fontSize: 11 }}
-                                axisLine={false}
-                                tickLine={false}
-                            />
-                            <YAxis
-                                tick={{ fill: "var(--color-text-muted)", fontSize: 10 }}
-                                axisLine={false}
-                                tickLine={false}
-                            />
-                            <Tooltip
-                                formatter={(v) => [`${v} ${label.toLowerCase()}`, label]}
-                                contentStyle={{
-                                    background: "var(--color-bg-card)",
-                                    border: "1px solid var(--color-border)",
-                                    borderRadius: 8,
-                                    fontSize: 12,
-                                }}
-                            />
-                            <Area
-                                type="monotone"
-                                dataKey="value"
-                                stroke="#28d27a"
-                                strokeWidth={2.5}
-                                fill="url(#areaGrad)"
-                                dot={{
-                                    r: 4,
-                                    fill: "var(--color-bg-card)",
-                                    stroke: "#28d27a",
-                                    strokeWidth: 2,
-                                }}
-                            />
-                        </AreaChart>
-                    </ResponsiveContainer>
+            <div ref={ref} className="h-56 [&_*]:outline-none">
+                {width > 0 && height > 0 && (
+                    <AreaChart data={data} width={width} height={height}>
+                        <defs>
+                            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#28d27a" stopOpacity={0.3} />
+                                <stop offset="100%" stopColor="#28d27a" stopOpacity={0} />
+                            </linearGradient>
+                        </defs>
+                        <CartesianGrid
+                            strokeDasharray="3 3"
+                            stroke="var(--color-border)"
+                            vertical={false}
+                        />
+                        <XAxis
+                            dataKey="year"
+                            tick={{ fill: "var(--color-text-muted)", fontSize: 11 }}
+                            axisLine={false}
+                            tickLine={false}
+                        />
+                        <YAxis
+                            tick={{ fill: "var(--color-text-muted)", fontSize: 10 }}
+                            axisLine={false}
+                            tickLine={false}
+                        />
+                        <Tooltip
+                            formatter={(v) => [`${v} ${label.toLowerCase()}`, label]}
+                            contentStyle={{
+                                background: "var(--color-bg-card)",
+                                border: "1px solid var(--color-border)",
+                                borderRadius: 8,
+                                fontSize: 12,
+                            }}
+                        />
+                        <Area
+                            type="monotone"
+                            dataKey="value"
+                            stroke="#28d27a"
+                            strokeWidth={2.5}
+                            fill="url(#areaGrad)"
+                            dot={{
+                                r: 4,
+                                fill: "var(--color-bg-card)",
+                                stroke: "#28d27a",
+                                strokeWidth: 2,
+                            }}
+                        />
+                    </AreaChart>
                 )}
             </div>
         </TerminalWindow>
@@ -344,7 +341,7 @@ const pieColors = ["#28d27a", "#4ec9b0", "#1a8a5c", "#6b7280"];
 
 function ParcPieChart({ data }: { data: ParcInfoDataPoint[] }) {
     const total = data.reduce((sum, d) => sum + d.value, 0);
-    const mounted = useIsMounted();
+    const { ref, width, height } = useContainerSize<HTMLDivElement>();
 
     const coloredData = data.map((d, i) => ({
         ...d,
@@ -356,31 +353,29 @@ function ParcPieChart({ data }: { data: ParcInfoDataPoint[] }) {
             <p className="text-xs text-[var(--color-text-muted)] mb-4 font-mono">
                 {"$ inventory --summary --chart"}
             </p>
-            <div className="h-56 relative">
-                {mounted && (
-                    <ResponsiveContainer width="100%" height="100%" minWidth={0}>
-                        <PieChart>
-                            <Pie
-                                data={coloredData}
-                                cx="50%"
-                                cy="50%"
-                                innerRadius={55}
-                                outerRadius={90}
-                                paddingAngle={3}
-                                dataKey="value"
-                                stroke="none"
-                            />
-                            <Tooltip
-                                formatter={(v, name) => [`${v} postes`, name]}
-                                contentStyle={{
-                                    background: "var(--color-bg-card)",
-                                    border: "1px solid var(--color-border)",
-                                    borderRadius: 8,
-                                    fontSize: 12,
-                                }}
-                            />
-                        </PieChart>
-                    </ResponsiveContainer>
+            <div ref={ref} className="h-56 relative [&_*]:outline-none">
+                {width > 0 && height > 0 && (
+                    <PieChart width={width} height={height}>
+                        <Pie
+                            data={coloredData}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={55}
+                            outerRadius={90}
+                            paddingAngle={3}
+                            dataKey="value"
+                            stroke="none"
+                        />
+                        <Tooltip
+                            formatter={(v, name) => [`${v} postes`, name]}
+                            contentStyle={{
+                                background: "var(--color-bg-card)",
+                                border: "1px solid var(--color-border)",
+                                borderRadius: 8,
+                                fontSize: 12,
+                            }}
+                        />
+                    </PieChart>
                 )}
                 {/* Center label */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -501,6 +496,7 @@ export default function CompanyCharts({ charts }: { charts: CompanyCharts }) {
         <div className={chartCount >= 2 ? "grid md:grid-cols-2 gap-4" : ""}>
             {hasRevenue && (
                 <motion.div
+                    className="min-w-0"
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -514,6 +510,7 @@ export default function CompanyCharts({ charts }: { charts: CompanyCharts }) {
             )}
             {hasBreakdown && (
                 <motion.div
+                    className="min-w-0"
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -527,6 +524,7 @@ export default function CompanyCharts({ charts }: { charts: CompanyCharts }) {
             )}
             {hasRadar && (
                 <motion.div
+                    className="min-w-0"
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -537,6 +535,7 @@ export default function CompanyCharts({ charts }: { charts: CompanyCharts }) {
             )}
             {hasMultiplier && (
                 <motion.div
+                    className="min-w-0"
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -547,6 +546,7 @@ export default function CompanyCharts({ charts }: { charts: CompanyCharts }) {
             )}
             {hasGrowth && (
                 <motion.div
+                    className="min-w-0"
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -557,6 +557,7 @@ export default function CompanyCharts({ charts }: { charts: CompanyCharts }) {
             )}
             {hasParcInfo && (
                 <motion.div
+                    className="min-w-0"
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
