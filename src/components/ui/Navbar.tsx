@@ -123,7 +123,7 @@ export default function Navbar() {
                                     key={link.href}
                                     href={link.href}
                                     className={`block rounded-md text-base font-mono transition-colors hover:bg-[var(--color-bg-hover)] hover:text-[var(--color-accent)] px-4 py-2.5 ${
-                                        pathname === link.href || pathname === link.href + "/"
+                                        pathname.startsWith(link.href)
                                             ? "text-[var(--color-accent)]"
                                             : "text-[var(--color-text-secondary)]"
                                     }`}
