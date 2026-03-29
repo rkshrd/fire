@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import companiesData from "@/data/companies.json";
@@ -36,23 +36,24 @@ export default function CarreerContent({ initialSlug }: { initialSlug?: string }
         : 0;
 
     const pathname = usePathname();
-    const router = useRouter();
     const [activeCompany, setActiveCompany] = useState(initialIndex);
     const [expandedMission, setExpandedMission] = useState<number | null>(null);
     const company = companiesData.companies[activeCompany];
 
     useEffect(() => {
         if (pathname === "/carreer" || pathname === "/carreer/") {
-            router.replace(`/carreer/${companiesData.companies[activeCompany].slug}/`, {
-                scroll: false,
-            });
+            window.history.replaceState(
+                null,
+                "",
+                `/carreer/${companiesData.companies[activeCompany].slug}/`
+            );
         }
-    }, [activeCompany, pathname, router]);
+    }, [activeCompany, pathname]);
 
     const handleCompanyChange = (i: number) => {
         setActiveCompany(i);
         setExpandedMission(null);
-        router.replace(`/carreer/${companiesData.companies[i].slug}/`, { scroll: false });
+        window.history.replaceState(null, "", `/carreer/${companiesData.companies[i].slug}/`);
     };
 
     return (
