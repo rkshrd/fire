@@ -1,6 +1,7 @@
 {
     "veilles": [
         {
+            "slug": "mfa",
             "title": "Authentification Multi-Facteurs",
             "sub-title": "MFA",
             "definition": "L'Authentification Multi-Facteurs (MFA) est une méthode de sécurité qui nécessite au moins deux formes distinctes de vérification d'identité avant d'accorder l'accès à un système ou une application. Cette approche renforce considérablement la sécurité en combinant plusieurs catégories de facteurs : quelque chose que vous connaissez ou facteur de connaissance (mot de passe, code PIN, réponse d'une question secrète), quelque chose que vous possédez ou facteur de possession (téléphone, token, TOPT), et quelque chose que vous êtes ou facteur d'identification (biométrie). En exigeant plusieurs preuves d'identité, la MFA réduit drastiquement les risques liés au vol de credentials et aux accès non autorisés, devenant ainsi un standard incontournable en cybersécurité moderne.",
@@ -963,6 +964,7 @@
             "image": "/veille/mfa.gif"
         },
         {
+            "slug": "ztna",
             "title": "Zero Trust Network Access",
             "sub-title": "ZTNA",
             "definition": "Le Zero Trust Network Access (ZTNA) est un modèle de sécurité qui supprime la confiance implicite traditionnellement accordée aux utilisateurs et aux appareils situés “dans” le réseau.\n Le principe : ne jamais faire confiance par défaut, toujours vérifier.\r\n ZTNA repose sur une approche granulaire de l'accès aux ressources, où chaque demande d'accès est évaluée en fonction de multiples critères tels que l'identité de l'utilisateur, le contexte de la demande (heure, emplacement, appareil utilisé) et le niveau de risque associé. En intégrant des technologies telles que l'authentification multi-facteurs (MFA), la micro-segmentation et la surveillance continue, ZTNA vise à minimiser les surfaces d'attaque et à protéger les données sensibles contre les menaces internes et externes.",
@@ -1168,6 +1170,7 @@
             "image": "/veille/ztna.gif"
         },
         {
+            "slug": "siem",
             "title": "Security Information and Event Management",
             "sub-title": "SIEM",
             "definition": "Un SIEM (Security Information and Event Management) est une solution de cybersécurité qui centralise la collecte, l'analyse et la corrélation des données de sécurité provenant de diverses sources au sein d'une organisation. Il permet de détecter les menaces en temps réel, d'analyser les incidents de sécurité et de générer des rapports de conformité. Intégré au sein d'un SOC (Security Operations Center), le SIEM travaille en tandem avec le SOAR (Security Orchestration, Automation & Response) pour automatiser la réponse aux incidents et réduire les temps de détection (MTTD) et de réponse (MTTR).",

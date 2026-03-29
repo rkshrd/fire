@@ -1,71 +1,542 @@
 {
     "companies": [
         {
+            "slug": "suez",
             "name": "SUEZ R&V",
             "role": "Technicien Informatique — Équipe Architecture ATS",
             "period": "Sept 2025 — Aujourd'hui",
             "location": "Île-de-France, La Défense, Altiplano",
             "team": "Équipe Architecture GIS/ATS - Tranverses",
             "description": "Intégrée à l'équipe Architecture du Département Technique, j'interviens sur le référencement de produits et de services, le déploiement et le maintien des de flux d'automatisation sur notre infrastructure. Je participe à des projets de structuration et de solution d'envergure nationale impliquant des architectures hybrides et de multi.",
+            "identity": {
+                "type": "SA",
+                "sector": "Recyclage & Valorisation des déchets",
+                "headquarters": "La Défense, Altiplano",
+                "employees": "40 000",
+                "countries": "40"
+            },
+            "kpis": [
+                { "value": "9.2 Md€", "label": "CA 2024" },
+                { "value": "40 000", "label": "Collaborateurs" },
+                { "value": "40", "label": "Pays" },
+                { "value": "37", "label": "Brevets 2024" }
+            ],
             "missions": [
                 {
-                    "title": "Referential TAD",
-                    "description": "Restructuration et mise à jour d'un référentiel technique complet : schémas réseau, procédures d'exploitation et documentations techniques"
+                    "title": "Synthèse & Référencement",
+                    "description": "Synthétisation des données et référencement des systèmes IT Products SRV pour le catalogue de services.",
+                    "details": [
+                        "Référencement des produits et services IT dans le catalogue",
+                        "Bases de données SharePoint + Excel consolidées",
+                        "Analyse et reporting via PowerBI",
+                        "Coordination avec les équipes transverses"
+                    ],
+                    "tools": ["PowerBI", "SharePoint", "Zabbix", "SecureGPT", "Azure DevOps"]
                 },
                 {
-                    "title": "Synch SRV",
-                    "description": "Flux stockés en cloud, avec déclencheur automatisé ou de récurence afin de synchroniser une liste database sur SharePoint et stocker les informations essentielles à l'entièreté des services IT au sein d'un même document en xlsx."
+                    "title": "PowerBI & Normalisation",
+                    "description": "Autoformation et normalisation des données : élimination de la redondance, intégrité et flexibilité des requêtes.",
+                    "details": [
+                        "Normalisation en formes normales (1NF → 3NF)",
+                        "Élimination des redondances et doublons",
+                        "Construction de rapports visuels interactifs",
+                        "Optimisation des sources de données"
+                    ],
+                    "tools": ["PowerBI", "Excel", "SharePoint"]
                 },
                 {
-                    "title": "Référentiel & Documentation",
-                    "description": "Création et maintien de la documentation technique."
+                    "title": "SI OVI & Process",
+                    "description": "Compréhension du SI type OVI : typologie unique, services diversifiés, processus à réévaluer.",
+                    "details": [
+                        "Analyse des processus métier existants",
+                        "Évaluation et adaptation des flux",
+                        "Cartographie des systèmes d'information",
+                        "Propositions d'optimisation"
+                    ],
+                    "tools": ["draw.io", "SharePoint"]
                 },
                 {
-                    "title": "Support N2/N3",
-                    "description": "Prise en charge des incidents réseau escaladés, analyse des logs, diagnostic et résolution de problèmes complexes sur l'infrastructure."
+                    "title": "Monitoring Zabbix",
+                    "description": "Supervision d'infrastructure et monitoring des services critiques avec Zabbix.",
+                    "details": [
+                        "Configuration des hôtes et des templates",
+                        "Mise en place d'alertes et seuils critiques",
+                        "Supervision réseau et serveurs",
+                        "Analyse des métriques de performance"
+                    ],
+                    "tools": ["Zabbix"]
                 },
                 {
-                    "title": "Projets Transverses",
-                    "description": "Participation à des projets transverses : migration d'équipements, standardisation des configurations et amélioration continue des processus."
+                    "title": "GLPI SaaS (Galileo)",
+                    "description": "Gestion des incidents, assets et suivi via GLPI en mode SaaS avec la plateforme Galileo.",
+                    "details": [
+                        "Gestion des tickets d'incidents et de demandes",
+                        "Inventaire et suivi du cycle de vie des assets",
+                        "Reporting et KPIs de support",
+                        "Intégration avec les outils de monitoring"
+                    ],
+                    "tools": ["GLPI SaaS", "Galileo"]
+                },
+                {
+                    "title": "Schématisation draw.io",
+                    "description": "Conceptualisation visuelle et schématisation de l'architecture et des flux via draw.io.",
+                    "details": [
+                        "Diagrammes d'architecture réseau et applicative",
+                        "Schémas de flux de données",
+                        "Documentation visuelle des processus",
+                        "Architecture Decision Records (ADR)"
+                    ],
+                    "tools": ["draw.io", "Azure DevOps"]
                 }
+            ],
+            "techStack": [
+                { "category": "Data & BI", "tools": ["PowerBI", "SharePoint", "Excel"] },
+                { "category": "Monitoring", "tools": ["Zabbix"] },
+                { "category": "ITSM", "tools": ["GLPI SaaS", "Galileo"] },
+                { "category": "DevOps", "tools": ["Azure DevOps"] },
+                { "category": "IA", "tools": ["Secure GPT"] },
+                { "category": "Schéma", "tools": ["draw.io"] },
+                { "category": "Automation", "tools": ["Power Automate"] },
+                { "category": "Formation", "tools": ["MS Learning"] }
+            ],
+            "project": {
+                "title": "Projet TRANSPARENCE",
+                "description": "Référentiels IT Products SRV → IT Catalogue Services. Architecture centralisée connectant les outils de référencement, supervision, automatisation et gestion des incidents.",
+                "type": "architecture",
+                "nodes": [
+                    { "id": "sharepoint", "label": "SharePoint", "x": 120, "y": 60, "color": "#28d27a" },
+                    { "id": "excel", "label": "Excel Refs", "x": 320, "y": 60, "color": "#4ec9b0" },
+                    { "id": "powerbi", "label": "PowerBI", "x": 520, "y": 60, "color": "#2ea3ff" },
+                    { "id": "transparence", "label": "TRANSPARENCE", "x": 320, "y": 180, "color": "#ff6200", "w": 160, "isCenter": true },
+                    { "id": "automate", "label": "Power Automate", "x": 120, "y": 300, "color": "#dcdcaa" },
+                    { "id": "azuredevops", "label": "Azure DevOps", "x": 320, "y": 300, "color": "#2ea3ff" },
+                    { "id": "glpi", "label": "GLPI SaaS", "x": 520, "y": 300, "color": "#9b6cff" },
+                    { "id": "zabbix", "label": "Zabbix", "x": 620, "y": 180, "color": "#ff5f56" },
+                    { "id": "securegpt", "label": "Secure GPT", "x": 20, "y": 180, "color": "#8e8f94" }
+                ],
+                "edges": [
+                    ["sharepoint", "transparence"],
+                    ["excel", "transparence"],
+                    ["powerbi", "transparence"],
+                    ["transparence", "automate"],
+                    ["transparence", "azuredevops"],
+                    ["transparence", "glpi"],
+                    ["zabbix", "transparence"],
+                    ["securegpt", "transparence"]
+                ]
+            },
+            "charts": {
+                "revenue": [
+                    { "year": "2022*", "value": 8.8 },
+                    { "year": "2023", "value": 8.9 },
+                    { "year": "2024", "value": 9.2 },
+                    { "year": "S1 2025", "value": 4.6 }
+                ],
+                "revenueUnit": "Md€",
+                "revenueNote": "*2022 : CA retraité 12 mois (publié : 6,8 Md€ sur 10 mois)",
+                "revenueBreakdown": [
+                    { "label": "R&V France 2024", "value": "3,36 Md€", "detail": "+7,3% vs. 2023 (3,13 Md€)" },
+                    { "label": "S1 2025", "value": "4,60 Md€", "detail": "+1% vs. S1 2024" }
+                ],
+                "revenueHighlights": ["68M pers. eau potable", "44M pers. assainissement", "8 TWh énergie produite", "Top 50 INPI brevets"],
+                "radar": [
+                    { "axis": "Environnement", "value": 0.95 },
+                    { "axis": "Innovation", "value": 0.85 },
+                    { "axis": "Inclusion", "value": 0.8 },
+                    { "axis": "Sécurité", "value": 0.9 },
+                    { "axis": "Circularité", "value": 0.92 },
+                    { "axis": "Digital", "value": 0.88 }
+                ]
+            },
+            "legalIdentity": [
+                { "label": "Forme juridique", "value": "Société Anonyme (SA)" },
+                { "label": "Siège social", "value": "Altiplano — La Défense" },
+                { "label": "Activité R&V France", "value": "Recyclage & Valorisation" },
+                { "label": "Effectif mondial", "value": "40 000 collaborateurs" },
+                { "label": "Présence", "value": "40 pays — 5 continents" },
+                { "label": "Directeur Général", "value": "Xavier Girre (juin 2025)" }
+            ],
+            "timeline": [
+                { "year": "1855", "text": "Fondation de la Compagnie du Canal de Suez" },
+                { "year": "1919", "text": "Création de la SITA (collecte & traitement des déchets)" },
+                { "year": "2003", "text": "Création de Suez Environnement" },
+                { "year": "2015", "text": "Renommage en SUEZ" },
+                { "year": "2021", "text": "Accord Veolia–SUEZ, scission des activités" },
+                { "year": "2022", "text": "Nouveau SUEZ (Meridiam, Ardian, GIP, CDC)" },
+                { "year": "2025", "text": "Xavier Girre nommé Directeur Général" }
+            ],
+            "values": [
+                {
+                    "title": "RSE & Environnement",
+                    "items": ["Réduction empreinte carbone", "Économie circulaire", "Protection biodiversité", "Préservation ressources naturelles"]
+                },
+                {
+                    "title": "Innovation",
+                    "items": ["Capteurs IoT réseaux d'eau", "Optimisation IA déchets", "Plateformes Smart City", "37 brevets (2024)"]
+                },
+                {
+                    "title": "Capital Humain",
+                    "items": ["Sécurité collaborateurs", "Inclusion & diversité", "Développement compétences", "Engagement sociétal"]
+                }
+            ],
+            "services": [
+                {
+                    "tab": "Collectivités",
+                    "items": ["Conception & exploitation réseaux d'eau", "Modernisation gestion déchets", "Solutions Smart City", "Accompagnement projets territoire"]
+                },
+                {
+                    "tab": "Entreprises & Industriels",
+                    "items": ["Traitement eaux industrielles", "Gestion déchets complexes", "Accompagnement environnemental", "Solutions digitales"]
+                },
+                {
+                    "tab": "Particuliers",
+                    "items": ["Distribution eau potable", "Assainissement", "Conseils consommation responsable", "Service qualité"]
+                }
+            ],
+            "servicesObjective": "Réduction des coûts et de l'impact environnemental pour tous les segments clients.",
+            "conclusion": {
+                "text": "SUEZ n'est pas seulement un opérateur technique : c'est un partenaire stratégique pour l'économie durable et circulaire.",
+                "author": "Thaïs Parisot",
+                "title": "Technicienne ATS Products — GIS Architecture Infra"
+            },
+            "sources": [
+                { "label": "suez.com", "url": "https://www.suez.com/" },
+                { "label": "Comptes consolidés SUEZ 2024" },
+                { "label": "Rapport S1 2025" },
+                { "label": "Wikipedia", "url": "https://fr.wikipedia.org/wiki/Suez_(entreprise,_2015)" }
+            ],
+            "projectScope": [
+                "Référentiels IT Products → IT Catalogue Services",
+                "Bases SharePoint + Excel consolidées",
+                "Analyse manuelle → automatisée via PowerBI",
+                "Optimisation & corrections de bugs",
+                "Conformité & mise en ligne du catalogue"
+            ],
+            "projectDevOps": [
+                "Architecture Decision Recovery (ADR)",
+                "Architecture Follow Up",
+                "Archives Items",
+                "Suivi continu des livrables",
+                "Archivage structuré Azure DevOps"
+            ],
+            "methodology": [
+                { "label": "Init", "description": "Équipe · Planning · CdC" },
+                { "label": "Planif.", "description": "Allocation Ressources" },
+                { "label": "Dev", "description": "Développer · Tester" },
+                { "label": "Suivi", "description": "Ajustements · Reporting" },
+                { "label": "Clôture", "description": "Bilan · Archivage" }
             ]
         },
         {
+            "slug": "vivalto",
             "name": "Vivalto Santé / CHPE",
             "role": "Technicienne Support IT",
             "period": "Sept 2023 — Sept 2024",
-            "location": "Île-de-France",
+            "location": "Le Port-Marly (78), Île-de-France",
             "team": "Service Informatique",
-            "description": "Au sein du service informatique du Centre Hospitalier Paul Eismein, j'ai assuré le support utilisateur, la gestion du parc informatique et piloté le projet de migration Windows 11 avec renouvellement du matériel.",
+            "description": "Au sein du service informatique du Centre Hospitalier Privé de l'Europe, j'ai assuré le support utilisateur, la gestion du parc informatique et piloté le projet de migration Windows 11 avec renouvellement du matériel.",
+            "identity": {
+                "type": "SA — Société à Mission",
+                "sector": "Hospitalisation privée (3ᵉ groupe en France)",
+                "headquarters": "Paris 16ᵉ",
+                "employees": "21 000"
+            },
+            "kpis": [
+                { "value": "105", "label": "Établissements" },
+                { "value": "6", "label": "Pays" },
+                { "value": "2.5 Md€", "label": "CA 2024" },
+                { "value": "700", "label": "Postes gérés" }
+            ],
             "missions": [
                 {
-                    "title": "Migration Windows 11",
-                    "description": "Pilotage de la migration vers Windows 11 : inventaire du parc, planification par service, masterisation, déploiement et accompagnement des utilisateurs."
+                    "title": "Support Utilisateurs N1/N2/N3",
+                    "description": "Gestion des tickets GLPI, prise en main à distance, création de comptes AD et réparation matériel.",
+                    "details": [
+                        "Double ticketing GLPI : établissement + groupe",
+                        "Prise en main à distance pour résolution immédiate",
+                        "Création & configuration de badges Simon Voss (UID/HEXA, CardPresso)",
+                        "Création comptes AD (UO EPM/MLA/SGL), boîtes mail, droits",
+                        "Réparation matériel & logiciels, escalade SAV (Dell, HP, Lenovo)"
+                    ],
+                    "tools": ["GLPI", "AD", "CardPresso", "Simon Voss"]
                 },
                 {
-                    "title": "Gestion du Parc IT",
-                    "description": "Administration du parc informatique via GLPI et OCS Inventory : suivi des actifs, gestion des licences et cycle de vie du matériel."
+                    "title": "Gestion du Parc Informatique",
+                    "description": "Administration du parc via AD, déploiement PXE/WDS/MDT et configuration BIOS multi-constructeurs.",
+                    "details": [
+                        "Administration AD / DNS / DHCP / serveur d'impression sur Windows Server 2022",
+                        "Déploiement PXE/WDS/MDT/SCCM — Image W11 Entreprise 23H2",
+                        "Configuration BIOS (UEFI, TPM 2.0, Secure Boot) multi-constructeurs",
+                        "Attribution IP, configuration VLAN/Ports, intégration réseau",
+                        "Scripts PowerShell : détection postes inactifs, nettoyage distant"
+                    ],
+                    "tools": ["AD", "DHCP", "DNS", "PXE", "WDS", "MDT", "SCCM", "PowerShell"]
                 },
                 {
-                    "title": "Support Utilisateur",
-                    "description": "Support de proximité N1/N2 pour les professionnels de santé : dépannage, installation, configuration et formation aux outils métier."
+                    "title": "Fermes Citrix",
+                    "description": "Administration des fermes de serveurs Citrix pour la virtualisation des applications métier.",
+                    "details": [
+                        "Publication d'applications : Mediboard, Pharma6, Chimio, Web100T",
+                        "Gestion des sessions utilisateurs et profils Citrix",
+                        "Troubleshooting performance et connexion",
+                        "Support N2/N3 en lien avec la DSSI Groupe"
+                    ],
+                    "tools": ["Citrix", "Mediboard", "Pharma6", "Chimio", "Web100T"]
                 },
                 {
-                    "title": "Onboarding & Offboarding",
-                    "description": "Gestion des arrivées et départs : création de comptes AD, messagerie, attribution de matériel et récupération à la sortie."
+                    "title": "Parc Imprimantes",
+                    "description": "Gestion complète de la flotte d'imprimantes réseau avec supervision et automatisation.",
+                    "details": [
+                        "Gestion consommables & SAV — HP, Kyocera, Toshiba, Xerox",
+                        "Installation réseau sur Windows Server 2022 (TCP/IP, pilotes, GPO)",
+                        "Supervision KPax (SNMP) : compteurs, alertes toner/bourrage",
+                        "Inventaire GLPI via FusionInventory",
+                        "Script Update-PrintersFleet.ps1 (pnputil, CSV, tâches planifiées)"
+                    ],
+                    "tools": ["KPax", "GLPI", "FusionInventory", "PowerShell", "GPO"]
                 },
                 {
-                    "title": "Infrastructure Imprimantes",
-                    "description": "Déploiement et maintenance de la flotte d'imprimantes réseau, création de référentiels et guides d'utilisation."
+                    "title": "Pharmacie & Chimiothérapie",
+                    "description": "Support des applications métier de pharmacie et monitoring des sondes IoT.",
+                    "details": [
+                        "Pharma6 (via Citrix) : gestion PUI — dispensation, stocks, traçabilité",
+                        "Chimio (via Citrix) : protocoles chimiothérapie, prescription → administration",
+                        "TimeWise : planification des séances de chimiothérapie",
+                        "TAMM : traçabilité des administrations médicamenteuses",
+                        "Monitoring Sensing Vision MT10/MT11 (sondes température BLE)"
+                    ],
+                    "tools": ["Pharma6", "Chimio", "TimeWise", "TAMM", "Sensing Vision"]
                 },
                 {
-                    "title": "Contrôle d'Accès",
-                    "description": "Installation et configuration de dispositifs de contrôle d'accès physique pour sécuriser les zones sensibles de l'établissement."
+                    "title": "Réseau & Wi-Fi",
+                    "description": "Infrastructure Wi-Fi Meraki, portail captif UCOPIA et remplacement des commutateurs réseau.",
+                    "details": [
+                        "Installation et configuration des bornes Wi-Fi Meraki",
+                        "UCOPIA : Wi-Fi Patient (portail captif) / Wi-Fi Médecin (auth AD)",
+                        "Dashboard Meraki : supervision réseau + capteurs IoT",
+                        "4 projets de remplacement de commutateurs réseau",
+                        "Intégration de réseaux externes dans le réseau interne"
+                    ],
+                    "tools": ["Meraki", "UCOPIA", "Switches", "VLAN"]
                 },
                 {
-                    "title": "Intégration MFA & Passwordless",
-                    "description": "Intégration de l'authentification multi-facteurs (TOTP via Google Authenticator) dans les applications métier, mise en place du passwordless sur les comptes Microsoft et migration vers Microsoft Authenticator."
+                    "title": "Sécurité & IAM",
+                    "description": "MFA, chiffrement BitLocker, contrôle d'accès physique et structuration AD.",
+                    "details": [
+                        "MFA/2FA : Google Authenticator → Microsoft Authenticator",
+                        "BitLocker XTS-AES 256 : activation auto, clés AD DS / Azure AD",
+                        "Badges physiques Simon Voss : processus formalisé RH/cadre",
+                        "Caméras Synology, poignées magnétiques",
+                        "Structuration AD : UO, GPO, comptes nominatifs, politique MDP renforcée"
+                    ],
+                    "tools": ["MFA", "BitLocker", "Simon Voss", "Synology", "AD", "GPO"]
+                },
+                {
+                    "title": "Processus Onboarding",
+                    "description": "Formalisation du processus création/migration de postes (aucun n'existait avant).",
+                    "details": [
+                        "Masterisation PXE → Config BIOS → Intégration domaine → Logiciels métiers",
+                        "Création compte AD + mail + badge + droits + listes de diffusion",
+                        "Profils métiers par service (Administration, Admissions, Médecins...)",
+                        "Convention de renommage AD : EPMW0xxx (fixes) / EPMW1xxx (portables)"
+                    ],
+                    "tools": ["PXE", "AD", "GPO", "MDT"]
+                },
+                {
+                    "title": "Automatisation PowerShell",
+                    "description": "Développement de scripts pour l'administration du parc et le déploiement à grande échelle.",
+                    "details": [
+                        "Update-PrintersFleet.ps1 : maintenance parc imprimantes automatisée",
+                        "Détection postes inactifs >25j (lastLogonTimestamp, rapport CSV, mail auto)",
+                        "Script présence GPO : contact réseau + vérification centralisée",
+                        "Nettoyage distant : temp, cache, corbeille + reboot",
+                        "Déploiement via GPO, tâches planifiées, PDQ Deploy"
+                    ],
+                    "tools": ["PowerShell", "GPO", "PDQ Deploy", "PsExec"]
                 }
+            ],
+            "techStack": [
+                { "category": "OS & Déploiement", "tools": ["Windows 11", "PXE", "WDS", "MDT", "SCCM"] },
+                { "category": "Infra & Réseau", "tools": ["AD", "DNS", "DHCP", "GPO", "Meraki", "UCOPIA"] },
+                { "category": "Virtualisation", "tools": ["Citrix"] },
+                { "category": "ITSM", "tools": ["GLPI", "FusionInventory"] },
+                { "category": "Sécurité", "tools": ["BitLocker", "MFA", "Simon Voss", "Synology"] },
+                { "category": "Scripting", "tools": ["PowerShell", "PDQ Deploy", "PsExec"] },
+                { "category": "Apps Métier", "tools": ["Mediboard", "Pharma6", "Chimio", "Web100T"] }
+            ],
+            "project": {
+                "title": "Projet IMPULSE — Migration W11",
+                "description": "Projet national piloté par la DSSI Rennes. Migration OS + renouvellement du parc (⅓ neufs, ⅔ reconditionnés). Objectif : 70% migré au 01/08/2026.",
+                "type": "checklist",
+                "items": [
+                    { "feature": "TPM 2.0", "status": "Obligatoire", "criticality": "CRITIQUE" },
+                    { "feature": "Secure Boot", "status": "Obligatoire", "criticality": "CRITIQUE" },
+                    { "feature": "UEFI (CSM OFF)", "status": "Obligatoire", "criticality": "CRITIQUE" },
+                    { "feature": "CPU Intel ≥ 8ᵉ gen / AMD Zen 2+", "status": "Obligatoire", "criticality": "CRITIQUE" },
+                    { "feature": "RAM ≥ 8 Go (16 Go recommandé)", "status": "Recommandé", "criticality": "HAUTE" },
+                    { "feature": "Stockage ≥ 128 Go SSD", "status": "Obligatoire", "criticality": "CRITIQUE" },
+                    { "feature": "BitLocker XTS-AES 256", "status": "Obligatoire", "criticality": "CRITIQUE" },
+                    { "feature": "Compte Azure AD / AD hybride", "status": "Obligatoire", "criticality": "CRITIQUE" }
+                ]
+            },
+            "charts": {
+                "revenue": [
+                    { "year": "2020", "value": 0.81 },
+                    { "year": "2021", "value": 1.1 },
+                    { "year": "2022", "value": 2.0 },
+                    { "year": "2023", "value": 2.2 },
+                    { "year": "2024", "value": 2.5 }
+                ],
+                "revenueUnit": "Md€",
+                "growthMultiplier": {
+                    "value": "×3",
+                    "label": "Croissance du CA en 4 ans (2020→2024)",
+                    "details": [
+                        { "year": "2021", "growth": "+36%", "note": "Cap du milliard" },
+                        { "year": "2022", "growth": "+82%", "note": "Expansion internationale" },
+                        { "year": "2023", "growth": "+10%", "note": "Consolidation" },
+                        { "year": "2024", "growth": "+14%", "note": "105 établissements" }
+                    ]
+                },
+                "growth": [
+                    { "year": "2009", "value": 3 },
+                    { "year": "2020", "value": 32 },
+                    { "year": "2021", "value": 41 },
+                    { "year": "2022", "value": 80 },
+                    { "year": "2023", "value": 91 },
+                    { "year": "2024", "value": 105 }
+                ],
+                "growthLabel": "Établissements",
+                "parcInfo": [
+                    { "name": "EPM Fixes", "value": 350 },
+                    { "name": "EPM Portables", "value": 150 },
+                    { "name": "MLA Fixes", "value": 50 },
+                    { "name": "MLA Portables", "value": 150 }
+                ]
+            },
+            "legalIdentity": [
+                { "label": "Dénomination", "value": "Vivalto Santé" },
+                { "label": "SIREN", "value": "813 958 410" },
+                { "label": "Capital social", "value": "456 820 753,58 €" },
+                { "label": "Siège social", "value": "61/63 rue des Belles Feuilles, 75116 Paris" },
+                { "label": "Fondation", "value": "2009 — Daniel Caille" },
+                { "label": "Direction Générale", "value": "Emmanuel de Geuser" },
+                { "label": "Code NAF", "value": "6420Z — Activités des sociétés holding" },
+                { "label": "Qualité", "value": "Entreprise à Mission (2021)" }
+            ],
+            "timeline": [
+                { "year": "2009", "text": "Création par Daniel Caille — 3 cliniques bretonnes" },
+                { "year": "2021", "text": "9 acquisitions, cap du milliard. Statut Société à Mission", "accent": "1 Md€" },
+                { "year": "2022", "text": "Expansion : Espagne, Portugal, Suisse, Tchéquie, Slovaquie. CA doublé à 2 Md€", "accent": "International" },
+                { "year": "2023", "text": "Audit Entreprise à Mission réussi (COFRAC). Augmentation de capital 81 M€" },
+                { "year": "2024", "text": "3 acquisitions Grand Ouest. 105 établissements, 6 pays. Certification HAS CHPE", "accent": "2,5 Md€" },
+                { "year": "2025", "text": "Transfert siège au 61/63 rue des Belles Feuilles, Paris 16ᵉ" }
+            ],
+            "values": [
+                {
+                    "title": "AUDACE",
+                    "items": ["Innover dans les parcours de soins", "Repousser les frontières du possible", "Oser les projets ambitieux"]
+                },
+                {
+                    "title": "CONFIANCE",
+                    "items": ["Transparence avec les patients", "Fiabilité des soins et des équipes", "Relation durable avec les praticiens"]
+                },
+                {
+                    "title": "ESPRIT D'ÉQUIPE",
+                    "items": ["Collaboration interdisciplinaire", "Partage des bonnes pratiques", "Solidarité au quotidien"]
+                }
+            ],
+            "missionStatement": "Notre mission, au service de tous et de façon durable, est de soigner et d'accompagner les patients tout au long de leur parcours de soins et de leur vie.",
+            "engagements": [
+                "Gouvernance partagée médecins / managers",
+                "Accessibilité aux soins pour tous",
+                "Inclusion et diversité",
+                "Performance médico-économique responsable",
+                "Réduction de l'empreinte environnementale",
+                "Soutien à la recherche clinique"
+            ],
+            "facility": {
+                "name": "CHP de l'Europe",
+                "founded": "1974",
+                "practitioners": "~100",
+                "employees": "~500",
+                "emergency": "24h/7j",
+                "address": "9 bis, avenue de Saint-Germain — 78560 Le Port-Marly",
+                "phone": "+33 1 39 17 22 22",
+                "certifications": ["Certification HAS — Juin 2024", "Réseau ONCORIF — Centre 3C"],
+                "population": "CA Saint-Germain-Boucle de Seine (~350 000 hab.)",
+                "specialties": ["Ophtalmologie", "Orthopédie", "Cardiologie", "Réanimation", "Urologie", "ORL", "Oncologie", "Néphrologie", "Pneumologie", "Angiologie", "Endocrinologie", "Gastro-entérologie", "Rhumatologie", "Soins palliatifs", "Esthétique", "Maxillo-facial"],
+                "polesExcellence": [
+                    "Cancérologie (3C, chimiothérapie)",
+                    "Pathologies digestives & endoscopie",
+                    "Chirurgie vasculaire — Vein Center",
+                    "Obésité (CSO labellisé)",
+                    "Médecine nucléaire — TEP SCAN",
+                    "Réanimation & soins intensifs cardio"
+                ]
+            },
+            "jobProfiles": [
+                { "profile": "Administration", "apps": "M365, Intranet, GLPI, impression HP" },
+                { "profile": "Admissions", "apps": "Cryptolib/CPS, Web100T, Mediboard via Citrix, scanner, fax virtuel" },
+                { "profile": "Médecins", "apps": "Mediboard via Citrix, Doctolib Pro, CPS, Ameli, DPI, double écran" },
+                { "profile": "Infirmières", "apps": "Session épurée, démarrage rapide, tactile, MAJ planifiées nuit" },
+                { "profile": "Secrétaires", "apps": "Lifen, Mediboard via Citrix, Doctolib, TPE, CPS, intranet" },
+                { "profile": "Oncologie / Chimio", "apps": "Chimio via Citrix, TimeWise, TAMM" },
+                { "profile": "Pharmacie PUI/PUC", "apps": "Pharma6 via Citrix, Sensing Vision MT10/MT11" },
+                { "profile": "Urgences", "apps": "Priorité HAUTE, migration hors soins, tests applicatifs obligatoires" },
+                { "profile": "Sécurité", "apps": "Supervision caméras Synology, comptes verrouillés, pas d'accès web" },
+                { "profile": "RH", "apps": "Meta4 paie, AgileTime" },
+                { "profile": "Technique", "apps": "Outils métiers, réseau segmenté VLAN" }
+            ],
+            "grandsProjects": [
+                {
+                    "title": "IMPULSE — Migration W11",
+                    "description": "Projet national DSSI. Migration OS + renouvellement parc (⅓ neufs, ⅔ reconditionnés). Objectif : 70% migré au 01/08/2026.",
+                    "tags": ["Windows 11", "PXE/SCCM", "BitLocker", "MFA", "700 postes", "M365"]
+                },
+                {
+                    "title": "Mattermost → Teams",
+                    "description": "Migration de la messagerie collaborative vers l'écosystème Microsoft 365.",
+                    "tags": ["M365", "Teams", "Change Management", "Collaboration"]
+                },
+                {
+                    "title": "Fermes Citrix",
+                    "description": "Administration des fermes de serveurs pour la virtualisation des applications métier hospitalières.",
+                    "tags": ["Citrix", "Mediboard", "Pharma6", "Chimio", "Web100T"]
+                },
+                {
+                    "title": "Remplacement Switches",
+                    "description": "4 projets de remplacement de commutateurs réseau avec reconfiguration VLAN/Trunk.",
+                    "tags": ["Switches", "VLAN", "Trunk", "Infrastructure"]
+                },
+                {
+                    "title": "Sensing Vision Monitoring",
+                    "description": "Déploiement de sondes IoT (MT10/MT11) pour la surveillance des températures en pharmacie.",
+                    "tags": ["IoT", "MT10", "MT11", "BLE", "Meraki", "PUI/PUC"]
+                },
+                {
+                    "title": "Automatisation & Scripting",
+                    "description": "Développement de scripts PowerShell pour l'administration du parc et le déploiement à grande échelle.",
+                    "tags": ["PowerShell", "GPO", "AD", "FusionInventory", "PsExec"]
+                }
+            ],
+            "conclusion": {
+                "text": "Le CHP de l'Europe m'a permis de développer une expertise complète en support IT hospitalier, de la gestion du parc au pilotage de projets d'envergure nationale.",
+                "author": "Thaïs Parisot",
+                "title": "Technicienne Support IT — BTS SIO2 SISR | ENSITECH"
+            },
+            "sources": [
+                { "label": "france-doc.fr", "url": "https://www.france-doc.fr/" },
+                { "label": "societe.com", "url": "https://www.societe.com/" },
+                { "label": "CHP de l'Europe" },
+                { "label": "Vivalto Santé", "url": "https://www.vivalto-sante.fr/" }
+            ],
+            "methodology": [
+                { "label": "Init", "description": "Équipe · Planning · CdC" },
+                { "label": "Planif.", "description": "Allocation Ressources" },
+                { "label": "Dev", "description": "Développer · Tester" },
+                { "label": "Suivi", "description": "Ajustements · Reporting" },
+                { "label": "Clôture", "description": "Bilan · Archivage" }
             ]
         }
     ]
