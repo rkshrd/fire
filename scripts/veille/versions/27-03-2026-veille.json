@@ -1,0 +1,1669 @@
+{
+    "veilles": [
+        {
+            "title": "Authentification Multi-Facteurs",
+            "sub-title": "MFA",
+            "definition": "L'Authentification Multi-Facteurs (MFA) est une méthode de sécurité qui nécessite au moins deux formes distinctes de vérification d'identité avant d'accorder l'accès à un système ou une application. Cette approche renforce considérablement la sécurité en combinant plusieurs catégories de facteurs : quelque chose que vous connaissez ou facteur de connaissance (mot de passe, code PIN, réponse d'une question secrète), quelque chose que vous possédez ou facteur de possession (téléphone, token, TOPT), et quelque chose que vous êtes ou facteur d'identification (biométrie). En exigeant plusieurs preuves d'identité, la MFA réduit drastiquement les risques liés au vol de credentials et aux accès non autorisés, devenant ainsi un standard incontournable en cybersécurité moderne.",
+            "fonctionnement": "Le processus d'authentification multi-facteurs se déroule en plusieurs étapes séquentielles. Premièrement, l'utilisateur fournit son identifiant et son mot de passe (facteur de connaissance). Une fois cette première vérification réussie, le système demande un second facteur : cela peut être un code temporaire envoyé par SMS, généré par une application d'authentification (TOTP), ou une validation biométrique. Le serveur d'authentification vérifie ensuite la validité de ce second facteur en temps réel. Seulement après validation des multiples facteurs, l'accès est accordé. Ce mécanisme utilise souvent des protocoles standardisés comme OATH (TOTP/HOTP), FIDO2, ou des solutions propriétaires intégrées dans des architectures Zero Trust (ZTNA) et Single Sign-On (SSO).",
+            "prerequis": [
+                {
+                    "title": "SMS / OTP",
+                    "fonctionnement": "1. Saisie du login/mot de passe; 2. Serveur génère un code à usage unique (6 chiffres); 3. Envoi du code via SMS; 4. Utilisateur entre le code; 5. Vérification et accès accordé",
+                    "protocole": "Basé sur OATH HOTP/TOTP",
+                    "environnement": "Compatible SSO, applications web/mobile"
+                },
+                {
+                    "title": "Authenticator App (TOTP)",
+                    "fonctionnement": "1. Scan du QR code lors du setup; 2. Application génère des codes toutes les 30s; 3. Synchronisation temporelle avec serveur; 4. Saisie du code à 6 chiffres; 5. Validation algorithmique (HMAC-SHA1)",
+                    "protocole": "TOTP (RFC 6238)",
+                    "environnement": "Google Authenticator, Microsoft Authenticator, Authy, intégration SSO"
+                },
+                {
+                    "title": "Push Notification",
+                    "fonctionnement": "1. Tentative de connexion détectée; 2. Push notification envoyée à l'app mobile; 3. Affichage des détails de connexion; 4. Utilisateur approuve/rejette; 5. Réponse transmise au serveur",
+                    "protocole": "FCM (Firebase) / APNs",
+                    "environnement": "Duo Security, Microsoft Authenticator, architectures ZTNA",
+                    "link": "https://brainstation.io/cybersecurity/two-factor-auth"
+                },
+                {
+                    "title": "Biométrie",
+                    "fonctionnement": "1. Capture de la donnée biométrique (empreinte, visage); 2. Extraction des caractéristiques uniques; 3. Comparaison avec template stocké (hash); 4. Score de correspondance calculé; 5. Accès accordé si seuil atteint",
+                    "protocole": "FIDO2, WebAuthn",
+                    "environnement": "Windows Hello, Touch ID, Face ID, ZTNA"
+                },
+                {
+                    "title": "Clés de Sécurité (FIDO2)",
+                    "fonctionnement": "1. Enregistrement de la clé physique; 2. Génération de paire de clés publique/privée; 3. Insertion de la clé USB/NFC; 4. Challenge cryptographique envoyé; 5. Signature avec clé privée, vérification publique",
+                    "protocole": "FIDO2/WebAuthn (U2F)",
+                    "environnement": "YubiKey, Google Titan, SSO enterprise"
+                },
+                {
+                    "title": "Email Verification",
+                    "fonctionnement": "1. Détection de tentative de connexion; 2. Génération de lien unique ou code; 3. Envoi par email sécurisé; 4. Clic sur le lien / saisie du code; 5. Validation de la session",
+                    "protocole": "SMTP/TLS, tokens JWT",
+                    "environnement": "Systèmes web, backup pour SSO"
+                },
+                {
+                    "title": "Certificats Client",
+                    "fonctionnement": "1. Installation du certificat X.509 sur l'appareil; 2. Établissement de connexion TLS; 3. Serveur demande le certificat client; 4. Vérification de la chaîne de confiance; 5. Authentification mutuelle réussie",
+                    "protocole": "PKI, mTLS (mutual TLS)",
+                    "environnement": "VPN enterprise, ZTNA, accès B2B"
+                },
+                {
+                    "title": "Smart Cards",
+                    "fonctionnement": "1. Insertion de la carte à puce; 2. Saisie du code PIN; 3. Lecture des credentials cryptés; 4. Déchiffrement avec la clé privée; 5. Authentification auprès du contrôleur",
+                    "protocole": "ISO 7816, PIV, CAC",
+                    "environnement": "Gouvernement, banques, accès physique + logique"
+                },
+                {
+                    "title": "Authentification Adaptative",
+                    "fonctionnement": "1. Analyse du contexte (IP, device, comportement); 2. Calcul du score de risque en temps réel; 3. Décision automatique sur le niveau MFA; 4. Facteurs supplémentaires si risque élevé; 5. Accès accordé selon politique",
+                    "protocole": "Risk-based authentication",
+                    "environnement": "ZTNA, Cloud SSO (Okta, Azure AD)"
+                },
+                {
+                    "title": "Authentification vocale",
+                    "fonctionnement": "1. Enregistrement de l'échantillon vocal; 2. Extraction des caractéristiques vocales uniques; 3. Comparaison avec le modèle stocké; 4. Calcul du score de similarité; 5. Accès accordé si le score dépasse le seuil",
+                    "protocole": "Technologies de reconnaissance vocale",
+                    "environnement": "Centres d'appels, services bancaires téléphoniques"
+                }
+            ],
+            "articles": [
+                {
+                    "title": "Authentification à 2 Facteurs (2AF)",
+                    "link": "https://www.microsoft.com/fr-fr/security/business/security-101/what-is-two-factor-authentication-2fa",
+                    "tags": [
+                        "Documentation"
+                    ],
+                    "description": "Fiche explicative sur l'authentification à deux facteurs (2AF), ses avantages et son fonctionnement pour renforcer la sécurité des comptes utilisateurs.",
+                    "source": "Microsoft Security"
+                },
+                {
+                    "date": "25 Août 2025",
+                    "title": "Meilleures Applications 2FA - Comparatif 2025",
+                    "link": "https://www.clubic.com/guide-achat-538328-authentification-2fa-les-meilleures-applications-en-2024.html",
+                    "tags": [
+                        "Solutions"
+                    ],
+                    "description": "Comparatif des meilleures applications d'authentification à deux facteurs (2FA) en 2025, incluant Google Authenticator, Authy, Microsoft Authenticator et autres solutions populaires.",
+                    "source": "Clubic"
+                },
+                {
+                    "date": "30 Octobre 2025",
+                    "title": "CISA & NSA Tips for Microsft Exchange Server",
+                    "link": "https://www.bleepingcomputer.com/news/security/cisa-and-nsa-share-tips-on-securing-microsoft-exchange-servers/amp/",
+                    "tags": [
+                        "Infrastructure"
+                    ],
+                    "description": "Conseils de la CISA et de la NSA pour sécuriser les serveurs Microsoft Exchange, incluant l'implémentation de l'authentification multi-facteurs (MFA) pour protéger contre les accès non autorisés.",
+                    "source": " BleepingComputer"
+                },
+                {
+                    "date": "31 Octobre 2025",
+                    "title": "Hacktivist Group Targeting Infrastructure",
+                    "link": "https://www.cybersecuritydive.com/news/canadian-warn-hacktivists-exposed-ics-devices/804244/",
+                    "tags": [
+                        "Vulnérabilité",
+                        "Infrastructure",
+                        "Entreprise"
+                    ],
+                    "description": "Un groupe de hacktivistes cible les infrastructures critiques en exploitant des vulnérabilités, soulignant l'importance de l'authentification multi-facteurs (MFA) pour renforcer la sécurité des systèmes industriels.",
+                    "source": "Cybersecurity Dive"
+                },
+                {
+                    "title": "MFA Résistante au Phishing: Ce Qu'il Faut Savoir",
+                    "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='220'%3E%3Crect fill='%23ff7043' width='400' height='220'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='20' font-family='Arial'%3ECloudflare%3C/text%3E%3C/svg%3E",
+                    "tags": [
+                        "Sécurité"
+                    ],
+                    "description": "Pourquoi toutes les méthodes MFA ne se valent pas face au phishing et comment implémenter une authentification véritablement résistante aux attaques.",
+                    "source": "Cloudflare Learning"
+                },
+                {
+                    "date": "4 Novembre 2025",
+                    "title": "Flock Safety piraté par un simple mot de passe",
+                    "link": "https://www.bfmtv.com/tech/cybersecurite/le-plus-grand-reseau-de-cameras-privees-des-etats-unis-a-la-merci-des-pirates-et-utilise-sans-controle-par-les-autorites-pour-surveiller-la-population_AV-202511040552.html",
+                    "tags": [
+                        "Failles",
+                        "Entreprise",
+                        "Sécurité"
+                    ],
+                    "description": "Une faille de sécurité majeure chez Flock Safety, le plus grand réseau de caméras privées aux États-Unis, a été exploitée par des pirates utilisant un simple mot de passe, mettant en lumière l'importance cruciale de l'authentification multi-facteurs (MFA) pour protéger les systèmes sensibles.",
+                    "source": "BFMTV"
+                },
+                {
+                    "date": "14 Mars 2024",
+                    "title": "Authentifier les utilisateurs",
+                    "link": "https://www.cnil.fr/fr/securite-authentifier-les-utilisateurs",
+                    "tags": [
+                        "Standard",
+                        "Gouvernement"
+                    ],
+                    "description": "Guide de la CNIL sur les meilleures pratiques pour authentifier les utilisateurs de manière sécurisée, incluant l'implémentation de l'authentification multi-facteurs (MFA) pour renforcer la protection des données personnelles.",
+                    "source": "CNIL"
+                },
+                {
+                    "date": "31 Mars 2025",
+                    "title": "LeBonCoin : Biométrie VS TOTP",
+                    "link": "https://www.silicon.fr/Thematique/cybersecurite-1371/Breves/biometrie-totp-choix-leboncoin-mfa-469570.htm",
+                    "tags": [
+                        "Entreprise",
+                        "Sécurité"
+                    ],
+                    "description": "LeBonCoin opte pour la biométrie plutôt que le TOTP pour son authentification multi-facteurs (MFA), soulignant les avantages de la biométrie en termes de sécurité et d'expérience utilisateur.",
+                    "source": "Silicon.fr"
+                },
+                {
+                    "date": "30 Octobre 2025",
+                    "title": "Critical Claroty Authentication Bypass Flaw Opened OT to Attack",
+                    "link": "https://www.darkreading.com/ics-ot-security/claroty-patches-authentication-bypass-flaw",
+                    "tags": [
+                        "Failles",
+                        "Sécurité"
+                    ],
+                    "description": "Une faille critique dans le système Claroty permettait de contourner l'authentification, exposant les environnements OT à des attaques potentielles. La mise en œuvre de l'authentification multi-facteurs (MFA) est recommandée pour renforcer la sécurité.",
+                    "source": "Dark Reading"
+                },
+                {
+                    "date": "30 Octobre 2025",
+                    "title": "Keyless to Be Acquired by Ping Identity",
+                    "link": "https://bebeez.eu/2025/10/30/keyless-to-be-acquired-by-ping-identity-to-drive-global-adoption-of-privacy-preserving-biometric-authentication/",
+                    "tags": [
+                        "Solutions",
+                        "Sécurité",
+                        "Innovation",
+                        "Biométrie"
+                    ],
+                    "description": "Keyless, spécialiste de l'authentification biométrique sans mot de passe, va être acquis par Ping Identity pour promouvoir l'adoption mondiale de solutions d'authentification respectueuses de la vie privée dans les environnements cloud.",
+                    "source": "Bebeez"
+                },
+                {
+                    "date": "31 Octobre 2025",
+                    "title": "SEC to launch Blockchain-Based Authentication Platform",
+                    "link": "https://thevoicenewsweekly.com/%F0%9D%90%92%F0%9D%90%84%F0%9D%90%82-%F0%9D%90%AD%F0%9D%90%A8-%F0%9D%90%A5%F0%9D%90%9A%F0%9D%90%AE%F0%9D%90%A7%F0%9D%90%9C%F0%9D%90%A1-%F0%9D%90%81%F0%9D%90%A5%F0%9D%90%A8%F0%9D%90%9C%F0%9D%90%A4/",
+                    "tags": [
+                        "Innovation",
+                        "Sécurité",
+                        "Blockchain"
+                    ],
+                    "description": "La Securities and Exchange Commission (SEC) des Philippines lance une plateforme d'authentification basée sur la blockchain pour renforcer la sécurité et la transparence des processus d'enregistrement des entreprises.",
+                    "source": "The Voice News Weekly"
+                },
+                {
+                    "date": "28 Mars 2024",
+                    "title": "Authentification Multifacteur & RGPD",
+                    "link": "https://www.cnil.fr/fr/cloturee-authentification-multifacteur-consultation-publique-de-la-cnil-sur-un-projet-de",
+                    "tags": [
+                        "Standard",
+                        "Gouvernement"
+                    ],
+                    "description": "Consultation publique de la CNIL sur un projet de recommandation relatif à l'authentification multifacteur (MFA) dans le cadre du RGPD, visant à renforcer la sécurité des données personnelles.",
+                    "source": "CNIL"
+                },
+                {
+                    "title": "Yubikey U2F for MFA",
+                    "link": "https://www.yubico.com/mfa-authentication/?lang=fr&gad_source=1&gclid=CjwKCAjw-qi_BhBxEiwAkxvbkOaZydTMKyPbn8BHNcCfj0WIPf7fYcx2WmU_PnTQYIRH6dV2B-nCdBoCMt8QAvD_BwE",
+                    "tags": [
+                        "Solutions",
+                        "Sécurité",
+                        "Entreprise"
+                    ],
+                    "description": "Présentation des clés de sécurité Yubikey U2F pour l'authentification multi-facteurs (MFA), offrant une protection robuste contre les accès non autorisés aux comptes et systèmes d'entreprise.",
+                    "source": "Yubico"
+                },
+                {
+                    "title": "Passwordless Authentication",
+                    "link": "https://www.cyberark.com/fr/what-is/passwordless-authentication/",
+                    "tags": [
+                        "Solutions",
+                        "Sécurité",
+                        "Entreprise",
+                        "Documentation"
+                    ],
+                    "description": "Explication de l'authentification sans mot de passe (passwordless), une méthode de sécurité qui utilise des facteurs biométriques ou des clés de sécurité pour vérifier l'identité des utilisateurs sans nécessiter de mot de passe traditionnel.",
+                    "source": "Cyber Ark"
+                },
+                {
+                    "date": "26 Novembre 2024",
+                    "title": "Authentification Multi-Facteurs by Default",
+                    "link": "https://learn.microsoft.com/fr-fr/entra/identity/authentication/concept-system-preferred-multifactor-authentication",
+                    "tags": [
+                        "Documentation",
+                        "Systèmes"
+                    ],
+                    "description": "Présentation du concept d'authentification multi-facteurs (MFA) par défaut dans les systèmes Microsoft, visant à renforcer la sécurité des comptes utilisateurs en exigeant plusieurs formes de vérification d'identité.",
+                    "source": "Microsoft Learn"
+                },
+                {
+                    "date": "13 Février 2025",
+                    "title": "Astaroth Phising Kit Bypasses 2AF",
+                    "link": "https://hackread.com/astaroth-phishing-kit-bypasses-2fa-hijack-gmail-microsoft/?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "2AF"
+                    ],
+                    "description": " Le kit de phishing Astaroth a été mis à jour pour contourner l'authentification à deux facteurs (2AF), permettant aux attaquants de compromettre les comptes Gmail et Microsoft malgré la présence de mesures de sécurité supplémentaires.",
+                    "source": "Hackread"
+                },
+                {
+                    "date": "11 Juillet 2022",
+                    "title": "Pypi Project Deploy 2AF with Keys",
+                    "link": "https://www.zdnet.fr/actualites/python-pypl-deploie-le-systeme-2fa-et-distribue-4-000-cles-de-securite-39944602.htm",
+                    "tags": [
+                        "Innovation",
+                        "Sécurité",
+                        "2AF",
+                        "Entreprise"
+                    ],
+                    "description": "Le projet PyPI de Python a déployé un système d'authentification à deux facteurs (2AF) et distribué 4 000 clés de sécurité aux utilisateurs pour renforcer la sécurité des comptes sur la plateforme de gestion de paquets.",
+                    "source": "ZDNet"
+                },
+                {
+                    "date": "30 Octobre 2025",
+                    "link": "https://tech.einnews.com/pr_news/862524534/quantum-safe-multi-factor-authentication-market-anticipated-to-grow-at-20-8-cagr-through-2029-industry-report",
+                    "title": "Marché MFA quantique-sûre : croissance de 20,8% CAGR",
+                    "tags": [
+                        "Recherches",
+                        "Statistiques",
+                        "Entreprise"
+                    ],
+                    "description": " Rapport sur le marché de l'authentification multi-facteurs quantique-sûre, anticipant une croissance à un taux de 20,8 % CAGR jusqu'en 2029, soulignant l'importance croissante de la sécurité dans les environnements d'entreprise.",
+                    "source": "Ein News"
+                },
+                {
+                    "date": "2 Mai 2024",
+                    "title": "Microsoft étend l'authentification passkey",
+                    "link": "https://www.usine-digitale.fr/article/microsoft-etend-l-authentification-par-passkey-aux-particuliers-en-plus-des-entreprises.N2212628",
+                    "tags": [
+                        "Innovation",
+                        "Sécurité"
+                    ],
+                    "description": "Microsoft étend l'authentification par passkey, une méthode sans mot de passe, aux utilisateurs particuliers en plus des entreprises, renforçant ainsi la sécurité et la facilité d'accès aux comptes Microsoft.",
+                    "source": "L'Usine Digitale"
+                },
+                {
+                    "date": "14 Février 2023",
+                    "title": "MFA",
+                    "link": "https://www.vaadata.com/blog/fr/authentification-multifacteur-mfa-principes-types-dattaques-exploitations-et-bonnes-pratiques-securite/",
+                    "tags": [
+                        "Documentation",
+                        "MFA",
+                        "Solutions",
+                        "Sécurité"
+                    ],
+                    "description": "Tout savoir sur l'authentification multifacteur (MFA) : principes, types d'attaques, exploitations et bonnes pratiques de sécurité pour protéger les comptes utilisateurs.",
+                    "source": "Vaadata"
+                },
+                {
+                    "date": "31 Octobre 2025",
+                    "title": "Unit-42 & High Touch Attacks",
+                    "link": "https://secpro.substack.com/p/unit-42-on-high-touch-attacks?source=queue",
+                    "tags": [
+                        "Vulnérabilité",
+                        "Sécurité",
+                        "Entreprise"
+                    ],
+                    "description": "Unit 42 analyse les attaques à haute interaction (high-touch attacks) qui ciblent les entreprises, mettant en lumière les vulnérabilités exploitées et les mesures de sécurité, telles que l'authentification multi-facteurs (MFA), pour se protéger contre ces menaces sophistiquées.",
+                    "source": "SecPro"
+                },
+                {
+                    "date": "1er Septembre 2025",
+                    "title": "CVE-2025-52856: & CVE-2025-52861",
+                    "link": "https://cybersecuritynews.com/qnap-authentication-vulnerability/",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "Sécurité",
+                        "Entreprise"
+                    ],
+                    "description": "Deux vulnérabilités critiques, CVE-2025-52856 et CVE-2025-52861, ont été découvertes dans les dispositifs QNAP, permettant de contourner les mécanismes d'authentification et d'accéder illégalement aux données sensibles. La mise en œuvre de l'authentification multi-facteurs (MFA) est recommandée pour renforcer la sécurité des systèmes affectés.",
+                    "source": "Cyber Security News"
+                },
+                {
+                    "date": "1er Septembre 2025",
+                    "title": "Des millions de comptes email piratés",
+                    "link": "https://www.bluewin.ch/en/news/millions-of-email-accounts-hacked-how-you-can-protect-yourself-now-2849982.html",
+                    "tags": [
+                        "Failles",
+                        "Sécurité"
+                    ],
+                    "description": "Une faille de sécurité majeure a compromis des millions de comptes email, exposant les utilisateurs à des risques accrus de piratage et de vol d'identité. L'implémentation de l'authentification multi-facteurs (MFA) est fortement recommandée pour protéger les comptes contre les accès non autorisés.",
+                    "source": "Blue News"
+                },
+                {
+                    "date": "13 Juin 2025",
+                    "title": "Anthentication Issues in Microsoft 365",
+                    "link": "https://cybersecuritynews.com/microsoft-365-authentication-issues/",
+                    "tags": [
+                        "Failles",
+                        "Sécurité",
+                        "Microsoft 365"
+                    ],
+                    "source": "Cyber Security News"
+                },
+                {
+                    "date": "31 Janvier 2026",
+                    "title": "Mandiant Finds ShinyHunters-Style Vishing Attacks Stealing MFA to Breach SaaS Platforms",
+                    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2lnJbnFaov0GE_74eq7mb52_5L4JzxpsP2dS-QqlaAJ8aSuWL-QRFQhkHSS_oso_YVwAUrLjhG_V2oVRGfxZuZjrf4dfYkkGI-e-OXJUq3exOdhCJC8I00T3cmSuQGdK52eeajtBJryw95T-fl27BXaYYewKTAhgZPKj_ZWcaQDJhbSkj59dV4l0SZe8G/s1600/vishing.jpg",
+                    "link": "https://thehackernews.com/2026/01/mandiant-finds-shinyhunters-using.html",
+                    "tags": [
+                        "Failles",
+                        "Solutions",
+                        "Cloud"
+                    ],
+                    "description": "Google-owned Mandiant on Friday said it identified an \"expansion in threat activity\" that uses tradecraft consistent with extortion-themed attacks orchestrated by a financially motivated hacking group known as ShinyHunters. The attacks leverage advanced voice phishing (aka vishing) and bogus credential harvesting sites mimicking targeted companies to gain unauthorized access to victim",
+                    "source": "The Hacker News"
+                },
+                {
+                    "date": "26 Janvier 2026",
+                    "title": "Okta Flags Customized, Reactive Vishing Attacks Which Bypass MFA",
+                    "link": "https://www.infosecurity-magazine.com/news/okta-flags-vishing-attacks-which/",
+                    "tags": [
+                        "Failles"
+                    ],
+                    "description": "Threat actors posing as IT support teams use phishing kits to generate fake login sites in real-time to trick victims into handing over credentials",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "7 Janvier 2026",
+                    "title": "MFA Failure Enables Infostealer Breach At 50 Enterprises",
+                    "link": "https://www.infosecurity-magazine.com/news/mfa-failure-infostealer-breach-50/",
+                    "tags": [
+                        "Entreprise",
+                        "Failles"
+                    ],
+                    "description": "Threat actor “Zestix” was able to breach around 50 firms using infostealers because they lacked multi-factor authentication",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "29 Août 2022",
+                    "title": "Tentacles of ‘0ktapus’ Threat Group Victimize 130 Firms",
+                    "link": "https://threatpost.com/0ktapus-victimize-130-firms/180487/",
+                    "tags": [
+                        "Hacks",
+                        "Privacy"
+                    ],
+                    "description": "Over 130 companies tangled in sprawling phishing campaign that spoofed a multi-factor authentication system.",
+                    "source": "Threatpost"
+                },
+                {
+                    "date": "13 Mars 2025",
+                    "title": "SuperBlack Ransomware exploite les failles Fortinet",
+                    "link": "https://www.bleepingcomputer.com/news/security/new-superblack-ransomware-exploits-fortinet-auth-bypass-flaws/?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "Infrastructure"
+                    ],
+                    "description": "Le ransomware SuperBlack exploite deux failles de contournement d'authentification dans les équipements Fortinet (CVE-2024-55591 et CVE-2025-24472) pour obtenir des privilèges super-admin. Même avec MFA en place, ces failles permettent un accès hors processus d'authentification normal.",
+                    "source": "BleepingComputer"
+                },
+                {
+                    "date": "11 Mars 2025",
+                    "title": "Plongée technique dans le phishing moderne",
+                    "link": "https://blog.quarkslab.com/technical-dive-into-modern-phishing.html?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Sécurité",
+                        "Documentation"
+                    ],
+                    "description": "Tour technique des méthodes de phishing modernes : BITB, fausses CAPTCHA, Adversary-in-the-Middle (Evilginx, Modlishka), noVNC et streaming WebRTC. Ces techniques capturent sessions et tokens, contournant la MFA classique basée sur OTP ou cookies de session.",
+                    "source": "Quarkslab"
+                },
+                {
+                    "title": "Hyperion Networks : mesures de cybersécurité avancées",
+                    "link": "https://lesnews.ca/tech/cybersecurite/hyperion-networks-des-mesures-de-cybersecurite-avancees-contre-les-menaces-emergentes/",
+                    "tags": [
+                        "Entreprise",
+                        "Sécurité"
+                    ],
+                    "description": "Hyperion Networks déploie une défense multi-couches intégrant pare-feux avancés, chiffrement, surveillance IA/ML et protection e-mail renforcée. La MFA s'inscrit dans cette logique de renforcement des accès et de défense en profondeur.",
+                    "source": "Les News"
+                },
+                {
+                    "date": "6 Janvier 2025",
+                    "title": "Sécurité numérique : l'impact de NIS2 et SecNumCloud",
+                    "link": "https://www.solutions-numeriques.com/avis-dexpert-securite-numerique-a-lheure-du-cloud-limpact-de-nis2-et-secnumcloud/",
+                    "tags": [
+                        "Standard",
+                        "Gouvernement",
+                        "Cloud"
+                    ],
+                    "description": "La directive NIS2 et le référentiel SecNumCloud imposent un cadre renforcé pour la cybersécurité des services cloud. L'authentification forte dont la MFA est une composante indispensable pour répondre aux obligations de gestion des risques et d'accès aux données sensibles.",
+                    "source": "Solutions Numériques"
+                },
+                {
+                    "title": "FBI : Play Ransomware a compromis 900 organisations",
+                    "link": "https://www.bleepingcomputer.com/news/security/fbi-play-ransomware-breached-900-victims-including-critical-orgs/?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Entreprise",
+                        "Infrastructure"
+                    ],
+                    "description": "L'avis conjoint FBI/CISA/ACSC révèle que le groupe Play a compromis ~900 organisations via des outils RMM vulnérables et des comptes volés. L'activation de la MFA pour les VPN et systèmes d'administration est explicitement recommandée comme mesure de mitigation.",
+                    "source": "BleepingComputer"
+                },
+                {
+                    "date": "13 Janvier 2025",
+                    "title": "Faille OAuth Google : des millions de comptes vulnérables",
+                    "link": "https://trufflesecurity.com/blog/millions-at-risk-due-to-google-s-oauth-flaw?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "Cloud"
+                    ],
+                    "description": "Une faille dans le flux 'Sign in with Google' (OAuth/OIDC) permet à un attaquant de racheter un domaine d'entreprise déchu et d'accéder aux services SaaS associés. La MFA ajoute une couche de défense mais ne protège pas contre ce type de compromission d'identité par abus de confiance OAuth.",
+                    "source": "Truffle Security"
+                },
+                {
+                    "date": "4 Mars 2025",
+                    "title": "Détection de keyloggers par hotkeys : structure kernel non documentée",
+                    "link": "https://www.elastic.co/security-labs/detecting-hotkey-based-keyloggers?utm_source=tldrinfosec",
+                    "tags": [
+                        "Sécurité",
+                        "Solutions",
+                        "Documentation"
+                    ],
+                    "description": "Elastic Security Labs présente une technique de détection de keyloggers basés sur les hotkeys Windows via la table kernel gphkHashTable. Un keylogger peut capturer les codes MFA saisis au clavier, soulignant que la MFA doit être accompagnée de défenses endpoint.",
+                    "source": "Elastic Security Labs"
+                },
+                {
+                    "date": "6 Janvier 2025",
+                    "title": "DoubleClickjacking : la nouvelle menace exploitant le double-clic",
+                    "link": "https://siecledigital.fr/2025/01/06/doubleclickjacking-la-nouvelle-menace-des-cyberattaques-exploitant-le-double-clic/",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "Sécurité"
+                    ],
+                    "description": "Le DoubleClickjacking exploite la séquence de double-clic pour valider des autorisations OAuth ou des changements de compte à l'insu de l'utilisateur. La MFA pour les actions sensibles (pas seulement la connexion initiale) est essentielle pour contrer cette technique.",
+                    "source": "Siècle Digital"
+                },
+                {
+                    "title": "Règlement DORA : défi et opportunité pour la cybersécurité financière",
+                    "link": "https://www.forbes.fr/brandvoice/reglement-dora-entre-defi-et-opportunite-de-transformation-pour-la-cybersecurite-des-entites-financieres/",
+                    "tags": [
+                        "Standard",
+                        "Entreprise",
+                        "Gouvernement"
+                    ],
+                    "description": "Le règlement DORA impose aux entités financières un cadre renforcé de résilience numérique : gestion des risques IT, tests de pénétration et gouvernance des prestataires tiers. La MFA est une mesure clé pour protéger les accès aux fonctions critiques et services TIC.",
+                    "source": "Forbes France"
+                },
+                {
+                    "date": "1 Juin 2025",
+                    "title": "184 millions d'identifiants exposés par un InfoStealer",
+                    "link": "https://www.websiteplanet.com/news/infostealer-breach-report/?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Sécurité",
+                        "Vulnérabilité"
+                    ],
+                    "description": "Une base de données non protégée contenant 184 millions de login/mot de passe volés par un infostealer a été découverte. Les comptes sans MFA sont les plus exposés au credential stuffing et à la prise de contrôle, illustrant le rôle critique de la MFA comme barrière défensive.",
+                    "source": "Website Planet"
+                },
+                {
+                    "date": "6 Janvier 2025",
+                    "title": "Cybersécurité des hôpitaux : la Cour des comptes alerte",
+                    "link": "https://next.ink/163968/cybersecurite-la-cour-des-comptes-met-les-hopitaux-en-pls/",
+                    "tags": [
+                        "Gouvernement",
+                        "Infrastructure",
+                        "Entreprise"
+                    ],
+                    "description": "La Cour des comptes constate un retard majeur des hôpitaux français en cybersécurité : 10% des victimes de cyberattaques, seulement 1,7% du budget alloué au numérique, et plus de 20% d'équipements obsolètes. La MFA est une mesure de base indispensable pour renforcer les accès dans ce contexte.",
+                    "source": "Next INpact"
+                },
+                {
+                    "date": "25 Mars 2025",
+                    "title": "FIC 2025 : Zero Trust et la gestion des accès",
+                    "link": "https://www.lebigdata.fr/fic-2025-zero-trust-la-gestion-des-acces-cle-de-la-confiance",
+                    "tags": [
+                        "Sécurité",
+                        "Documentation",
+                        "Entreprise"
+                    ],
+                    "description": "Le FIC 2025 met en avant l'architecture Zero Trust avec la gestion des accès comme socle principal. L'authentification forte et la MFA sont explicitement citées parmi les piliers essentiels du modèle, aux côtés de la micro-segmentation et de la surveillance continue.",
+                    "source": "LeBigData"
+                },
+                {
+                    "title": "Cour des comptes : pérenniser les dépenses cyber des hôpitaux",
+                    "link": "https://www.usine-digitale.fr/article/cybersecurite-des-hopitaux-la-cour-des-comptes-appelle-a-une-perennisation-des-depenses.N2224958",
+                    "tags": [
+                        "Gouvernement",
+                        "Infrastructure"
+                    ],
+                    "description": "Le programme CaRE (750 M€) vise à renforcer la cybersécurité hospitalière, mais la Cour des comptes alerte sur la pérennité du financement. La MFA pour les accès critiques fait partie des mesures de base à déployer dans ces établissements sous-investis en numérique.",
+                    "source": "L'Usine Digitale"
+                },
+                {
+                    "date": "9 Avril 2025",
+                    "title": "Medusa Ransomware revendique l'attaque de NASCAR",
+                    "link": "https://hackread.com/medusa-ransomware-claims-nascar-breach-latest-attack/?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Entreprise",
+                        "Sécurité"
+                    ],
+                    "description": "Le groupe Medusa a compromis NASCAR avec une rançon de 4 M$, exfiltrant des données sensibles dont des numéros de sécurité sociale. L'avis conjoint des agences américaines recommande explicitement l'activation de la MFA comme contrôle essentiel contre ce type de ransomware.",
+                    "source": "HackRead"
+                },
+                {
+                    "date": "3 Avril 2025",
+                    "title": "HellCat Ransomware exploite des identifiants Jira volés",
+                    "link": "https://hackread.com/hellcat-ransomware-firms-infostealer-stolen-jira-credentials/?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Entreprise",
+                        "Vulnérabilité"
+                    ],
+                    "description": "Le groupe HellCat compromet des entreprises via des identifiants Jira volés par des infostealers (Lumma, Raccoon, Redline). La MFA réduit fortement le risque d'account takeover, mais les sessions/cookies volés peuvent la contourner. L'activation de MFA phishing-résistante (FIDO2) et le SSO/SAML sont recommandés.",
+                    "source": "HackRead"
+                },
+                {
+                    "title": "Cisco Duo : répondre à l'exigence MFA de Microsoft pour Azure",
+                    "link": "https://duo.com/resources/webinars/use-duo-to-knock-the-microsoft-mfa-requirement-for-azure-out-of-the-park?utm_medium=publisher-direct&utm_source=TLDR-InfoSec",
+                    "tags": [
+                        "Solutions",
+                        "Entreprise",
+                        "Documentation"
+                    ],
+                    "description": "Webinaire de Cisco Duo expliquant comment répondre à l'obligation MFA de Microsoft pour Azure, via l'intégration External Authentication Methods (EAM) de Entra ID. Duo propose d'aller au-delà de la MFA traditionnelle vers l'ISPM et l'ITDR pour une sécurité d'identité complète.",
+                    "source": "Cisco Duo"
+                },
+                {
+                    "date": "6 Janvier 2025",
+                    "title": "La Suisse renforce sa cybersécurité avec deux nouvelles unités",
+                    "link": "https://www.news.admin.ch/fr/nsb?id=103728",
+                    "tags": [
+                        "Gouvernement",
+                        "Infrastructure"
+                    ],
+                    "description": "L'OFCOM suisse crée deux sections spécialisées en cybersécurité des télécommunications et en sécurité des réseaux. La MFA s'inscrit comme mesure essentielle dans ce cadre de renforcement des accès aux infrastructures critiques de télécommunication.",
+                    "source": "Administration Fédérale Suisse"
+                },
+                {
+                    "date": "21 Avril 2025",
+                    "title": "Phishing Google no-reply : attaque DKIM sophistiquée",
+                    "link": "https://www.theverge.com/news/652509/google-no-reply-dkim-phishing-scam?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Sécurité"
+                    ],
+                    "description": "Des attaquants envoient des emails depuis no-reply@google.com passant la vérification DKIM grâce à un replay DKIM, redirigeant vers des pages de phishing hébergées sur sites.google.com. Google recommande explicitement l'activation de la 2FA et des passkeys pour se protéger.",
+                    "source": "The Verge"
+                },
+                {
+                    "date": "25 Mars 2025",
+                    "title": "Agenda Ransomware abuse les outils d'accès distant et de backup",
+                    "link": "https://industrialcyber.co/ransomware/agenda-ransomware-abusing-remote-access-backup-tools-to-escalate-attacks-on-critical-infrastructure-in-2025/",
+                    "tags": [
+                        "Failles",
+                        "Infrastructure",
+                        "Entreprise"
+                    ],
+                    "description": "Le groupe Agenda (591 victimes) exploite des outils RMM et de sauvegarde légitimes pour compromettre des infrastructures critiques. La MFA phishing-résistante (FIDO2) est indispensable sur tous les accès d'administration et VPN, mais doit être complétée par des backups immutables et la segmentation réseau.",
+                    "source": "Industrial Cyber"
+                },
+                {
+                    "title": "Askari Bank déploie la MFA à 100% avec IBM Verify",
+                    "link": "https://www.ibm.com/case-studies/askari-bank-verify",
+                    "tags": [
+                        "Solutions",
+                        "Entreprise",
+                        "Documentation"
+                    ],
+                    "description": "Askari Bank (Pakistan) a déployé IBM Verify pour automatiser l'onboarding, le SSO sur 36 applications et la MFA à 100% des actions sensibles, réduisant de 75% le temps support sur les mots de passe. Un cas d'usage concret de MFA dans le secteur bancaire.",
+                    "source": "IBM"
+                },
+                {
+                    "title": "Trust Stamp : brevet pour une MFA renforcée par l'IA",
+                    "link": "https://www.proactiveinvestors.com/companies/news/1081060/trust-stamp-receives-us-patent-allowance-for-tech-to-identify-genai-driven-attacks-in-identity-authentication-1081060.html",
+                    "tags": [
+                        "Innovation",
+                        "Sécurité"
+                    ],
+                    "description": "Trust Stamp obtient un brevet pour des systèmes de MFA utilisant des données anonymisées d'attaques historiques et l'IA pour anticiper les fraudes d'identité. Cette évolution illustre la transition vers une MFA adaptative et intelligente face aux menaces GenAI.",
+                    "source": "Proactive Investors"
+                },
+                {
+                    "date": "28 Octobre 2025",
+                    "title": "CVE-2025-41090 : contrôle d'accès inadéquat dans microCLAUDIA",
+                    "link": "https://nvd.nist.gov/vuln/detail/CVE-2025-41090",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité"
+                    ],
+                    "description": "La vulnérabilité CVE-2025-41090 (score 7.6 HIGH) dans microCLAUDIA permet à un utilisateur authentifié d'exécuter des actions inter-tenant via l'API. La MFA réduit le risque d'obtenir un compte authentifié, mais ne suffit pas sans isolation tenant et contrôles d'autorisation.",
+                    "source": "NIST NVD"
+                },
+                {
+                    "date": "Mai 2025",
+                    "title": "Password Spraying : 80 000 comptes Microsoft Entra ID ciblés",
+                    "link": "https://www.bleepingcomputer.com/news/security/password-spraying-attacks-target-80-000-microsoft-entra-id-accounts/?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Entreprise",
+                        "Sécurité"
+                    ],
+                    "description": "Une campagne de password-spraying vise plus de 80 000 comptes Entra ID sur des centaines d'organisations. L'article recommande explicitement l'activation de la MFA pour tous les utilisateurs et l'utilisation de politiques d'accès conditionnel comme remparts essentiels.",
+                    "source": "BleepingComputer"
+                },
+                {
+                    "date": "23 Mai 2025",
+                    "title": "Nova Scotia Power : ransomware et fuite de 280 000 clients",
+                    "link": "https://www.theregister.com/2025/05/23/novia_scotia_power_customers_info_leaked/?utm_source=tldrinfosec",
+                    "tags": [
+                        "Failles",
+                        "Entreprise",
+                        "Infrastructure"
+                    ],
+                    "description": "Nova Scotia Power a subi un ransomware exposant les données de 280 000 clients. L'activation de la MFA sur les portails clients et les systèmes d'administration est une barrière supplémentaire essentielle pour limiter l'exploitation des données volées.",
+                    "source": "The Register"
+                },
+                {
+                    "date": "6 Janvier 2025",
+                    "title": "25 ans après le bug de l'an 2000 : les défis cyber du numérique",
+                    "link": "https://www.journaldunet.com/cybersecurite/1537813-25-ans-apres-le-bug-de-l-an-2000-la-cybersecurite-face-aux-futurs-defis-du-numerique/",
+                    "tags": [
+                        "Documentation",
+                        "Sécurité"
+                    ],
+                    "description": "Panorama des défis futurs de la cybersécurité : IA dans les attaques, deepfakes, informatique quantique et systèmes autonomes. La MFA s'inscrit comme composante clé de la gestion des identités face à ces menaces en mutation, même si elle doit évoluer.",
+                    "source": "Journal du Net"
+                },
+                {
+                    "date": "Avril 2025",
+                    "title": "Microsoft Authenticator : fin de la gestion des mots de passe",
+                    "link": "https://www.bleepingcomputer.com/news/security/microsoft-authenticator-now-warns-to-export-passwords-before-july-cutoff/?utm_source=tldrinfosec",
+                    "tags": [
+                        "Solutions",
+                        "Innovation"
+                    ],
+                    "description": "Microsoft Authenticator supprime la fonction autofill des mots de passe en juillet 2025, recentrant l'app sur la MFA (TOTP, push, passkeys). Ce virage illustre la transition vers le passwordless et la concentration des outils MFA sur l'authentification forte.",
+                    "source": "BleepingComputer"
+                },
+                {
+                    "date": "Avril 2025",
+                    "title": "Agenda Ransomware déploie un RAT Linux sur Windows",
+                    "link": "https://cybersecuritynews.com/agenda-ransomware-actors-deploying-linux-rat/",
+                    "tags": [
+                        "Failles",
+                        "Sécurité",
+                        "Infrastructure"
+                    ],
+                    "description": "Le groupe Agenda contourne la MFA en exploitant des sessions légitimes d'utilisateurs compromis et des outils RMM (Splashtop, AnyDesk, ScreenConnect). L'article démontre que la MFA doit être accompagnée de monitoring des sessions, restriction des outils RMM et moindre privilège.",
+                    "source": "Cyber Security News"
+                },
+                {
+                    "date": "Juin 2025",
+                    "title": "Campagne massive de prise de contrôle de comptes Entra ID",
+                    "link": "https://redmondmag.com/articles/2025/06/13/widespread-entra-id-account-takeover-campaign-detected-using-open-source-tool.aspx",
+                    "tags": [
+                        "Failles",
+                        "Entreprise",
+                        "Vulnérabilité"
+                    ],
+                    "description": "Une campagne de compromission ciblant les comptes Microsoft Entra ID utilise un outil open-source pour automatiser les prises de contrôle. La MFA et les politiques d'accès conditionnel sont des contre-mesures essentielles pour ce type d'attaque.",
+                    "source": "Redmond Magazine"
+                },
+                {
+                    "title": "Qu'est-ce que la MFA et comment fonctionne-t-elle ?",
+                    "link": "https://www.onelogin.com/fr-fr/learn/what-is-mfa",
+                    "tags": [
+                        "Documentation",
+                        "Solutions"
+                    ],
+                    "description": "Guide explicatif de OneLogin sur l'authentification multifacteur : les trois types de facteurs (connaissance, possession, inhérence), l'authentification adaptative et l'importance croissante de la MFA avec l'avènement du cloud computing.",
+                    "source": "OneLogin"
+                },
+                {
+                    "date": "Juin 2025",
+                    "title": "Token lance une clé de sécurité biométrique",
+                    "link": "https://www.biometricupdate.com/202506/token-releases-biometric-security-key",
+                    "tags": [
+                        "Innovation",
+                        "Solutions",
+                        "Biométrie"
+                    ],
+                    "description": "Token lance une nouvelle clé de sécurité intégrant l'authentification biométrique, combinant facteur de possession et facteur d'inhérence dans un seul dispositif. Une avancée pour la MFA phishing-résistante et le passwordless.",
+                    "source": "Biometric Update"
+                },
+                {
+                    "title": "Attaque Adversary-in-the-Middle (AiTM) : contourner la MFA",
+                    "link": "https://cybersecuritynews.com/adversary-in-the-middle-aitm-attack/amp/",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "Sécurité"
+                    ],
+                    "description": "Analyse technique des attaques Adversary-in-the-Middle qui permettent de capturer les sessions et tokens d'authentification, contournant ainsi la MFA basée sur OTP ou cookies. Les méthodes phishing-résistantes (FIDO2/WebAuthn) restent la meilleure défense.",
+                    "source": "Cyber Security News"
+                },
+                {
+                    "title": "RSA étend l'authentification passwordless à Windows et Entra ID",
+                    "link": "https://www.msspalert.com/news/rsa-expands-passwordless-authentication-with-windows-desktop-login-and-entra-id-integration",
+                    "tags": [
+                        "Innovation",
+                        "Solutions",
+                        "Entreprise"
+                    ],
+                    "description": "RSA Security intègre l'authentification sans mot de passe à Windows Desktop et Microsoft Entra ID, marquant une étape vers la convergence MFA/passwordless dans les environnements d'entreprise.",
+                    "source": "MSSP Alert"
+                },
+                {
+                    "title": "Microsoft Authenticator ne gérera plus vos mots de passe",
+                    "link": "https://www.zdnet.fr/actualites/microsoft-authenticator-ne-gerera-plus-vos-mots-de-passe-ni-la-plupart-des-cles-de-passe-479752.htm",
+                    "tags": [
+                        "Solutions",
+                        "Innovation"
+                    ],
+                    "description": "Microsoft Authenticator abandonne la gestion des mots de passe et la plupart des clés de passe pour se recentrer sur l'authentification forte (TOTP, push, passkeys). Un signal clair de la transition vers le passwordless dans l'écosystème Microsoft.",
+                    "source": "ZDNet France"
+                },
+                {
+                    "title": "Rapport : les infostealers ciblent les données d'accès",
+                    "link": "https://b2b-cyber-security.de/en/threat-report%3A-infostealers-target-access-data/",
+                    "tags": [
+                        "Failles",
+                        "Sécurité",
+                        "Entreprise"
+                    ],
+                    "description": "Rapport détaillant comment les infostealers ciblent spécifiquement les données d'accès (identifiants, cookies, sessions). La MFA reste un rempart essentiel mais doit être complétée par des protections endpoint pour contrer le vol de sessions.",
+                    "source": "B2B Cyber Security"
+                },
+                {
+                    "title": "Hackers exploitent Microsoft ADFS via des redirections Office.com",
+                    "link": "https://www.computing.co.uk/news/2025/security/hackers-exploit-microsoft-adfs-with-office-com-redirects",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "Entreprise"
+                    ],
+                    "description": "Des attaquants exploitent Microsoft ADFS en combinant des redirections Office.com pour compromettre les flux d'authentification. Cette technique menace les environnements fédérés où la MFA est implémentée via ADFS.",
+                    "source": "Computing"
+                },
+                {
+                    "title": "4 méthodes pour contourner la 2FA (et pourquoi l'utiliser quand même)",
+                    "link": "https://www.pcworld.com/article/2888970/4-ways-hackers-can-break-2fa-and-why-you-should-still-use-it-anyway.html",
+                    "tags": [
+                        "Failles",
+                        "Documentation",
+                        "Sécurité"
+                    ],
+                    "description": "Article détaillant quatre méthodes utilisées par les attaquants pour contourner la 2FA : phishing en temps réel, vol de session, SIM swap et ingénierie sociale. Malgré ces risques, la 2FA reste une protection essentielle qui bloque la majorité des attaques automatisées.",
+                    "source": "PCWorld"
+                },
+                {
+                    "title": "Kit de phishing contourne la MFA pour voler des identifiants M365",
+                    "link": "https://blog.knowbe4.com/new-phishing-kit-bypasses-mfa-to-steal-microsoft-365-credentials",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "2AF"
+                    ],
+                    "description": "Un nouveau kit de phishing permet de contourner la MFA pour voler des identifiants Microsoft 365 en capturant les tokens de session en temps réel. L'utilisation de méthodes phishing-résistantes (FIDO2/passkeys) est la meilleure défense.",
+                    "source": "KnowBe4"
+                },
+                {
+                    "title": "Guide développeur : l'authentification passwordless",
+                    "link": "https://securityboulevard.com/2025/08/kill-the-password-a-developers-guide-to-passwordless-authentication-nirvana/",
+                    "tags": [
+                        "Documentation",
+                        "Innovation",
+                        "Solutions"
+                    ],
+                    "description": "Guide technique pour développeurs sur l'implémentation de l'authentification sans mot de passe : passkeys, FIDO2, WebAuthn et biométrie. Une ressource pratique pour la transition vers une MFA de nouvelle génération.",
+                    "source": "Security Boulevard"
+                },
+                {
+                    "date": "28 Octobre 2025",
+                    "title": "Pourquoi la MFA échoue et comment y remédier",
+                    "link": "https://www.forbes.com/councils/forbestechcouncil/2025/10/28/why-mfa-is-failing-and-how-to-fix-it/",
+                    "tags": [
+                        "Failles",
+                        "Documentation",
+                        "Sécurité"
+                    ],
+                    "description": "Analyse des raisons pour lesquelles la MFA traditionnelle échoue face aux attaques modernes et recommandations pour passer à des méthodes phishing-résistantes et une authentification adaptative plus robuste.",
+                    "source": "Forbes"
+                },
+                {
+                    "title": "Microsoft impose la MFA pour Azure Resource Management",
+                    "link": "https://www.bleepingcomputer.com/news/microsoft/microsoft-to-enforce-mfa-for-azure-resource-management-in-october/",
+                    "tags": [
+                        "Entreprise",
+                        "Solutions",
+                        "Cloud"
+                    ],
+                    "description": "Microsoft rend obligatoire la MFA pour tous les accès Azure Resource Management, confirmant la tendance à généraliser l'authentification forte dans les environnements cloud d'entreprise.",
+                    "source": "BleepingComputer"
+                },
+                {
+                    "title": "NYDFS inflige une amende de 2 M$ pour violations MFA",
+                    "link": "https://www.jdsupra.com/legalnews/nydfs-imposes-2m-penalty-for-violations-6199749/",
+                    "tags": [
+                        "Standard",
+                        "Gouvernement",
+                        "Entreprise"
+                    ],
+                    "description": "Le New York Department of Financial Services impose une pénalité de 2 millions de dollars pour non-respect des exigences de MFA. Un signal fort que l'absence de MFA expose désormais les organisations à des sanctions financières directes.",
+                    "source": "JD Supra"
+                },
+                {
+                    "title": "Tendances cybersécurité : l'importance de la MFA en entreprise",
+                    "link": "https://www.enterprisesecuritymageurope.com/news/the-effects-of-trends-in-cybersecurity-nid-4388-cid-45.html",
+                    "tags": [
+                        "Entreprise",
+                        "Sécurité",
+                        "Documentation"
+                    ],
+                    "description": "Panorama des tendances en cybersécurité d'entreprise : la MFA reste un contrôle fondamental dans un paysage de menaces croissantes, notamment face à l'IA et aux attaques sophistiquées sur les identités.",
+                    "source": "Enterprise Security Mag Europe"
+                },
+                {
+                    "title": "Gmail : 2,5 milliards de comptes menacés après une fuite",
+                    "link": "https://www.bhaskarenglish.in/tech-science/news/25-billion-gmail-accounts-at-risk-google-asks-users-to-ditch-old-passwords-after-major-breach-135804407.html",
+                    "tags": [
+                        "Failles",
+                        "Sécurité"
+                    ],
+                    "description": "Google alerte sur les risques pesant sur 2,5 milliards de comptes Gmail après une fuite majeure et recommande aux utilisateurs de changer leurs mots de passe et d'activer la MFA pour protéger leurs comptes contre les accès non autorisés.",
+                    "source": "Bhaskar English"
+                },
+                {
+                    "title": "Verizon 2025 : IA et erreur humaine alimentent la tempête sécuritaire",
+                    "link": "https://cybermagazine.com/news/verizon-ai-and-human-error-fuel-security-storm",
+                    "tags": [
+                        "Entreprise",
+                        "Statistiques",
+                        "Sécurité"
+                    ],
+                    "description": "Le rapport Verizon 2025 Mobile Security Index révèle que seulement 57% des grandes entreprises utilisent une MFA avancée (45% pour les PME). Avec 85% des organisations confrontées à des attaques mobiles croissantes, le déploiement de la MFA reste un enjeu majeur.",
+                    "source": "Cyber Magazine"
+                },
+                {
+                    "title": "Attention aux attaques FIDO Downgrade contournant les défenses anti-phishing",
+                    "link": "https://www.govinfosecurity.com/beware-fido-downgrade-attacks-bypassing-phishing-defenses-a-29223",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "Sécurité"
+                    ],
+                    "description": "Des attaques de type FIDO Downgrade permettent de forcer un utilisateur à utiliser une méthode MFA moins sécurisée en contournant les défenses FIDO2/WebAuthn. Une menace directe contre la MFA phishing-résistante qui nécessite une vigilance accrue.",
+                    "source": "GovInfoSecurity"
+                },
+                {
+                    "title": "Whisper2FA : l'outil de phishing qui vole les identifiants M365",
+                    "link": "https://www.redhotcyber.com/en/post/whisper-2fa-the-new-phishing-tool-that-steals-microsoft-365-credentials/",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "2AF"
+                    ],
+                    "description": "Whisper2FA est un nouvel outil de phishing qui capture les identifiants Microsoft 365 en contournant la MFA via l'interception des tokens de session en temps réel, illustrant la sophistication croissante des attaques contre l'authentification multi-facteurs.",
+                    "source": "Red Hot Cyber"
+                },
+                {
+                    "title": "Proton lance son application d'authentification 2FA",
+                    "link": "https://www.vice.com/en/article/proton-authenticator-2fa-app/",
+                    "tags": [
+                        "Solutions",
+                        "Innovation"
+                    ],
+                    "description": "Proton lance Proton Authenticator, une application 2FA respectueuse de la vie privée et open-source, offrant une alternative aux solutions Google et Microsoft pour l'authentification multi-facteurs.",
+                    "source": "Vice"
+                },
+                {
+                    "title": "L'authentification multifacteur bientôt obligatoire",
+                    "link": "https://www.lemagit.fr/actualites/366553276/Lauthentification-multifacteurs-bientot-obligatoire",
+                    "tags": [
+                        "Standard",
+                        "Entreprise",
+                        "Gouvernement"
+                    ],
+                    "description": "Les régulateurs poussent vers la généralisation obligatoire de la MFA dans les entreprises, notamment dans les secteurs financiers et de santé. Un tournant réglementaire qui confirme la MFA comme standard de sécurité incontournable.",
+                    "source": "LeMagIT"
+                },
+                {
+                    "title": "Cisco Duo s'étend au-delà de la MFA vers l'IAM sécurisé",
+                    "link": "https://www.msspalert.com/news/cisco-duo-expands-beyond-mfa-launches-security-first-identity-and-access-management-platform",
+                    "tags": [
+                        "Solutions",
+                        "Innovation",
+                        "Entreprise"
+                    ],
+                    "description": "Cisco Duo lance une plateforme IAM complète intégrant MFA, Device Trust, SSO et contrôles d'accès adaptatifs. L'évolution illustre la convergence entre MFA et gestion des identités dans une approche Zero Trust.",
+                    "source": "MSSP Alert"
+                },
+                {
+                    "title": "Phishing OAuth contourne la MFA Microsoft 365",
+                    "link": "https://www.csoonline.com/article/4032743/cybercrooks-faked-microsoft-oauth-apps-for-mfa-phishing.html",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "2AF"
+                    ],
+                    "description": "Des cybercriminels créent de fausses applications OAuth Microsoft pour contourner la MFA et accéder aux comptes Microsoft 365. L'abus du consentement OAuth représente un vecteur croissant de contournement de l'authentification multi-facteurs.",
+                    "source": "CSO Online"
+                },
+                {
+                    "title": "FIDO affaibli : les risques de downgrade d'authentification",
+                    "link": "https://www.csoonline.com/article/4040128/fido-undermined.html",
+                    "tags": [
+                        "Failles",
+                        "Vulnérabilité",
+                        "Documentation"
+                    ],
+                    "description": "Analyse des risques d'affaiblissement des protocoles FIDO lorsque les services autorisent le fallback vers des méthodes moins sécurisées, permettant des attaques de downgrade qui compromettent l'avantage de la MFA phishing-résistante.",
+                    "source": "CSO Online"
+                },
+                {
+                    "date": "20 Février 2026",
+                    "title": "‘Starkiller’ Phishing Service Proxies Real Login Pages, MFA",
+                    "link": "https://krebsonsecurity.com/2026/02/starkiller-phishing-service-proxies-real-login-pages-mfa/",
+                    "tags": [
+                        "A Little Sunshine",
+                        "Latest Warnings",
+                        "The Coming Storm",
+                        "Web Fraud 2.0",
+                        "Abnormal AI",
+                        "Sécurité"
+                    ],
+                    "description": "Most phishing websites are little more than static copies of login pages for popular online destinations, and they are often quickly taken down by anti-abuse activists and security firms. But a stealthy new phishing-as-a-service offering lets customers sidestep both of these pitfalls: It uses cleverly disguised links to load the target brand's real website, and then acts as a relay between the target and the legitimate site -- forwarding the victim's username, password and multi-factor authen...",
+                    "source": "Krebs on Security"
+                },
+                {
+                    "date": "23 Mars 2026",
+                    "title": "Tycoon2FA Phishing Service Resumes Activity Post-Takedown",
+                    "link": "https://www.infosecurity-magazine.com/news/tycoon2fa-phishing-service-resumes/",
+                    "tags": [
+                        "Solutions",
+                        "2AF"
+                    ],
+                    "description": "Tycoon2FA phishing platform resumes activity post-takedown, leveraging AITM techniques to bypass MFA",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "19 Février 2026",
+                    "title": "Starkiller: New ‘Commercial-Grade’ Phishing Kit Bypasses MFA",
+                    "link": "https://www.infosecurity-magazine.com/news/starkiller-phishing-kit-bypasses/",
+                    "tags": [
+                        "Infrastructure",
+                        "Innovation",
+                        "Solutions"
+                    ],
+                    "description": "A new cybercriminal toolkit uses proxies to mimic popular online services and represents a “significant escalation in phishing infrastructure,” warn researchers at Abnormal",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "24 Mars 2026",
+                    "title": "Your Body Is Betraying Your Right to Privacy",
+                    "image": "https://media.wired.com/photos/69c1aa958d470e1446eb5d44/master/pass/Book-Excerpt-Your-Body-Is-Betraying-Your-Right-to-Privacy-Security.jpg",
+                    "link": "https://www.wired.com/story/book-excerpt-your-data-will-be-used-against-you-andrew-guthrie-ferguson/",
+                    "tags": [
+                        "The Big Story",
+                        "Security",
+                        "Book Excerpt",
+                        "longreads",
+                        "surveillance",
+                        "Biométrie"
+                    ],
+                    "description": "Attachment to smart devices and biometric surveillance leaves Americans more vulnerable to police searches than ever. Left unchecked it will only get worse.",
+                    "source": "Wired Security"
+                }
+            ],
+            "image": "/veille/mfa.gif"
+        },
+        {
+            "title": "Zero Trust Network Access",
+            "sub-title": "ZTNA",
+            "definition": "Le Zero Trust Network Access (ZTNA) est un modèle de sécurité qui supprime la confiance implicite traditionnellement accordée aux utilisateurs et aux appareils situés “dans” le réseau.\n Le principe : ne jamais faire confiance par défaut, toujours vérifier.\r\n ZTNA repose sur une approche granulaire de l'accès aux ressources, où chaque demande d'accès est évaluée en fonction de multiples critères tels que l'identité de l'utilisateur, le contexte de la demande (heure, emplacement, appareil utilisé) et le niveau de risque associé. En intégrant des technologies telles que l'authentification multi-facteurs (MFA), la micro-segmentation et la surveillance continue, ZTNA vise à minimiser les surfaces d'attaque et à protéger les données sensibles contre les menaces internes et externes.",
+            "fonctionnement": "ZTNA utilise des politiques d’accès granulaires au niveau de l’application définies sur le refus par défaut pour tous les utilisateurs et appareils. Un utilisateur se connecte et s’authentifie par rapport à un contrôleur Zero Trust, qui met en œuvre la politique de sécurité appropriée et vérifie les attributs de l’appareil. Une fois que l’utilisateur et l’appareil satisfont aux exigences spécifiées, l’accès est accordé à des applications et ressources réseau spécifiques en fonction de l’identité de l’utilisateur. Le statut de l’utilisateur et de l’appareil est continuellement vérifié pour maintenir l’accès.",
+            "prerequis": [
+                {
+                    "title": "Identity Provider (IdP)",
+                    "fonctionnement": "1. L'utilisateur tente d'accéder à une ressource; 2. Le broker ZTNA redirige vers l'IdP; 3. Authentification via SAML/OIDC avec MFA; 4. Jeton d'identité émis avec attributs utilisateur; 5. Le broker vérifie le jeton et applique les politiques d'accès",
+                    "protocole": "SAML 2.0, OpenID Connect, OAuth 2.0",
+                    "environnement": "Okta, Microsoft Entra ID, Ping Identity, Keycloak"
+                },
+                {
+                    "title": "Device Posture Check",
+                    "fonctionnement": "1. Agent installé sur l'endpoint vérifie la conformité; 2. Contrôle de l'état : version OS, correctifs, présence EDR, chiffrement disque; 3. Score de conformité calculé en temps réel; 4. Résultat transmis au broker ZTNA; 5. Accès accordé ou refusé selon le seuil de conformité",
+                    "protocole": "Agent-based ou agentless (certificat client)",
+                    "environnement": "MDM (Intune, Jamf), EDR (CrowdStrike, SentinelOne), NAC"
+                },
+                {
+                    "title": "Policy Engine / Broker",
+                    "fonctionnement": "1. Réception de la demande d'accès utilisateur + device; 2. Évaluation des politiques (identité, rôle, device, contexte, risque); 3. Principe deny-by-default : tout est refusé sauf autorisation explicite; 4. Accès accordé uniquement à l'application spécifique, pas au réseau entier; 5. Réévaluation continue pendant la session",
+                    "protocole": "Reverse proxy, tunnels chiffrés, SDP (Software-Defined Perimeter)",
+                    "environnement": "Zscaler Private Access, Cloudflare Access, Cisco Duo, Palo Alto Prisma"
+                },
+                {
+                    "title": "Micro-segmentation",
+                    "fonctionnement": "1. Segmentation granulaire au niveau applicatif (pas réseau); 2. Chaque application est isolée avec ses propres règles d'accès; 3. Communication inter-applications contrôlée par politique; 4. Réduction de la surface d'attaque et du mouvement latéral; 5. Politiques définies par identité et contexte, pas par IP",
+                    "protocole": "SD-WAN, VLAN, firewall micro-segmentation, service mesh",
+                    "environnement": "Illumio, VMware NSX, Guardicore, Kubernetes Network Policies"
+                },
+                {
+                    "title": "Monitoring Continu (CDM)",
+                    "fonctionnement": "1. Surveillance continue de l'état utilisateur et device après authentification; 2. Détection d'anomalies comportementales (changement IP, horaire inhabituel, device inconnu); 3. Recalcul du score de risque en temps réel; 4. Révocation ou renforcement de l'accès si le risque augmente; 5. Intégration avec SIEM/XDR pour corrélation avancée",
+                    "protocole": "Continuous Diagnostics & Mitigation, UEBA",
+                    "environnement": "SIEM (Splunk, Wazuh), XDR, NDR (Darktrace, Vectra AI)"
+                },
+                {
+                    "title": "SASE (Secure Access Service Edge)",
+                    "fonctionnement": "1. Convergence réseau + sécurité dans le cloud; 2. ZTNA intégré avec SWG, CASB et FWaaS; 3. L'utilisateur se connecte via un point d'accès cloud proche; 4. Toutes les politiques de sécurité appliquées en un point unique; 5. Protection uniforme quel que soit l'emplacement de l'utilisateur",
+                    "protocole": "ZTNA + SWG + CASB + FWaaS, SD-WAN",
+                    "environnement": "Zscaler, Palo Alto Prisma Access, Fortinet SASE, Netskope"
+                }
+            ],
+            "articles": [
+                {
+                    "date": "6 Février 2026",
+                    "title": "EDR, Email, and SASE Miss This Entire Class of Browser Attacks",
+                    "link": "https://www.bleepingcomputer.com/news/security/edr-email-and-sase-miss-this-entire-class-of-browser-attacks/",
+                    "tags": [
+                        "Security",
+                        "Sécurité",
+                        "Failles",
+                        "Solutions"
+                    ],
+                    "description": "Many modern attacks happen entirely inside the browser, leaving little evidence for traditional security tools. Keep Aware shows why EDR, email, and SASE miss browser-only attacks and how visibility changes prevention. [...]",
+                    "source": "BleepingComputer"
+                },
+                {
+                    "date": "2 Février 2026",
+                    "title": "NSA Publishes New Zero Trust Implementation Guidelines",
+                    "link": "https://www.infosecurity-magazine.com/news/nsa-zero-trust-implementation/",
+                    "tags": [
+                        "Entreprise",
+                        "Innovation",
+                        "Documentation"
+                    ],
+                    "description": "NSA released new guidelines to help organizations achieve target-level Zero Trust maturity",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "21 Janvier 2026",
+                    "title": "Risk of AI Model Collapse to Drive Zero Trust Data Governance, Gartner Says",
+                    "link": "https://www.infosecurity-magazine.com/news/ai-model-collapse-zero-trust-data/",
+                    "tags": [
+                        "Entreprise"
+                    ],
+                    "description": "Gartner predicts 50% of organizations will adopt zero trust data governance by 2028",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "27 Janvier 2026",
+                    "title": "AI &amp; the Death of Accuracy: What It Means for Zero-Trust",
+                    "image": "https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/blt16a225f2be68303f/6972837427d0e5cd3caca439/wood_block_tower_cagan_niron_Alamy.jpg?width=1280&auto=webp&quality=80&disable=upscale",
+                    "link": "https://www.darkreading.com/application-security/ai-death-accuracy-zero-trust",
+                    "tags": [
+                        "Sécurité"
+                    ],
+                    "description": "AI \"model collapse,\" where LLMs over time train on more and more AI-generated data and become degraded as a result, can introduce inaccuracies, promulgate malicious activity, and impact PII protections.",
+                    "source": "Dark Reading"
+                },
+                {
+                    "date": "3 Février 2026",
+                    "title": "Empowering the RAF Association with Next-Generation Cyber Resilience",
+                    "image": "https://www.paloaltonetworks.com/blog/wp-content/uploads/2026/02/GettyImages-989518294-edit.jpg",
+                    "link": "https://www.paloaltonetworks.com/blog/2026/02/raf-association-next-generation-cyber-resilience/",
+                    "tags": [
+                        "AI Security",
+                        "Announcement",
+                        "Government",
+                        "Public Sector",
+                        "Zero Trust Security",
+                        "Sécurité"
+                    ],
+                    "description": "The RAF Association (RAFA) boosts digital resilience and scales operations by partnering with Palo Alto Networks for zero trust and AI-driven security. The post Empowering the RAF Association with Next-Generation Cyber Resilience appeared first on Palo Alto Networks Blog.",
+                    "source": "Palo Alto Networks"
+                },
+                {
+                    "date": "5 Janvier 2026",
+                    "title": "Palo Alto Networks Announces Support for NVIDIA Enterprise AI Factory",
+                    "image": "https://www.paloaltonetworks.com/blog/wp-content/uploads/2025/12/panw-nvidia-blog-social-banners_Op4-1080x1080-1.png",
+                    "link": "https://www.paloaltonetworks.com/blog/2026/01/support-nvidia-enterprise-ai-factory/",
+                    "tags": [
+                        "AI Governance",
+                        "Announcement",
+                        "Firewall",
+                        "Partners",
+                        "Products and Services",
+                        "Sécurité"
+                    ],
+                    "description": "Secure your AI Factory with Palo Alto Networks Prisma AIRS and NVIDIA BlueField. Get zero trust security without sacrificing AI performance. The post Palo Alto Networks Announces Support for NVIDIA Enterprise AI Factory appeared first on Palo Alto Networks Blog.",
+                    "source": "Palo Alto Networks"
+                },
+                {
+                    "date": "24 Mars 2026",
+                    "title": "{ Tribune Expert } – Agents IA : le chaînon manquant du Zero Trust ?",
+                    "image": "https://www.silicon.fr/wp-content/uploads/2026/03/4f314a54-e717-496f-bb9a-5ae21d055d00.jpg",
+                    "link": "https://www.silicon.fr/cybersecurite-1371/tribune-expert-agents-ia-le-chainon-manquant-du-zero-trust-226404",
+                    "tags": [
+                        "Cybersécurité",
+                        "Okta"
+                    ],
+                    "description": "Dans un SI de plus en plus automatisé, la confiance ne doit plus être vérifiée uniquement pour les utilisateurs, mais pour chaque agent capable d’agir en leur nom. The post { Tribune Expert } &#8211; Agents IA : le chaînon manquant du Zero Trust ? appeared first on Silicon.fr.",
+                    "source": "Silicon.fr"
+                },
+                {
+                    "date": "19 Mars 2026",
+                    "title": "New tools and guidance: Announcing Zero Trust for AI",
+                    "link": "https://www.microsoft.com/en-us/security/blog/2026/03/19/new-tools-and-guidance-announcing-zero-trust-for-ai/",
+                    "tags": [
+                        "Sécurité",
+                        "Innovation",
+                        "Solutions"
+                    ],
+                    "description": "Microsoft introduces Zero Trust for AI, adding a new AI pillar to its workshop, enhanced reference architecture, updated guidance, and a new assessment tool. The post New tools and guidance: Announcing Zero Trust for AI appeared first on Microsoft Security Blog.",
+                    "source": "Microsoft Security Blog"
+                },
+                {
+                    "date": "23 Mars 2026",
+                    "title": "Securing the Era of Agentic AI with Prisma SASE",
+                    "image": "https://www.paloaltonetworks.com/blog/wp-content/uploads/2026/03/GettyImages-1070902426-edit-scaled.jpg",
+                    "link": "https://www.paloaltonetworks.com/blog/2026/03/agentic-ai-with-prisma-sase/",
+                    "tags": [
+                        "AI Governance",
+                        "Announcement",
+                        "Products and Services",
+                        "Agentic AI",
+                        "Prisma SASE",
+                        "Infrastructure"
+                    ],
+                    "description": "Prisma SASE is the comprehensive platform for the agentic AI era. Govern new AI identities, protect data from AI sprawl, and enable autonomous operations. The post Securing the Era of Agentic AI with Prisma SASE appeared first on Palo Alto Networks Blog.",
+                    "source": "Palo Alto Networks"
+                },
+                {
+                    "date": "13 Mars 2026",
+                    "title": "From legacy architecture to Cloudflare One",
+                    "link": "https://blog.cloudflare.com/legacy-to-agile-sase/",
+                    "tags": [
+                        "Cloudflare One",
+                        "SASE",
+                        "Partners",
+                        "Cloud"
+                    ],
+                    "description": "Learn how Cloudflare and CDW de-risk SASE migrations with a blueprint that treats legacy debt as an application modernization project.",
+                    "source": "Cloudflare Blog"
+                },
+                {
+                    "date": "9 Mars 2026",
+                    "title": "Complexity is a choice. SASE migrations shouldn’t take years.",
+                    "link": "https://blog.cloudflare.com/complexity-is-a-choice-sase-migrations-shouldnt-take-years/",
+                    "tags": [
+                        "SASE",
+                        "Cloudflare One",
+                        "Sécurité",
+                        "Entreprise",
+                        "Cloud"
+                    ],
+                    "description": "Discover how Cloudflare partners TachTech and Adapture are shattering the 18-month migration myth, deploying agile SASE for global enterprises in weeks by treating security as software.",
+                    "source": "Cloudflare Blog"
+                },
+                {
+                    "date": "5 Mars 2026",
+                    "title": "Ending the \"silent drop\": how Dynamic Path MTU Discovery makes the Cloudflare One Client more resilient",
+                    "link": "https://blog.cloudflare.com/client-dynamic-path-mtu-discovery/",
+                    "tags": [
+                        "Cloudflare Zero Trust",
+                        "Cloudflare One",
+                        "Cloudflare One Client",
+                        "Zero Trust",
+                        "Connectivity",
+                        "Cloud"
+                    ],
+                    "description": "The Cloudflare One Client now features the ability to actively probe and adjust packet sizes. This update eliminates the problems caused by tunnel layering and MTU differences, providing more stability and resiliency.",
+                    "source": "Cloudflare Blog"
+                },
+                {
+                    "date": "5 Mars 2026",
+                    "title": "How Automatic Return Routing solves IP overlap",
+                    "link": "https://blog.cloudflare.com/automatic-return-routing-ip-overlap/",
+                    "tags": [
+                        "SASE",
+                        "Cloudflare One",
+                        "Entreprise"
+                    ],
+                    "description": "Automatic Return Routing (ARR) solves the common enterprise challenge of overlapping private IP addresses by using stateful flow tracking instead of traditional routing tables. This userspace-driven approach ensures return traffic reaches the correct origin tunnel without manual NAT or VRF configuration.",
+                    "source": "Cloudflare Blog"
+                }
+            ],
+            "sources": [
+                "https://aijourn.com/faction-networks-announces-leroy-williams-as-president-and-ceo-of-oa-technologies/",
+                "https://biztechmagazine.com/article/2026/02/financial-organizations-navigate-heightened-regulatory-security-requirements",
+                "https://blog.cloudflare.com/fr-fr/zero-trust-sase-and-sse-foundational-concepts-for-your-next-generation-network/",
+                "https://blogs.cisco.com/security/securing-dns-black-hat-europe",
+                "https://blogs.oracle.com/cloud-infrastructure/announcing-support-for-iam-deny-policies-in-the-oci-iam",
+                "https://breakingdefense.com/2025/12/meeting-zero-trust-goals-while-maintaining-information-dominance/",
+                "https://cyberelements.io/ztnazero-trust-network-access-ztna/",
+                "https://docs.fortinet.com/document/fortigate/7.6.4/administration-guide/317228/zero-trust-network-access",
+                "https://edtechmagazine.com/higher/article/2025/08/zero-trust-takes-hold-higher-education",
+                "https://federalnewsnetwork.com/commentary/2025/12/why-deeper-defense-collaboration-demands-a-zero-trust-approach-to-cybersecurity-2/",
+                "https://federalnewsnetwork.com/commentary/2026/02/how-the-faa-built-the-first-zero-trust-network-long-before-cybersecurity-existed/",
+                "https://finance.yahoo.com/news/keeper-security-extends-zero-trust-120000001.html?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAC9NNBnuU9bGWHkVI17imEiP29vXSrd4XLxJaRoP8on05vMqDbh4wQFmkcf2RRuT2Szp7f1HADWZJ1XlrVZJaWB5LxiQ1UlhBcvfov2UH4rGtV7q7vnsxWH5fPflVGfu0k8ZkydATs-wC-XJcw2U8KQbDLGFcSqo_Rl_BagwrSkX",
+                "https://fintech.global/2026/02/06/zscaler-buys-squarex-to-extend-zero-trust-security-into-browsers/",
+                "https://gbhackers.com/how-online-casinos-are-driving-innovation-in-cybersecurity-standards/amp/",
+                "https://hackernoon.com/securing-the-digital-nerve-system-a-practical-guide-to-implementing-zero-trust-api-security",
+                "https://hackernoon.com/zero-trust-security-goes-mainstream-as-breach-costs-hit-record-highs",
+                "https://hapyservices.com/zero-trust-network-access-ztna/",
+                "https://instasafe.com/blog/ztna-vs-zta-vs-ztaa-learn-the-difference/",
+                "https://itsocial.fr/cybersecurite/cybersecurite-actualites/watchguard-unifie-identite-terminaux-et-acces-dans-un-bundle-zero-trust-pret-a-deployer/",
+                "https://meritalk.com/articles/military-cyber-leaders-accelerate-zero-trust-modernization-efforts/",
+                "https://meritalk.com/articles/nist-official-urges-unified-zero-trust-approach/",
+                "https://news.samsung.com/my/leading-the-way-in-enterprise-mobile-security-samsungs-zero-trust-strategy",
+                "https://securityboulevard.com/2025/11/are-current-non-human-identities-impenetrable/",
+                "https://securityboulevard.com/2025/12/the-future-of-network-security-policy-management-in-a-zero-trust-world/",
+                "https://securityboulevard.com/2026/01/pragmatic-steps-toward-zero-trust-2/",
+                "https://securitybrief.com.au/story/apac-surge-in-agentic-ai-adoption-sparks-new-cyber-risks-focus",
+                "https://securitybrief.com.au/story/gartner-half-of-firms-adopt-zero-trust-data-by-2028",
+                "https://thebossmagazine.com/post/how-modern-executives-rethinking-cybersecurity-strategy/",
+                "https://thehacker.news/proactive-cloud-security?source=below&_gl=1*tm30kd*_ga*MTgxMjk1NDg0Ni4xNzY2NTA0MDEy*_ga_ZDZCZPGJ7N*czE3NjY1MDQwMTIkbzEkZzEkdDE3NjY1MDU0NTYkajYwJGwwJGgxNjA0MDM5MzM0*_ga_3VWMMV8X94*czE3NjY1MDQwMTIkbzEkZzEkdDE3NjY1MDU0NTYkajYwJGwwJGgw",
+                "https://www.appgate.com/blog/why-federal-government-shutdowns-deserve-a-resilient-predictable-access-strategy",
+                "https://www.appgate.com/blog/why-legacy-access-models-fail-financial-services-and-why-speed-matters-more-than-ever",
+                "https://www.bleepingcomputer.com/news/security/cisa-and-nsa-share-tips-on-securing-microsoft-exchange-servers/amp/",
+                "https://www.cachem.fr/securite-reseau-nas-2026/",
+                "https://www.catonetworks.com/fr/zero-trust-network-access/#Quest-ce_que_le_ZTNA_\\(Zero_Trust_Network_Access\\",
+                "https://www.catonetworks.com/fr/zero-trust-network-access/how-to-implement-zero-trust/#Quest-ce_que_la_mise_en_uvre_du_Zero_Trust",
+                "https://www.channelinsider.com/security/tools-and-platforms/watchguard-unified-zero-trust-bundle/",
+                "https://www.cio.com/article/4095407/why-trust-is-the-new-currency-in-the-agentic-era-and-what-its-worth.html",
+                "https://www.cisa.gov/topics/cybersecurity-best-practices/edge-device-security",
+                "https://www.citybiz.co/article/776451/faction-networks-appoints-leroy-williams-as-ceo-of-oa-technologies/",
+                "https://www.cloudflare.com/fr-fr/learning/security/glossary/what-is-zero-trust/",
+                "https://www.crowdstrike.com/fr-fr/cybersecurity-101/zero-trust-security/zero-trust-network-access-ztna/?__cf_chl_tk=zRnDdwmAPOl6iY53cY2l5VGfoC8WKOxTr9TYwbE1GVY-1771545537-1.0.1.1-D4r5rPPD31XjNc1Pj7mD7KjC5xxEX9J.aevsKy7NDsA",
+                "https://www.csoonline.com/article/4122266/50-of-organizations-will-adopt-zero-trust-data-governance-by-2028.html",
+                "https://www.csoonline.com/article/4128745/zscaler-extends-zero-trust-security-to-browsers-with-squarex-acquisition.html",
+                "https://www.cybersecurity-insiders.com/zero-trust-is-not-stuck-we-are-just-executing-it-poorly/",
+                "https://www.dbta.com/Editorial/News-Flashes/Portnox-Expands-Universal-Zero-Trust-Platform-to-Enable-Context-Aware-Access-Controls-to-Cloud-On-Premises-and-Console-Based-Applications-173465.aspx",
+                "https://www.einpresswire.com/article/883577086/zero-trust-security-shifts-from-enterprise-strategy-to-business-necessity",
+                "https://www.ericsson.com/en/reports-and-papers/mobility-report/articles/modernize-enterprise-it-softbank",
+                "https://www.eschoolnews.com/it-leadership/2025/11/25/resilient-learning-begins-with-zero-trust-and-cyber-preparedness/",
+                "https://www.fidelity.com/news/article/default/202512170001PRIMZONEFULLFEED9603431",
+                "https://www.fidelity.com/news/article/technology/202511241158PR_NEWS_USPR_____NY32186",
+                "https://www.fortinet.com/fr/resources/cyberglossary/sase-vs-ztna",
+                "https://www.helpnetsecurity.com/2025/12/12/firewalla-orange/",
+                "https://www.helpnetsecurity.com/2025/12/18/appgate-agentic-ai-core-protection/",
+                "https://www.helpnetsecurity.com/2026/02/10/portnox-passwordless-ztna/",
+                "https://www.hstoday.us/subject-matter-areas/cybersecurity/why-zero-trust-is-still-a-national-security-imperative/",
+                "https://www.iotinsider.com/industries/security/exabeam-and-recorded-future-deepen-partnership-to-accelerate-threat-detection/?amp=1",
+                "https://www.mbtmag.com/cybersecurity/blog/22955274/todays-threat-landscape-demands-a-proactive-ot-security-strategy",
+                "https://www.mbtmag.com/cybersecurity/news/22961015/platform-reinforces-device-security-with-sandbox-zero-trust-features",
+                "https://www.microsoft.com/en-us/security/blog/2026/01/22/microsoft-security-success-stories-why-integrated-security-is-the-foundation-of-ai-transformation/",
+                "https://www.morningstar.com/news/business-wire/20251209771856/openvpn-and-ivalt-partner-to-deliver-the-next-generation-of-human-bound-passwordless-zero-trust-network-access",
+                "https://www.msspalert.com/news/watchguard-offers-mssps-msps-security-teams-a-zero-trust-framework",
+                "https://www.nature.com/articles/s41598-026-40089-2",
+                "https://www.openaccessgovernment.org/unifying-network-performance-and-cybersecurity-with-secure-nexus/201611/",
+                "https://www.paloaltonetworks.com/blog/sase/achieve-true-zero-trust-and-peak-performance-with-prisma-access-6-1/",
+                "https://www.paloaltonetworks.com/cyberpedia/iot-security-issues",
+                "https://www.prnewswire.com/news-releases/portnox-expands-universal-zero-trust-platform-to-protect-mission-critical-enterprise-applications-302683818.html",
+                "https://www.scoop.co.nz/stories/BU2512/S00246/best-of-both-worlds-how-advantage-nz-delivers-seamless-zero-trust-security-with-sentinelone-and-cloudflare.htm",
+                "https://www.seqrite.com/fr/blog/the-roi-of-implementing-a-ztna-solution/",
+                "https://www.skyhighsecurity.com/fr/cybersecurity-defined/what-is-ztna.html",
+                "https://www.sophos.com/fr-fr/products/zero-trust-network-access?utm_source=google&utm_medium=cpc&utm_campaign=mg-2024-we-fr-demg-gog-gen-convr-net-ztna-search-broad&utm_term=ztna&utm_content=na&cmp=701aJ000004dg0HQAQ&gclsrc=aw.ds&gad_source=1&gad_campaignid=21748264534&gbraid=0AAAAA901NznZLociKsJqqYmxRJIU-qe5t&gclid=EAIaIQobChMImO7eroyDkQMVN_x5BB3xADHKEAMYAiAAEgIxSfD_BwE",
+                "https://www.stormshield.com/fr/produits-et-services/produits/protection-des-reseaux/fonctionnalites/ztna/",
+                "https://www.webpronews.com/cox-enterprises-data-breach-cl0p-exploits-oracle-zero-day-flaw/",
+                "https://www.webpronews.com/fired-it-contractor-pleads-guilty-to-862k-revenge-hack-amid-tech-layoffs/",
+                "https://www.zataz.com/ztna-le-controle-dacces-reseau-a-lere-de-la-defiance-numerique/",
+                "https://www.zscaler.com/blogs/product-insights/building-better-zero-trust-culture-starts-debunking-myths-around-trust",
+                "https://www.zscaler.com/fr/resources/security-terms-glossary/what-is-zero-trust-network-access",
+                "https://www.zscaler.com/fr/zpedia/sase-vs-ztna",
+                "https://www.zscaler.com/resources/security-terms-glossary/what-is-zero-trust-network-access"
+            ],
+            "image": "/veille/ztna.gif"
+        },
+        {
+            "title": "Security Information and Event Management",
+            "sub-title": "SIEM",
+            "definition": "Un SIEM (Security Information and Event Management) est une solution de cybersécurité qui centralise la collecte, l'analyse et la corrélation des données de sécurité provenant de diverses sources au sein d'une organisation. Il permet de détecter les menaces en temps réel, d'analyser les incidents de sécurité et de générer des rapports de conformité. Intégré au sein d'un SOC (Security Operations Center), le SIEM travaille en tandem avec le SOAR (Security Orchestration, Automation & Response) pour automatiser la réponse aux incidents et réduire les temps de détection (MTTD) et de réponse (MTTR).",
+            "fonctionnement": "Le SIEM collecte l'ensemble des logs provenant de multiples sources : pare-feux, IDS/IPS, serveurs, endpoints, environnements cloud (AWS, Azure), applications, bases de données et systèmes d'authentification. Il corrèle ensuite ces événements à l'aide de règles prédéfinies et d'analyse comportementale pour identifier les anomalies (exemple : 50 tentatives de login échouées suivies d'un transfert de fichiers suspect déclenche une alerte). Le SIEM génère des tableaux de bord de supervision et des rapports de conformité. En complément, le SOAR automatise les actions de réponse : enrichissement des alertes, création de tickets, blocage d'IP malveillantes, désactivation de comptes compromis et exécution de playbooks (réponse au phishing, containment de malware, vérification MFA sur login suspect). L'ensemble forme la boucle de sécurité complète : Voir, Comprendre, Agir, Améliorer.",
+            "prerequis": [],
+            "articles": [
+                {
+                    "date": "6 Février 2026",
+                    "title": "How Samsung Knox Helps Stop Your Network Security Breach",
+                    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYbHuhB2klNlaHkYykLYRjMjQVPrFD5GjaSmTiLJPzDkOGBVufabhBs2akKWk8RV3LBOvEqj2ANFmVcfqfixnoHAlShEtg6FZvSviNFYX1xmLxdRZwK3M87ElFVhJbArR7ZELSje8MoaPW2FnbHHIWFTpjSOxlPaP5KWEXzIJ8YkkMlzdUE01DTeDPKUw/s1600/samsung.jpg",
+                    "link": "https://thehackernews.com/2026/02/how-samsung-knox-helps-stop-your-network-security-breach.html",
+                    "tags": [
+                        "Sécurité",
+                        "Entreprise",
+                        "Infrastructure",
+                        "Failles"
+                    ],
+                    "description": "As you know, enterprise network security has undergone significant evolution over the past decade. Firewalls have become more intelligent, threat detection methods have advanced, and access controls are now more detailed. However (and it&rsquo;s a big &ldquo;however&rdquo;), the increasing use of mobile devices in business operations necessitates network security measures that are specifically",
+                    "source": "The Hacker News"
+                },
+                {
+                    "date": "4 Février 2026",
+                    "title": "The First 90 Seconds: How Early Decisions Shape Incident Response Investigations",
+                    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUnx0YyMmcxNjnpByxI1Ox1uYPj-VK1XhaTm_BWuyumyZGTDH9njGAT0tc95n736kaWAVeRD9ptaw5XJZoNSuIeVBgU8bBXXMlu-zlyZxXq8AjftysB21xcTcM5U-mtX6-jdtRAYuAhkLTb2k2inxlvvI4vXevI8knxLpst2BeGfY6LI0bHj7U87-VwxQ/s1600/malware-attack.jpg",
+                    "link": "https://thehackernews.com/2026/02/the-first-90-seconds-how-early.html",
+                    "tags": [
+                        "Solutions"
+                    ],
+                    "description": "Many incident response failures do not come from a lack of tools, intelligence, or technical skills. They come from what happens immediately after detection, when pressure is high, and information is incomplete. I have seen IR teams recover from sophisticated intrusions with limited telemetry. I have also seen teams lose control of investigations they should have been able to handle. The",
+                    "source": "The Hacker News"
+                },
+                {
+                    "date": "3 Février 2026",
+                    "title": "[Webinar] The Smarter SOC Blueprint: Learn What to Build, Buy, and Automate",
+                    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj94yPJzbFbdUMoIM3dTA8goVdCA24p4PPkHSWX3VTTV5kl4XNJD_hz4_NrZb0XjG_tHMdyLMSWJIawj8PTJcqal7TpfSJ0_3jeGzZFn7dTa0_ecTHkRtPzSKBP1VlUaeuv_ErmIMZF08OiQxQPZ73I-A5AmbcUyLGtt2dsYI7RWEBUMie7rqn_EjnC_5aQ/s1600/soc-webinar.jpg",
+                    "link": "https://thehackernews.com/2026/02/webinar-smarter-soc-blueprint-learn.html",
+                    "tags": [
+                        "Sécurité",
+                        "Solutions"
+                    ],
+                    "description": "Most security teams today are buried under tools. Too many dashboards. Too much noise. Not enough real progress. Every vendor promises “complete coverage” or “AI-powered automation,” but inside most SOCs, teams are still overwhelmed, stretched thin, and unsure which tools are truly pulling their weight. The result? Bloated stacks, missed signals, and mounting pressure to do more with less. This",
+                    "source": "The Hacker News"
+                },
+                {
+                    "date": "29 Janvier 2026",
+                    "title": "Researchers Find 175,000 Publicly Exposed Ollama AI Servers Across 130 Countries",
+                    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpmx-gYMpMW-nf6wXdiwU6bhhuySnvXQo3BifYIaLE8Vi7Verinm69xkQ4B2AWSXdkdU6yA0WjLVtNGvxx_QzRyxEDKxbpqil2P3NZzOQrFf_MihjJeRVJ64VrWW9IAW9eaxmay2BeiTCHKIestdHmy3KpDagP53nnYQkV4z2TsKoCa_m-gk7BCTue_CKE/s1600/Ollama.jpg",
+                    "link": "https://thehackernews.com/2026/01/researchers-find-175000-publicly.html",
+                    "tags": [
+                        "Infrastructure",
+                        "Innovation",
+                        "Cloud"
+                    ],
+                    "description": "A new joint investigation by SentinelOne SentinelLABS, and Censys has revealed that the open-source artificial intelligence (AI) deployment has created a vast \"unmanaged, publicly accessible layer of AI compute infrastructure\" that spans 175,000 unique Ollama hosts across 130 countries. These systems, which span both cloud and residential networks across the world, operate outside the",
+                    "source": "The Hacker News"
+                },
+                {
+                    "date": "23 Décembre 2025",
+                    "title": "Hundreds of Arrests as Operation Sentinel Recovers $3m",
+                    "link": "https://www.infosecurity-magazine.com/news/hundreds-arrests-operation/",
+                    "tags": [
+                        "SIEM"
+                    ],
+                    "description": "Operational Sentinel helps to crack down on cybercrime across 19 African countries in a month-long campaign",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "6 Février 2026",
+                    "title": "Airrived Emerges From Stealth With $6.1 Million in Funding",
+                    "link": "https://www.securityweek.com/airrived-emerges-from-stealth-with-6-1-million-in-funding/",
+                    "tags": [
+                        "Artificial Intelligence",
+                        "Cybersecurity Funding",
+                        "AI",
+                        "Airrived",
+                        "Funding",
+                        "Vulnérabilité"
+                    ],
+                    "description": "The startup aims to unify SOC, GRC, IAM, vulnerability management, IT, and business operations through its Agentic OS platform. The post Airrived Emerges From Stealth With $6.1 Million in Funding appeared first on SecurityWeek.",
+                    "source": "SecurityWeek"
+                },
+                {
+                    "date": "30 Janvier 2026",
+                    "title": "Torq Moves SOCs Beyond SOAR With AI-Powered Hyper Automation",
+                    "image": "https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/blt95ade4301e0baed1/697e3b674c92fabc22015c8e/AI-ML-Ops-BluePlanetStudio-adobe.jpg?width=1280&auto=webp&quality=80&disable=upscale",
+                    "link": "https://www.darkreading.com/remote-workforce/torq-moves-socs-soar-ai-powered-hyper-automation",
+                    "tags": [
+                        "SIEM"
+                    ],
+                    "description": "Investors poured $140 million into Torq's Series D Round, raising the startup's valuation to $1.2 billion, to bring AI-based \"hyper automation\" to SOCs.",
+                    "source": "Dark Reading"
+                },
+                {
+                    "date": "22 Janvier 2026",
+                    "title": "What the Alien Franchise Taught Me About Cybersecurity",
+                    "image": "https://www.paloaltonetworks.com/blog/wp-content/uploads/2026/01/AdobeStock_576388241-scaled.jpeg",
+                    "link": "https://www.paloaltonetworks.com/blog/2026/01/alien-franchise-taught-cybersecurity/",
+                    "tags": [
+                        "AI Security",
+                        "Points of View",
+                        "AI-powered SIEM",
+                        "SOC modernization",
+                        "Sécurité",
+                        "Infrastructure"
+                    ],
+                    "description": "Ripley's tactics from Alien are your blueprint for SOC transformation to defeat modern threats with AI-driven security, automation and SIEM modernization. The post What the Alien Franchise Taught Me About Cybersecurity appeared first on Palo Alto Networks Blog.",
+                    "source": "Palo Alto Networks"
+                },
+                {
+                    "date": "23 Mars 2026",
+                    "title": "AI in the SOC: What Could Go Wrong?",
+                    "image": "https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/blt3b30cd90466d23d5/69c1a4abe1907d29d08f0f4c/Question_mark_blocks_HAKINMHAN_Alamy.jpg?width=1280&auto=webp&quality=80&disable=upscale",
+                    "link": "https://www.darkreading.com/cybersecurity-operations/ai-soc-go-wrong",
+                    "tags": [
+                        "Sécurité"
+                    ],
+                    "description": "Two cybersecurity leaders tested out AI in their respective SOCs for six months — and here's what they learned.",
+                    "source": "Dark Reading"
+                },
+                {
+                    "date": "27 Mars 2026",
+                    "title": "CISA Flags Critical PTC Vulnerability That Had German Police Mobilized",
+                    "link": "https://www.securityweek.com/cisa-flags-critical-ptc-vulnerability-that-had-german-police-mobilized/",
+                    "tags": [
+                        "Incident Response",
+                        "Tracking & Law Enforcement",
+                        "Vulnerabilities",
+                        "CISA",
+                        "Featured",
+                        "Vulnérabilité"
+                    ],
+                    "description": "Police in Germany physically warned organizations about the critical PTC Windchill vulnerability tracked as CVE-2026-4681. The post CISA Flags Critical PTC Vulnerability That Had German Police Mobilized appeared first on SecurityWeek.",
+                    "source": "SecurityWeek"
+                },
+                {
+                    "date": "26 Mars 2026",
+                    "title": "Lakewatch : à son tour, Databricks s’invite sur le marché du SIEM",
+                    "link": "https://www.lemagit.fr/actualites/366640605/Lakewatch-a-son-tour-Databricks-sinvite-sur-le-marche-du-SIEM",
+                    "tags": [
+                        "Sécurité",
+                        "Solutions",
+                        "Statistiques"
+                    ],
+                    "description": "<p>Le 25 mars 2026, Databricks a annoncé la préversion privée de Lakewatch, ce que l’éditeur appelle un « SIEM ouvert et agentique ».</p> <p>Comme la majorité des produits du marché, l’éditeur promet de « d’ingérer, de retenir et d’analyser » de gros volumes de données permettant de détecter des anomalies de sécurité dans les systèmes et des applications.</p> <p>Pour se différencier des acteurs en place (Splunk,Elastic, Securonix, Microsoft Sentinel, Google, CrowStrike, SentinelOne), entend s...",
+                    "source": "LeMagIT Sécurité"
+                },
+                {
+                    "date": "25 Mars 2026",
+                    "title": "Hackers Exploit Compromised Enterprise Identities at Industrial Scale, Warns SentinelOne",
+                    "link": "https://www.infosecurity-magazine.com/news/hackers-exploit-id-industrial-scale/",
+                    "tags": [
+                        "Vulnérabilité",
+                        "Sécurité",
+                        "Entreprise",
+                        "Failles",
+                        "Statistiques"
+                    ],
+                    "description": "Cybersecurity company’s annual report issues warning over a “mass-marketed impersonation crisis” over attackers abusing legitimate credentials",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "18 Mars 2026",
+                    "title": "AI Issues Will Drive Half of Incident Response Efforts by 2028, Says Gartner",
+                    "link": "https://www.infosecurity-magazine.com/news/ai-issues-half-incident-response/",
+                    "tags": [
+                        "Sécurité"
+                    ],
+                    "description": "Gartner has urged security teams to get involved in AI projects from the start to avoid costly incident response",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "9 Mars 2026",
+                    "title": "Threat Actor Exploits Flaws and Uses Elastic Cloud SIEM to Manage Stolen Data",
+                    "link": "https://www.infosecurity-magazine.com/news/elastic-cloud-siem-manage-stolen/",
+                    "tags": [
+                        "Vulnérabilité",
+                        "Cloud"
+                    ],
+                    "description": "Huntress researchers uncover campaign exploiting vulnerabilities to steal data using Elastic Cloud as a data hub",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "23 Février 2026",
+                    "title": "Leading Semiconductor Supplier Advantest Hit by Ransomware Attack",
+                    "link": "https://www.infosecurity-magazine.com/news/advantest-ransomware-attack/",
+                    "tags": [
+                        "Sécurité",
+                        "Failles"
+                    ],
+                    "description": "Advantest, a Japanese specialist in testing computer chips for major semiconductor manufacturers, has deployed incident response protocols following a cybersecurity incident",
+                    "source": "Infosecurity Magazine"
+                },
+                {
+                    "date": "24 Mars 2026",
+                    "title": "Databricks s’attaque au marché de la cybersécurité avec Lakewatch",
+                    "image": "https://www.silicon.fr/wp-content/uploads/2025/09/databricks-etoffe-edition-communautaire-enjeu-competences-F.jpg",
+                    "link": "https://www.silicon.fr/cybersecurite-1371/databricks-sattaque-au-marche-de-la-cybersecurite-avec-lakewatch-226408",
+                    "tags": [
+                        "Cybersécurité",
+                        "Databricks",
+                        "SIEM",
+                        "Sécurité",
+                        "Failles",
+                        "Statistiques"
+                    ],
+                    "description": "Databriks fait une entrée remarquée dans la cybersécurité avec Lakewatch, un SIEM de nouvelle génération conçu pour répondre aux attaques pilotées par des agents d'IA. Un lancement stratégique à quelques mois d'une IPO très attendue. The post Databricks s&rsquo;attaque au marché de la cybersécurité avec Lakewatch appeared first on Silicon.fr.",
+                    "source": "Silicon.fr"
+                },
+                {
+                    "date": "25 Février 2026",
+                    "title": "The SOC Is Now Agentic — Introducing the Next Evolution of Cortex",
+                    "image": "https://www.paloaltonetworks.com/blog/wp-content/uploads/2026/02/Image-2-24-26-at-9.35-AM-scaled.jpeg",
+                    "link": "https://www.paloaltonetworks.com/blog/2026/02/soc-agentic-next-evolution-cortex/",
+                    "tags": [
+                        "AI Security",
+                        "Announcement",
+                        "Agentic AI",
+                        "SOC",
+                        "Sécurité",
+                        "Infrastructure"
+                    ],
+                    "description": "Agentic AI security is here. See how AI-powered agents, XDL 2.0 and the new Agentix platform transform the SOC at Cortex Symphony 2026. The post The SOC Is Now Agentic — Introducing the Next Evolution of Cortex appeared first on Palo Alto Networks Blog.",
+                    "source": "Palo Alto Networks"
+                },
+                {
+                    "date": "27 Mars 2026",
+                    "title": "Elastic supprime la tarification par terminal et intègre le SOAR nativement dans sa plateforme XDR",
+                    "link": "https://itsocial.fr/cybersecurite/cybersecurite-actualites/elastic-supprime-la-tarification-par-terminal-et-integre-le-soar-nativement-dans-sa-plateforme-xdr/",
+                    "tags": [
+                        "ACTUALITES",
+                        "Cybersécurité - Actualités",
+                        "Automatisation",
+                        "Cybersécurité",
+                        "détection des menaces",
+                        "Innovation"
+                    ],
+                    "description": "En supprimant la tarification par terminal pour son XDR et en intégrant nativement l’automatisation SOAR dans sa plateforme, Elastic s’attaque à deux des freins budgétaires les plus persistants des équipes SOC. Ces annonces faites lors de la RSA Conference 2026 redessinent la logique de couverture pour les organisations contraintes de choisir, faute de moyens, quels actifs [&#8230;] The post Elastic supprime la tarification par terminal et intègre le SOAR nativement dans sa plateforme XDR app...",
+                    "source": "IT Social"
+                },
+                {
+                    "title": "How Charlotte AI AgentWorks Fuels Security's Agentic Ecosystem",
+                    "link": "https://www.crowdstrike.com/en-us/blog/how-charlotte-ai-agentworks-fuels-securitys-agentic-ecosystem/",
+                    "tags": [
+                        "Agentic SOC",
+                        "Sécurité"
+                    ],
+                    "source": "CrowdStrike Blog"
+                },
+                {
+                    "title": "CrowdStrike Services and Agentic MDR Put the Agentic SOC in Reach",
+                    "link": "https://www.crowdstrike.com/en-us/blog/crowdstrike-services-and-agentic-mdr-put-the-agentic-soc-in-reach/",
+                    "tags": [
+                        "Agentic SOC"
+                    ],
+                    "source": "CrowdStrike Blog"
+                },
+                {
+                    "title": "Falcon Next-Gen SIEM Supports Third-Party EDR Tools, Starting with Microsoft Defender",
+                    "link": "https://www.crowdstrike.com/en-us/blog/falcon-next-gen-siem-supports-third-party-edr-tools-starting-with-microsoft-defender/",
+                    "tags": [
+                        "Next-Gen SIEM & Log Management",
+                        "Solutions"
+                    ],
+                    "source": "CrowdStrike Blog"
+                }
+            ],
+            "sources": [
+                "https://au.investing.com/news/company-news/elastic-to-develop-130m-siem-service-for-federal-cybersecurity-93CH-4173719",
+                "https://aws.amazon.com/fr/blogs/apn/behind-securonixs-unified-siem-spark-architecture-on-amazon-eks-99-99-availability-across-10000-concurrent-jobs/",
+                "https://biztechmagazine.com/article/2025/12/smb-cybersecurity-going-beyond-basics-build-resilient-and-scalable-security-framework-perfcon",
+                "https://cyber.gouv.fr/actualites/clos-lanssi-lance-un-appel-%C3%A0-projet-de-cybers%C3%A9curit%C3%A9-dans-le-cadre-de-france-2030/",
+                "https://diginomica.com/what-if-your-security-problem-really-your-data-problem-heres-why-databricks-shifting-blame-it?amp",
+                "https://edtechmagazine.com/higher/article/2026/02/universities-deploy-observability-tools-monitor-it-environments",
+                "https://en.wowtale.net/2025/12/17/233086/",
+                "https://etedge-insights.com/technology/cyber-security/encrypted-traffic-the-hidden-risks-and-how-network-devices-should-handle-it/amp/",
+                "https://finance.yahoo.com/news/modern-siem-market-reach-13-200000409.html",
+                "https://finviz.com/news/250821/can-next-generation-siem-become-crowdstrikes-biggest-growth-engine",
+                "https://gulfnews.com/amp/story/technology%2Ftechie-tonic-the-rise-of-next-gen-security-information-and-event-management-1.500444854",
+                "https://industrialcyber.co/news/elastic-cisa-launch-cloud-based-siemaas-to-strengthen-cybersecurity-across-federal-agencies/",
+                "https://industrialcyber.co/regulation-standards-and-compliance/cisa-urges-organizations-to-adopt-openeox-standard-to-streamline-asset-management-and-curb-cyber-risks/",
+                "https://insider.govtech.com/california/sponsored/californias-employment-development-department-protects-customers-with-elastic",
+                "https://ir.crowdstrike.com/news-releases/news-release-details/crowdstrike-reports-third-quarter-fiscal-year-2026-financial",
+                "https://ischool.syracuse.edu/data-security-management/",
+                "https://itsocial.fr/contenus/actualites/eset-integre-sa-detection-des-menaces-dans-sentinel-le-siem-de-microsoft/",
+                "https://itsocial.fr/cybersecurite/cybersecurite-actualites/siem-elastic-automatic-import-exploite-lia-pour-lintegration-des-donnees-de-securite/",
+                "https://kpmg.com/xx/en/our-insights/ai-and-technology/invisible-access-visible-risk.html",
+                "https://managedservicesjournal.com/articles/convert-cyber-insurance-friction-into-a-recurring-revenue-engine/",
+                "https://quantumzeitgeist.com/ai-reveals-how-copilots-enhance-cybersecurity/",
+                "https://securityboulevard.com/2025/12/threat-detection-software-the-complete-guide-to-protecting-your-digital-assets-in-2026/",
+                "https://securityboulevard.com/2026/02/abstract-security-launches-ai-siem-platform-to-analyze-threats-in-real-time/",
+                "https://securitybrief.asia/story/ai-surge-keeps-gigamon-atop-fast-growing-observability",
+                "https://securitybrief.com.au/story/crowdstrike-posts-record-revenue-driven-by-ai-cybersecurity-demand",
+                "https://siliconangle.com/2025/12/02/skyhawk-security-adds-agentic-ai-validate-cloud-defenses-real-time/",
+                "https://siliconangle.com/2026/02/19/abstract-security-launches-ai-gen-composable-siem-streaming-first-security-operations/",
+                "https://stockstory.org/us/stocks/nasdaq/crwd/news/earnings-call/crwd-q3-deep-dive-ai-security-demand-and-platform-expansion-shape-outlook",
+                "https://stockstory.org/us/stocks/nyse/estc/news/why-up-down/elastic-estc-stock-trades-up-here-is-why-4",
+                "https://thehackernews.com/2025/12/how-to-integrate-ai-into-modern-soc.html",
+                "https://venturebeat.com/security/cx-security-gaps-ai-stack-blind-spots",
+                "https://www.analyticsinsight.net/cybersecurity/top-10-security-information-and-event-management-siem-solutions-of-2025",
+                "https://www.bankinfosecurity.com/cisa-directs-federal-agencies-to-update-edge-devices-a-30689",
+                "https://www.businesswire.com/news/home/20251202476132/en/Graylog-Boosts-Security-Visibility-with-Real-Time-Event-Ingestion-and-OCSF-Support-with-AWS-Security-Hub",
+                "https://www.businesswire.com/news/home/20251216541794/en/Elastic-Partnering-With-CISA-to-Help-Standardize-Cyber-Defense-Across-Federal-Civilian-Agencies",
+                "https://www.cdomagazine.tech/us-federal-news-bureau/cisa-partners-with-elastic-to-help-standardize-cyber-defense-across-govt-departments",
+                "https://www.channele2e.com/native/unlocking-a-new-era-of-endpoint-protection-how-ai-is-transforming-threat-hunting-and-response",
+                "https://www.chiefhealthcareexecutive.com/view/securing-healthcare-s-frontlines",
+                "https://www.comptia.org/en-us/about-us/news/press-releases/CompTIA-and-SGInnovate-partner-to-bridge-AI-and-cybersecurity-talent-gap-in-Singapore/",
+                "https://www.csoonline.com/article/4115151/trend-micro-patches-critical-flaws-in-its-apex-central-software.html",
+                "https://www.delloro.com/2026-predictions-enterprise-security-and-networking-markets/",
+                "https://www.elastic.co/fr/what-is/security-operations-center",
+                "https://www.esecurityplanet.com/threats/the-state-of-sap-security-how-to-defend-your-organization-from-surging-erp-application-attacks/",
+                "https://www.executivebiz.com/articles/ecs-elastic-cisa-federal-siemaas-contract",
+                "https://www.ey.com/en_us/insights/government-public-sector/vulnerability-exploits",
+                "https://www.forbes.com/councils/forbestechcouncil/2025/12/02/done-with-dashboards-why-security-needs-outcome-driven-metrics/",
+                "https://www.hunton.com/insights/legal/campus-event-safety-practices-for-campus-police-managing-high-profile-and-controversial-events-on-campus",
+                "https://www.ibm.com/fr-fr/think/topics/data-detection-response#437817029",
+                "https://www.ibm.com/fr-fr/think/topics/edr#437817025",
+                "https://www.ibm.com/fr-fr/think/topics/identity-threat-detection-response#437817028",
+                "https://www.ibm.com/fr-fr/think/topics/intrusion-detection-system#437817031",
+                "https://www.ibm.com/fr-fr/think/topics/intrusion-prevention-system#437817032",
+                "https://www.ibm.com/fr-fr/think/topics/ndr#437817026",
+                "https://www.ibm.com/fr-fr/think/topics/security-orchestration-automation-response",
+                "https://www.ibm.com/fr-fr/think/topics/siem#437817023",
+                "https://www.ibm.com/fr-fr/think/topics/xdr#437817027",
+                "https://www.intelligentciso.com/2025/12/17/securing-robotic-process-automation-in-modern-supply-chains/",
+                "https://www.iotinsider.com/industries/security/exabeam-and-recorded-future-deepen-partnership-to-accelerate-threat-detection/?amp=1",
+                "https://www.linkedin.com/pulse/managed-siem-pricing-2025-guide-best-cost-value-cyberedition-etwsc/?trackingId=P8fjBribPhMducL2N%2F42wQ%3D%3D",
+                "https://www.mailinblack.com/ressources/glossaire/quest-ce-quun-siem/",
+                "https://www.marketsandmarkets.com/Market-Reports/ot-firewall-market-127224498.html",
+                "https://www.microsoft.com/en-us/security/blog/2026/02/11/the-strategic-siem-buyers-guide-choosing-an-ai-ready-platform-for-the-agentic-era/",
+                "https://www.microsoft.com/en-us/security/blog/2026/02/17/unify-now-or-pay-later-new-research-exposes-the-operational-cost-of-a-fragmented-soc/",
+                "https://www.microsoft.com/en/customers/story/25951-omv-aktiengesellschaft-microsoft-sentinel",
+                "https://www.msspalert.com/news/secnap-cloudjacket-mxdr-targets-tool-sprawl-and-scaling-challenges-for-mssps",
+                "https://www.msspalert.com/perspective/eight-questions-to-ask-a-next-gen-siem-provider",
+                "https://www.nasdaq.com/articles/can-criminal-ip-integration-boost-ibms-qradar-growth-prospects",
+                "https://www.nexa.fr/blog/quest-ce-quun-siem",
+                "https://www.oci.fr/technologies-soc/",
+                "https://www.paloaltonetworks.com/blog/2025/12/ai-cybersecurity-in-financial-services/",
+                "https://www.paloaltonetworks.com/blog/2026/02/introducing-unit-42-managed-xsiam-2-0/",
+                "https://www.paloaltonetworks.com/cyberpedia/what-are-SIEM-implementation-best-practices",
+                "https://www.rescana.com/post/critical-fortinet-fortisiem-vulnerability-cve-2024-23108-actively-exploited-risks-attack-analysis",
+                "https://www.scworld.com/brief/abstract-security-launches-ai-native-siem-architecture",
+                "https://www.sify.com/security/all-about-cybersecurity-as-a-service/",
+                "https://www.technology.org/2025/12/11/secops-vs-devsecops-understanding-the-evolution-of-security-operations/",
+                "https://www.techradar.com/pro/security/microsoft-entra-id-vulnerability-allows-full-account-takeover-and-takes-barely-any-effort?utm_source=chatgpt.com",
+                "https://www.techtarget.com/searchsecurity/tip/A-leaders-guide-to-integrating-EDR-SIEM-and-SOAR",
+                "https://www.washingtontimes.com/sponsored/cloud-security-posture-management-solves-problems-happen/"
+            ],
+            "image": "/veille/siem.gif"
+        }
+    ]
+}

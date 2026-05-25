@@ -34,10 +34,10 @@ from time import mktime
 # ─────────────────────────────────────────────
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
-# Après déplacement sous `portfolio/scripts/veille`, le dépôt racine est 2 parents au-dessus
-ROOT_DIR = SCRIPT_DIR.parents[2]
+# Le dossier du projet est 2 parents au-dessus
+ROOT_DIR = SCRIPT_DIR.parents[1]
 SOURCES_FILE = SCRIPT_DIR / "sources.json"
-VEILLE_JSON = ROOT_DIR / "veille.json"
+VEILLE_JSON = ROOT_DIR / "src" / "data" / "veille.json"
 HISTORY_FILE = SCRIPT_DIR / "history.json"
 LOG_FILE = SCRIPT_DIR / "veille.log"
 EXPORT_DIR = SCRIPT_DIR / "exports"
@@ -328,7 +328,7 @@ def update_veille_json(categorized_articles, topics_config, dry_run=False, apply
         for article in articles:
             link = article.get("link", "")
             link_id = url_hash(link)
-            if link in existing_urls or link_id in history.get("processed_urls", [])
+            if link in existing_urls or link_id in history.get("processed_urls", []):
                 continue
             veille_article = article_to_veille_format(article, topic_name)
             new_articles.append(veille_article)

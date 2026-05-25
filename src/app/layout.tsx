@@ -1,3 +1,4 @@
+import Script from 'next/script'
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
@@ -7,6 +8,8 @@ import Footer from "@/components/ui/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import type { Metadata } from 'next'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 const inter = Inter({ subsets: ["latin"] });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"] });
@@ -14,13 +17,33 @@ const jetbrains = JetBrains_Mono({ subsets: ["latin"] });
 export const metadata: Metadata = {
     title: "Thaïs PARISOT — Portfolio",
     description: "Network, System & Cybersecurity Student — BTS SIO SISR Portfolio",
-    keywords: ["cybersecurity", "portfolio", "BTS SIO", "SISR", "network", "system"],
+    keywords: ["cybersecurity", "portfolio", "BTS SIO", "SISR", "network", "system", "Thaïs PARISOT", "rkshrd.tech", "rkshrd", "thais", "parisot"],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="fr" data-scroll-behavior="smooth" suppressHydrationWarning>
             <body className={`${inter.className} ${jetbrains.className} antialiased`}>
+                {children}
+                    <Script
+                    strategy="afterInteractive"
+                    src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+                    />
+                    <Script
+                    id="google-analytics"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                    __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+                    anonymize_ip: true
+                            });
+                          `,
+                        }}
+                    />
+                
                 <ThemeProvider>
                     <CustomCursor />
                     <ScrollProgress />
@@ -33,3 +56,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </html>
     );
 }
+

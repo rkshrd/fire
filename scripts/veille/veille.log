@@ -1,0 +1,57 @@
+2026-03-27 11:46:27,562 [INFO] 🚀 Démarrage de la veille automatique...
+2026-03-27 11:46:27,563 [ERROR] Erreur chargement config: [Errno 2] No such file or directory: 'C:\\Users\\thais\\Documents\\GitBurn\\fire\\scripts\\veille\\rss_sources.json'
+2026-03-27 11:46:42,887 [INFO] 🚀 Démarrage de la veille automatique...
+2026-03-27 11:46:42,896 [INFO] 📡 24 flux RSS à scanner...
+2026-03-27 11:46:43,177 [INFO] ✓ BleepingComputer: 15 articles récupérés
+2026-03-27 11:46:43,298 [INFO] ✓ Krebs on Security: 10 articles récupérés
+2026-03-27 11:46:43,324 [INFO] ✓ The Hacker News: 50 articles récupérés
+2026-03-27 11:46:43,460 [INFO] ✓ Infosecurity Magazine: 250 articles récupérés
+2026-03-27 11:46:43,466 [INFO] ✓ Threatpost: 10 articles récupérés
+2026-03-27 11:46:43,520 [INFO] ✓ LeMagIT Sécurité: 20 articles récupérés
+2026-03-27 11:46:43,616 [INFO] ✓ ZDNet FR: 50 articles récupérés
+2026-03-27 11:46:43,723 [INFO] ✓ Cyber Security News: 10 articles récupérés
+2026-03-27 11:46:43,724 [WARNING] ⚠ Erreur feed L'Usine Digitale: text/html;charset=utf-8 is not an XML media type
+2026-03-27 11:46:43,857 [INFO] ✓ Silicon.fr: 50 articles récupérés
+2026-03-27 11:46:43,862 [INFO] ✓ SecurityWeek: 10 articles récupérés
+2026-03-27 11:46:43,906 [INFO] ✓ Dark Reading: 50 articles récupérés
+2026-03-27 11:46:43,985 [WARNING] ⚠ Erreur feed SC Magazine: <unknown>:15:137910: not well-formed (invalid token)
+2026-03-27 11:46:44,085 [INFO] ✓ dev.to: 12 articles récupérés
+2026-03-27 11:46:44,107 [INFO] ✓ Wired Security: 20 articles récupérés
+2026-03-27 11:46:44,118 [INFO] ✓ Clubic Sécurité: 50 articles récupérés
+2026-03-27 11:46:44,221 [INFO] ✓ Microsoft Security Blog: 10 articles récupérés
+2026-03-27 11:46:44,228 [INFO] ✓ Help Net Security: 10 articles récupérés
+2026-03-27 11:46:44,229 [WARNING] ⚠ Erreur feed Ars Technica Security: <unknown>:2:20: not well-formed (invalid token)
+2026-03-27 11:46:44,250 [INFO] ✓ Palo Alto Networks: 10 articles récupérés
+2026-03-27 11:46:44,309 [INFO] ✓ IT Social: 10 articles récupérés
+2026-03-27 11:46:44,396 [INFO] ✓ Cloudflare Blog: 20 articles récupérés
+2026-03-27 11:46:44,513 [WARNING] ⚠ Erreur feed Zscaler Blog: <unknown>:2:11171: not well-formed (invalid token)
+2026-03-27 11:46:44,516 [INFO] ✓ CrowdStrike Blog: 10 articles récupérés
+2026-03-27 11:46:44,516 [INFO] 📊 677 articles récupérés au total
+2026-03-27 11:50:17,417 [INFO] 🚀 Démarrage de la veille automatique...
+2026-03-27 11:50:17,417 [INFO] 📡 24 flux RSS à scanner...
+2026-03-27 11:50:17,679 [INFO] ✓ BleepingComputer: 15 articles récupérés
+2026-03-27 11:50:17,724 [INFO] ✓ Krebs on Security: 10 articles récupérés
+2026-03-27 11:50:17,870 [INFO] ✓ Threatpost: 10 articles récupérés
+2026-03-27 11:50:17,910 [INFO] ✓ The Hacker News: 50 articles récupérés
+2026-03-27 11:50:17,944 [INFO] ✓ Dark Reading: 50 articles récupérés
+2026-03-27 11:50:17,949 [INFO] ✓ SecurityWeek: 10 articles récupérés
+2026-03-27 11:50:18,024 [INFO] ✓ LeMagIT Sécurité: 20 articles récupérés
+2026-03-27 11:50:18,098 [INFO] ✓ Infosecurity Magazine: 250 articles récupérés
+2026-03-27 11:50:18,137 [INFO] ✓ ZDNet FR: 50 articles récupérés
+2026-03-27 11:50:18,208 [INFO] ✓ Cyber Security News: 10 articles récupérés
+2026-03-27 11:50:18,222 [WARNING] ⚠ Erreur feed L'Usine Digitale: text/html;charset=utf-8 is not an XML media type
+2026-03-27 11:50:18,344 [INFO] ✓ Silicon.fr: 50 articles récupérés
+2026-03-27 11:50:18,370 [INFO] ✓ Clubic Sécurité: 50 articles récupérés
+2026-03-27 11:50:18,467 [INFO] ✓ dev.to: 12 articles récupérés
+2026-03-27 11:50:18,544 [WARNING] ⚠ Erreur feed SC Magazine: <unknown>:15:137910: not well-formed (invalid token)
+2026-03-27 11:50:18,558 [WARNING] ⚠ Erreur feed Ars Technica Security: <unknown>:2:20: not well-formed (invalid token)
+2026-03-27 11:50:18,566 [INFO] ✓ Wired Security: 20 articles récupérés
+2026-03-27 11:50:18,618 [INFO] ✓ Microsoft Security Blog: 10 articles récupérés
+2026-03-27 11:50:18,677 [INFO] ✓ Palo Alto Networks: 10 articles récupérés
+2026-03-27 11:50:18,708 [INFO] ✓ IT Social: 10 articles récupérés
+2026-03-27 11:50:18,851 [INFO] ✓ Cloudflare Blog: 20 articles récupérés
+2026-03-27 11:50:18,857 [INFO] ✓ Help Net Security: 10 articles récupérés
+2026-03-27 11:50:18,865 [INFO] ✓ CrowdStrike Blog: 10 articles récupérés
+2026-03-27 11:50:19,027 [WARNING] ⚠ Erreur feed Zscaler Blog: <unknown>:2:11171: not well-formed (invalid token)
+2026-03-27 11:50:19,028 [INFO] 📊 677 articles récupérés au total
+2026-03-27 11:50:19,074 [INFO] 💾 Version créée: C:\Users\thais\Documents\GitBurn\fire\scripts\veille\versions\27-03-2026-veille.json

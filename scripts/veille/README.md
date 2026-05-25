@@ -1,7 +1,7 @@
 # Veille Automatique RSS - Cybersécurité (dossier `veille`)
 
 Ceci est une copie simplifiée du répertoire de veille, déplacée vers
-`portfolio/scripts/veille` pour avoir un nom en un mot (`veille`).
+`scripts/veille` pour avoir un nom en un mot (`veille`).
 
 Principales commandes:
 
@@ -17,6 +17,11 @@ chmod +x veille.sh
 Python:
 
 ```bash
+python3 -m pip install <paquet> # dans le cas ou un paquet est manquant
+```
+
+```bash
+python3 fetch.py --dry-run
 python3 rss.py --dry-run
 ```
 
