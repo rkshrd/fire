@@ -1,6 +1,7 @@
 {
     "veilles": [
         {
+          
             "title": "Authentification Multi-Facteurs",
             "sub-title": "MFA",
             "definition": "L'Authentification Multi-Facteurs (MFA) est une méthode de sécurité qui nécessite au moins deux formes distinctes de vérification d'identité avant d'accorder l'accès à un système ou une application. Cette approche renforce considérablement la sécurité en combinant plusieurs catégories de facteurs : quelque chose que vous connaissez ou facteur de connaissance (mot de passe, code PIN, réponse d'une question secrète), quelque chose que vous possédez ou facteur de possession (téléphone, token, TOPT), et quelque chose que vous êtes ou facteur d'identification (biométrie). En exigeant plusieurs preuves d'identité, la MFA réduit drastiquement les risques liés au vol de credentials et aux accès non autorisés, devenant ainsi un standard incontournable en cybersécurité moderne.",

@@ -8,8 +8,6 @@ import Footer from "@/components/ui/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
-import type { Metadata } from 'next'
-import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 const inter = Inter({ subsets: ["latin"] });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"] });
@@ -24,26 +22,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="fr" data-scroll-behavior="smooth" suppressHydrationWarning>
             <body className={`${inter.className} ${jetbrains.className} antialiased`}>
-                {children}
-                    <Script
+
+                {/* Google Analytics */}
+                <Script
                     strategy="afterInteractive"
                     src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-                    />
-                    <Script
+                />
+                <Script
                     id="google-analytics"
                     strategy="afterInteractive"
                     dangerouslySetInnerHTML={{
-                    __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
-                    anonymize_ip: true
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+                                anonymize_ip: true
                             });
-                          `,
-                        }}
-                    />
-                
+                        `,
+                    }}
+                />
+
                 <ThemeProvider>
                     <CustomCursor />
                     <ScrollProgress />
@@ -56,4 +55,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </html>
     );
 }
-
