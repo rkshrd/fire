@@ -29,7 +29,6 @@ export default function PostIt({ title, content, index }: PostItProps) {
             viewport={{ once: true }}
             transition={{ duration: 0.3 }}
             className={`${colorClass} p-4 rounded shadow-md min-h-[140px] relative`}
-            style={{ transform: `rotate(${rotation}deg)` }}
         >
             {/* Pin */}
             <div className="absolute -top-2 left-1/2 -translate-x-1/2">

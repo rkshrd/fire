@@ -93,93 +93,95 @@ export default function Navbar() {
     }
 
     return (
-        <header className="glass fixed top-0 left-0 w-full z-50 h-18 px-6 !border-l-0 !border-r-0">
-            <nav className="h-full w-full flex items-center">
-                {/* Left: hamburger + dropdown */}
-                <div className="relative flex-1">
-                    <button
-                        className="hamburger-btn w-10 h-10 flex items-center justify-center rounded-md border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors group"
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        aria-label="Menu principal"
+        <>
+            <header className="glass fixed top-0 left-0 w-full z-40 h-18 px-6 !border-l-0 !border-r-0">
+                <nav className="h-full w-full flex items-center">
+                    {/* Left: hamburger + dropdown */}
+                    <div className="relative flex-1">
+                        <button
+                            className="hamburger-btn w-10 h-10 flex items-center justify-center rounded-md border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors group"
+                            onClick={() => setMenuOpen(!menuOpen)}
+                            aria-label="Menu principal"
+                            data-hoverable
+                        >
+                            <div className="flex flex-col justify-center items-center w-[18px] h-[18px] gap-[4px]">
+                                <span
+                                    className={`block h-[2px] w-full bg-[var(--color-accent)] group-hover:bg-[var(--color-accent-hover)] rounded-full transition-all duration-300 origin-center ${menuOpen ? "translate-y-[6px] rotate-45" : ""}`}
+                                />
+                                <span
+                                    className={`block h-[2px] w-full bg-[var(--color-accent)] group-hover:bg-[var(--color-accent-hover)] rounded-full transition-all duration-300 ${menuOpen ? "opacity-0 scale-x-0" : ""}`}
+                                />
+                                <span
+                                    className={`block h-[2px] w-full bg-[var(--color-accent)] group-hover:bg-[var(--color-accent-hover)] rounded-full transition-all duration-300 origin-center ${menuOpen ? "-translate-y-[6px] -rotate-45" : ""}`}
+                                />
+                            </div>
+                        </button>
+                    </div>
+                    {/* Center: logo - Home button */}
+                    <Link
+                        href="/"
+                        aria-label="Home"
                         data-hoverable
+                        className="flex-none flex items-center justify-center mx-auto"
                     >
-                        <div className="flex flex-col justify-center items-center w-[18px] h-[18px] gap-[4px]">
-                            <span
-                                className={`block h-[2px] w-full bg-[var(--color-accent)] group-hover:bg-[var(--color-accent-hover)] rounded-full transition-all duration-300 origin-center ${menuOpen ? "translate-y-[6px] rotate-45" : ""}`}
-                            />
-                            <span
-                                className={`block h-[2px] w-full bg-[var(--color-accent)] group-hover:bg-[var(--color-accent-hover)] rounded-full transition-all duration-300 ${menuOpen ? "opacity-0 scale-x-0" : ""}`}
-                            />
-                            <span
-                                className={`block h-[2px] w-full bg-[var(--color-accent)] group-hover:bg-[var(--color-accent-hover)] rounded-full transition-all duration-300 origin-center ${menuOpen ? "-translate-y-[6px] -rotate-45" : ""}`}
-                            />
-                        </div>
-                    </button>
-
-                    {menuOpen && (
-                        <div className="navbar-menu absolute top-full left-0 mt-2 min-w-[220px] glass rounded-lg animate-[slideDown_0.2s_ease] z-50 p-2">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    className={`block rounded-md text-base font-mono transition-colors hover:bg-[var(--color-bg-hover)] hover:text-[var(--color-accent)] px-4 py-2.5 ${
-                                        pathname === link.href || pathname === link.href + "/"
-                                            ? "text-[var(--color-accent)]"
-                                            : "text-[var(--color-text-secondary)]"
-                                    }`}
-                                    data-hoverable
-                                >
-                                    <span className="text-[var(--color-accent)] mr-1">{">"}</span>
-                                    {link.label}
-                                </Link>
-                            ))}
-                        </div>
-                    )}
-                </div>
-                {/* Center: logo - Home button */}
-                <Link
-                    href="/"
-                    aria-label="Home"
-                    data-hoverable
-                    className="flex-none flex items-center justify-center mx-auto"
-                >
-                    <Image
-                        src="/favicon.ico"
-                        /*
+                        <Image
+                            src="/favicon.ico"
+                            /*
                 Préconiser le /nom_icone.format directement
                 plutot que public/nom_icone.format pour éviter les
                 problèmes de chemin d'accès et de configuration dans Next.js.
               */
-                        alt="FireChipset"
-                        width={52}
-                        height={52}
-                        priority
-                        className={`cursor-pointer transition-all duration-300 drop-shadow-[0_0_6px_var(--color-accent-glow)] hover:drop-shadow-[0_0_10px_var(--color-accent-glow)] hover:scale-105 hover:opacity-100 active:opacity-60 active:scale-95 ${hideLogo ? "opacity-0 pointer-events-none" : "opacity-90"}`}
-                    />
-                </Link>
+                            alt="FireChipset"
+                            width={52}
+                            height={52}
+                            priority
+                            className={`cursor-pointer transition-all duration-300 drop-shadow-[0_0_6px_var(--color-accent-glow)] hover:drop-shadow-[0_0_10px_var(--color-accent-glow)] hover:scale-105 hover:opacity-100 active:opacity-60 active:scale-95 ${hideLogo ? "opacity-0 pointer-events-none" : "opacity-90"}`}
+                        />
+                    </Link>
 
-                {/* Right: datetime + theme toggle */}
-                <div className="flex-1 flex items-center gap-4 justify-end">
-                    <div className="hidden sm:flex flex-col items-end text-sm font-mono text-[var(--color-text-muted)]">
-                        <span>{dateStr}</span>
-                        <span className="text-[var(--color-accent)]">{timeStr}</span>
+                    {/* Right: datetime + theme toggle */}
+                    <div className="flex-1 flex items-center gap-4 justify-end">
+                        <div className="hidden sm:flex flex-col items-end text-sm font-mono text-[var(--color-text-muted)]">
+                            <span>{dateStr}</span>
+                            <span className="text-[var(--color-accent)]">{timeStr}</span>
+                        </div>
+                        <button
+                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                            className="w-10 h-10 flex items-center justify-center rounded-md border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors"
+                            aria-label="Toggle theme"
+                            data-hoverable
+                        >
+                            {mounted ? (
+                                theme === "light" ? (
+                                    <Sun size={20} className="text-[var(--color-accent)]" />
+                                ) : (
+                                    <Moon size={20} className="text-[var(--color-accent)]" />
+                                )
+                            ) : null}
+                        </button>
                     </div>
-                    <button
-                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                        className="w-10 h-10 flex items-center justify-center rounded-md border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors"
-                        aria-label="Toggle theme"
-                        data-hoverable
-                    >
-                        {mounted ? (
-                            theme === "light" ? (
-                                <Sun size={20} className="text-[var(--color-accent)]" />
-                            ) : (
-                                <Moon size={20} className="text-[var(--color-accent)]" />
-                            )
-                        ) : null}
-                    </button>
+                </nav>
+            </header>
+
+            {menuOpen && (
+                <div className="navbar-menu fixed top-20 left-6 min-w-[220px] bg-[var(--color-bg-primary)] backdrop-blur-xl border border-[var(--color-border)] rounded-lg animate-[slideDown_0.2s_ease] z-50 p-2">
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className={`block rounded-md text-base font-mono transition-colors hover:bg-[var(--color-bg-hover)] hover:text-[var(--color-accent)] px-4 py-2.5 ${
+                                pathname.startsWith(link.href)
+                                    ? "text-[var(--color-accent)]"
+                                    : "text-[var(--color-text-secondary)]"
+                            }`}
+                            data-hoverable
+                        >
+                            <span className="text-[var(--color-accent)] mr-1">{">"}</span>
+                            {link.label}
+                        </Link>
+                    ))}
                 </div>
-            </nav>
-        </header>
+            )}
+        </>
     );
 }

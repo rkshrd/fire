@@ -20,6 +20,7 @@ declare module "@/data/veille.json" {
     }
 
     interface Veille {
+        slug: string;
         title: string;
         "sub-title": string;
         definition: string;
@@ -92,19 +93,54 @@ declare module "@/data/skills.json" {
 }
 
 declare module "@/data/companies.json" {
-    interface Mission {
-        title: string;
-        description: string;
-    }
+    import type {
+        CompanyIdentity,
+        KPI,
+        Mission,
+        TechCategory,
+        CompanyProject,
+        MethodologyStep,
+        CompanyCharts,
+        GrandProject,
+        LegalIdentityItem,
+        TimelineEvent,
+        ValuePillar,
+        ServiceTab,
+        Facility,
+        Conclusion,
+        JobProfile,
+        SourceLink,
+    } from "@/types/companies";
 
     interface Company {
+        slug: string;
         name: string;
         role: string;
         period: string;
         location: string;
         team: string;
         description: string;
+        identity: CompanyIdentity;
+        kpis: KPI[];
         missions: Mission[];
+        techStack: TechCategory[];
+        project: CompanyProject;
+        charts?: CompanyCharts;
+        grandsProjects?: GrandProject[];
+        legalIdentity?: LegalIdentityItem[];
+        timeline?: TimelineEvent[];
+        values?: ValuePillar[];
+        services?: ServiceTab[];
+        missionStatement?: string;
+        engagements?: string[];
+        projectScope?: string[];
+        projectDevOps?: string[];
+        facility?: Facility;
+        jobProfiles?: JobProfile[];
+        servicesObjective?: string;
+        conclusion?: Conclusion;
+        sources?: SourceLink[];
+        methodology: MethodologyStep[];
     }
 
     interface CompaniesData {

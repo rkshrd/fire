@@ -4,7 +4,7 @@ import { Download, ExternalLink } from "lucide-react";
 export default function Footer() {
     return (
         <footer className="fixed bottom-0 left-0 w-full border-t border-[var(--color-border)] py-3 bg-[var(--color-bg-primary)] z-40">
-            <div className="w-full px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm font-mono text-[var(--color-text-muted)]">
+            <div className="w-full px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm font-mono text-[var(--color-text-muted)]">
                 <p>
                     <span className="text-[var(--color-text-secondary)]">© 2026</span>{" "}
                     <span className="text-[var(--color-accent)]">Thaïs PARISOT</span>
@@ -12,12 +12,12 @@ export default function Footer() {
                 <div className="flex gap-4">
                     <Link
                         href="/"
-                        className="hover:text-[var(--color-accent)] transition-colors"
+                        className="hidden sm:inline hover:text-[var(--color-accent)] transition-colors"
                         data-hoverable
                     >
                         home
                     </Link>
-                    |
+                    <span className="hidden sm:inline">|</span>
                     <a
                         href="https://www.linkedin.com/in/thaïs-parisot-777ir3ign1s/"
                         target="_blank"
@@ -27,7 +27,7 @@ export default function Footer() {
                     >
                         linkedin
                     </a>
-                    |
+                    <span className="hidden sm:inline">|</span>
                     <a
                         href="https://discord.com/users/264148329527508992"
                         target="_blank"
@@ -37,7 +37,7 @@ export default function Footer() {
                     >
                         discord
                     </a>
-                    | cv &#123;
+                    <span className="hidden sm:inline">|</span> cv &#123;
                     <a
                         href="/CV.pdf"
                         download="CV-Thaïs-Parisot.pdf"
